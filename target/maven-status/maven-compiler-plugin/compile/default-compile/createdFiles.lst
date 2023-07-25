@@ -1,0 +1,4 @@
+ru/barrier/configs/BotInitializer.class
+ru/barrier/services/TelegramBot.class
+ru/barrier/BarrierSystemApplication.class
+ru/barrier/configs/BotConfig.class
