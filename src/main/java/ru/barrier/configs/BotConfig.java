@@ -9,10 +9,13 @@ import org.springframework.context.annotation.PropertySource;
 @PropertySource("application.properties")
 public class BotConfig {
     @Value("${bot.name}")
-    String botName;
+    private String botName;
 
     @Value("${bot.token}")
-    String token;
+    private String token;
+
+    @Value("${upload.path}")
+    private String uploadPath;
 
     public String getBotName() {
         return botName;
@@ -22,5 +25,8 @@ public class BotConfig {
         return token;
     }
 
+    public String getUploadPath() {
+        return uploadPath;
+    }
 
 }
