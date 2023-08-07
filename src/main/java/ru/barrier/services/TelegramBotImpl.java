@@ -9,6 +9,7 @@ import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.commands.SetMyCommands;
 import org.telegram.telegrambots.meta.api.methods.send.SendDocument;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
 import org.telegram.telegrambots.meta.api.objects.InputFile;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.commands.BotCommand;
@@ -16,9 +17,12 @@ import org.telegram.telegrambots.meta.api.objects.commands.scope.BotCommandScope
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import ru.barrier.configs.BotConfig;
 import ru.barrier.models.User;
+import ru.barrier.models.UserBarrier;
+import ru.barrier.repository.UserBarrierRepository;
 import ru.barrier.repository.UserRepository;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Component
@@ -26,6 +30,13 @@ import java.util.List;
 public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramBot {
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private UserBarrierRepository userBarrierRepository;
+
+    @Autowired
+    private AddDataTest addDataTest;
+
     final BotConfig botConfig;
 
     SendMessage sendMessage = new SendMessage();
@@ -86,38 +97,77 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
 
         }
         if (update.hasCallbackQuery()) {
+            boolean choosePlace = false;
+
+            Long chatId = update.getCallbackQuery().getFrom().getId();
+
+            System.out.println("!!!!!!!!!!   " + update.hasCallbackQuery());
+            System.out.println("?????????????   " + update.getCallbackQuery().getData().toString());
+            log.debug(update.getCallbackQuery().getFrom().getUserName());
+            log.debug(update.getCallbackQuery().getFrom().getFirstName());
+            log.debug(chatId);
+
+            byte countTiming = 0;
+
             if (update.getCallbackQuery().getData().toString().equals("Accept")) {
-                System.out.println("!!!!!!!!!!   " + update.hasCallbackQuery());
-                System.out.println("?????????????   " + update.getCallbackQuery().getData().toString());
-                log.debug(update.getCallbackQuery().getFrom().getUserName());
-                log.debug(update.getCallbackQuery().getFrom().getFirstName());
-                log.debug(update.getCallbackQuery().getFrom().getId());
 
                 registerUser(update.getCallbackQuery().getFrom().getId());
 
                 // добавить основное меню
 //                SendMessage sendMessage = new SendMessage();
-                sendMessage.setChatId(String.valueOf(update.getCallbackQuery().getFrom().getId()));
+                sendMessage.setChatId(String.valueOf(chatId));
                 sendMessage.setText("");
                 menuBot.baseMenu(sendMessage); //отправить вместе с сообщением меню
-                sendMessage(update.getCallbackQuery().getFrom().getId(), "Теперь Вы можете оплатить услугу");
+                sendMessage(chatId, "Теперь Вы можете оплатить услугу");
             }
 
             if (update.getCallbackQuery().getData().toString().equals("oneDay")) {
-                System.out.println("!!!!!!!!!!   " + update.hasCallbackQuery());
-                System.out.println("?????????????   " + update.getCallbackQuery().getData().toString());
-                log.debug(update.getCallbackQuery().getFrom().getUserName());
-                log.debug(update.getCallbackQuery().getFrom().getFirstName());
-                log.debug(update.getCallbackQuery().getFrom().getId());
-
-//                registerUser(update.getCallbackQuery().getFrom().getId());
-
-                // добавить основное меню
-                sendMessage.setChatId(String.valueOf(update.getCallbackQuery().getFrom().getId()));
+                sendMessage.setChatId(String.valueOf(chatId));
                 sendMessage.setText("");
-//                menuBot.baseMenu(sendMessage); //отправить вместе с сообщением меню
-                sendMessage(update.getCallbackQuery().getFrom().getId(), "Один день");
+                sendMessage(chatId, "Один день");
+                countTiming = 1;
             }
+            if (update.getCallbackQuery().getData().toString().equals("sevenDay")) {
+                sendMessage.setChatId(String.valueOf(chatId));
+                sendMessage.setText("");
+                sendMessage(chatId, "Семь дней");
+                countTiming = 7;
+            }
+            if (update.getCallbackQuery().getData().toString().equals("tenDay")) {
+                sendMessage.setChatId(String.valueOf(chatId));
+                sendMessage.setText("");
+                sendMessage(chatId, "10 дней");
+                countTiming = 10;
+            }
+            if (update.getCallbackQuery().getData().toString().equals("fifteenDay")) {
+                sendMessage.setChatId(String.valueOf(chatId));
+                sendMessage.setText("");
+                sendMessage(chatId, "15 дней");
+                countTiming = 15;
+            }
+            if (update.getCallbackQuery().getData().toString().equals("oneMonth")) {
+                sendMessage.setChatId(String.valueOf(chatId));
+                sendMessage.setText("");
+                sendMessage(chatId, "1 месяц");
+                countTiming = 30;
+            }
+            if (countTiming != 0) {
+                log.debug("countTiming = " + countTiming);
+                sendLocalPhoto(String.valueOf(chatId));
+                addDataTest.newUser();
+                log.debug("Тестовые данные загружены");
+                List<User> users = userRepository.findAll().stream().toList();
+//                for (int i = 0; i < users.size(); i++) {
+//                    System.out.println(users.get(i).getChatId());
+//                }
+                choosePlace = true;
+                System.out.println("countTiming = " + countTiming + "    choosePlace = " + choosePlace);
+            }
+            if (choosePlace == true) {
+                List<UserBarrier> listBasyPlace = userBarrierRepository.findAll().stream().toList();
+
+            }
+
         }
     }
 
@@ -146,7 +196,7 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
     private void openMessage(long chatID) {
         String answer = "Открываю";
         sendMessage(chatID, answer);
-        log.debug(answer);
+        log.debug(answer + "  sendMessage    " + sendMessage);
     }
 
     private void sendMessage(long chatID, String textToSend) {
@@ -185,6 +235,19 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
         } catch (TelegramApiException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void sendLocalPhoto(String chatId) {
+        SendPhoto sendPhoto = new SendPhoto();
+        sendPhoto.setChatId(chatId);
+        sendPhoto.setPhoto(new InputFile("http://test.school89.net/wp-content/uploads/2023/08/scheme_one_foras.jpg"));
+        sendPhoto.setCaption("Выберите пожалуйста место");
+        try {
+            execute(sendPhoto);
+        } catch (TelegramApiException e) {
+            throw new RuntimeException(e);
+        }
+        log.debug(chatId);
     }
 
 

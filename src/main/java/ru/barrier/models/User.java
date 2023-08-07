@@ -17,9 +17,11 @@ public class User {
     @Column(name = "chat_id", nullable = false)
     private long chatId;
 
-//    @OneToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "user_barrier", nullable = false)
-//    private UserBarrier userBarrier;
+//    @Transient
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    @PrimaryKeyJoinColumn
+    @JoinColumn(name = "user_barrier")
+    private UserBarrier userBarrier;
 
 
     @Transient

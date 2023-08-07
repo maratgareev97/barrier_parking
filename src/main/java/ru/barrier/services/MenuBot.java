@@ -18,9 +18,9 @@ public class MenuBot {
 //    private List<KeyboardRow> keyboardRows = new ArrayList<>();
 //    private KeyboardRow row = new KeyboardRow();
     // Для кнопок под сообщением
-    private InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
-    private List<List<InlineKeyboardButton>> rowsInLine = new ArrayList<>();
-    List<InlineKeyboardButton> rowInLine = new ArrayList<>();
+//    private InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+//    private List<List<InlineKeyboardButton>> rowsInLine = new ArrayList<>();
+//    List<InlineKeyboardButton> rowInLine = new ArrayList<>();
 
     public SendMessage baseMenu(SendMessage sendMessage) {
 
@@ -52,6 +52,10 @@ public class MenuBot {
     }
 
     public SendDocument doingAcceptContractMenu(SendDocument sendMessage) {
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> rowsInLine = new ArrayList<>();
+        List<InlineKeyboardButton> rowInLine = new ArrayList<>();
+
         var yesButton = new InlineKeyboardButton();
         String emoji = EmojiParser.parseToUnicode("✅");
         yesButton.setText(emoji + "Принять соглашение");
@@ -66,6 +70,14 @@ public class MenuBot {
     }
 
     public SendMessage timing(SendMessage sendMessage) {
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> rowsInLine = new ArrayList<>();
+        List<InlineKeyboardButton> rowInLineOneDay = new ArrayList<>();
+        List<InlineKeyboardButton> rowInLineSevenDay = new ArrayList<>();
+        List<InlineKeyboardButton> rowInLineTenDay = new ArrayList<>();
+        List<InlineKeyboardButton> rowInLineDayFifteenDay = new ArrayList<>();
+        List<InlineKeyboardButton> rowInLineOneMonth = new ArrayList<>();
+
         var oneDayButton = new InlineKeyboardButton();
         oneDayButton.setText("1 день");
         oneDayButton.setCallbackData("oneDay");
@@ -74,10 +86,32 @@ public class MenuBot {
         sevenDayButton.setText("7 дней");
         sevenDayButton.setCallbackData("sevenDay");
 
-        rowInLine.add(oneDayButton);
-        rowInLine.add(sevenDayButton);
+        var tenDayButton = new InlineKeyboardButton();
+        tenDayButton.setText("10 дней");
+        tenDayButton.setCallbackData("tenDay");
 
-        rowsInLine.add(rowInLine);
+        var fifteenDayButton = new InlineKeyboardButton();
+        fifteenDayButton.setText("15 дней");
+        fifteenDayButton.setCallbackData("fifteenDay");
+
+        var oneMonthButton = new InlineKeyboardButton();
+        oneMonthButton.setText("1 месяц");
+        oneMonthButton.setCallbackData("oneMonth");
+
+        rowInLineOneDay.add(oneDayButton);
+        rowsInLine.add(rowInLineOneDay);
+
+        rowInLineSevenDay.add(sevenDayButton);
+        rowsInLine.add(rowInLineSevenDay);
+
+        rowInLineTenDay.add(tenDayButton);
+        rowsInLine.add(rowInLineTenDay);
+
+        rowInLineDayFifteenDay.add(fifteenDayButton);
+        rowsInLine.add(rowInLineDayFifteenDay);
+
+        rowInLineOneMonth.add(oneMonthButton);
+        rowsInLine.add(rowInLineOneMonth);
 
         inlineKeyboardMarkup.setKeyboard(rowsInLine);
         sendMessage.setReplyMarkup(inlineKeyboardMarkup);

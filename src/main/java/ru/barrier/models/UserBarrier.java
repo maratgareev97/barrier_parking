@@ -2,12 +2,9 @@ package ru.barrier.models;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.LazyToOne;
-import org.hibernate.annotations.LazyToOneOption;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Set;
 
 @Entity
 @Getter
@@ -21,13 +18,24 @@ public class UserBarrier {
     @Column(name = "data_last_payment")
     private LocalDate dataLastPayment;
 
-    @Column(name = "use", nullable = false)
-    private boolean use;
+    @Column(name = "stopped_by")
+    private boolean stoppedBy;
 
-    @Column
-    private String test;
+    @Column(name = "parking_place")
+    private int parkingPlace;
 
-//    @OneToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "user", nullable = false)
-//    private User user;
+
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL,mappedBy = "userBarrier")
+    private User user;
+
+    @Override
+    public String toString() {
+        return "UserBarrier{" +
+               "chatId=" + chatId +
+               ", dataLastPayment=" + dataLastPayment +
+               ", use=" + stoppedBy +
+               ", test='" + parkingPlace + '\'' +
+               ", user=" + user +
+               '}';
+    }
 }
