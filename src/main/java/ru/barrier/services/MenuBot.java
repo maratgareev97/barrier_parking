@@ -12,15 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MenuBot {
-    // Для обычных кнопок
-//    private ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup();
-//
-//    private List<KeyboardRow> keyboardRows = new ArrayList<>();
-//    private KeyboardRow row = new KeyboardRow();
-    // Для кнопок под сообщением
-//    private InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
-//    private List<List<InlineKeyboardButton>> rowsInLine = new ArrayList<>();
-//    List<InlineKeyboardButton> rowInLine = new ArrayList<>();
 
     public SendMessage baseMenu(SendMessage sendMessage) {
 
@@ -51,6 +42,7 @@ public class MenuBot {
         return sendMessage;
     }
 
+
     public SendDocument doingAcceptContractMenu(SendDocument sendMessage) {
         InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
         List<List<InlineKeyboardButton>> rowsInLine = new ArrayList<>();
@@ -68,6 +60,7 @@ public class MenuBot {
 
         return sendMessage;
     }
+
 
     public SendMessage timing(SendMessage sendMessage) {
         InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
@@ -120,4 +113,33 @@ public class MenuBot {
     }
 
 
+    public SendMessage choiceFreePlace(SendMessage sendMessage, ArrayList arrayListFreePlace) {
+
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+
+        List<List<InlineKeyboardButton>> rowsInLine = new ArrayList<>();
+
+        var oneDayButton = new InlineKeyboardButton();
+
+        Integer countPlace = 0;
+        Integer buttonCountRow = arrayListFreePlace.size();
+        for (int j = 0; j < buttonCountRow / 8 + 1; j++) {
+            List<InlineKeyboardButton> rowInLineOneDay = new ArrayList<>();
+            for (int i = 0; i < 8; i++) {
+                if (countPlace < buttonCountRow) {
+                    oneDayButton = new InlineKeyboardButton();
+                    oneDayButton.setText(String.valueOf(arrayListFreePlace.get(countPlace)));
+                    oneDayButton.setCallbackData("place" + String.valueOf(arrayListFreePlace.get(countPlace)));
+                    rowInLineOneDay.add(oneDayButton);
+                } else break;
+                countPlace++;
+            }
+            rowsInLine.add(rowInLineOneDay);
+        }
+
+        inlineKeyboardMarkup.setKeyboard(rowsInLine);
+        sendMessage.setReplyMarkup(inlineKeyboardMarkup);
+
+        return sendMessage;
+    }
 }

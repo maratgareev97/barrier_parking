@@ -21,9 +21,7 @@ import ru.barrier.models.UserBarrier;
 import ru.barrier.repository.UserBarrierRepository;
 import ru.barrier.repository.UserRepository;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 @Component
 @Log4j
@@ -69,6 +67,28 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
         return botConfig.getToken();
     }
 
+    void executeDocument(SendDocument sendDocument) {
+        try {
+            execute(sendDocument);
+        } catch (TelegramApiException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    void executeMessage(SendMessage sendMessage) {
+        try {
+            execute(sendMessage);
+        } catch (TelegramApiException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    void executePhoto(SendPhoto sendPhoto) {
+        try {
+            execute(sendPhoto);
+        } catch (TelegramApiException e) {
+            throw new RuntimeException(e);
+        }}
+
     @Transactional
     public void onUpdateReceived(Update update) {
         if (update.hasMessage() && update.getMessage().hasText()) {
@@ -89,7 +109,7 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
                     break;
                 default:
                     if (messageTest.equals(rentEmoji + " Арендовать место")) {
-                        timing(chatID);
+                        sendMessageTiming(chatID);
                     } else {
                         sendMessage(chatID, "Не поддерживается");
                     }
@@ -97,7 +117,7 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
 
         }
         if (update.hasCallbackQuery()) {
-            boolean choosePlace = false;
+            boolean choicePlace = false;
 
             Long chatId = update.getCallbackQuery().getFrom().getId();
 
@@ -157,14 +177,47 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
                 addDataTest.newUser();
                 log.debug("Тестовые данные загружены");
                 List<User> users = userRepository.findAll().stream().toList();
-//                for (int i = 0; i < users.size(); i++) {
-//                    System.out.println(users.get(i).getChatId());
-//                }
-                choosePlace = true;
-                System.out.println("countTiming = " + countTiming + "    choosePlace = " + choosePlace);
+                choicePlace = true;
+                System.out.println("countTiming = " + countTiming + "    choosePlace = " + choicePlace);
             }
-            if (choosePlace == true) {
-                List<UserBarrier> listBasyPlace = userBarrierRepository.findAll().stream().toList();
+
+            if (choicePlace == true) {
+                List<UserBarrier> listBusyPlace = userBarrierRepository.findAll().stream().toList();
+                ArrayList<Integer> arrayListBusyPlace = new ArrayList<>();
+                for (int i = 0; i < listBusyPlace.size(); i++) {
+                    arrayListBusyPlace.add(listBusyPlace.get(i).getParkingPlace());
+                }
+                System.out.println(arrayListBusyPlace);
+                Collections.sort(arrayListBusyPlace);
+                System.out.println(arrayListBusyPlace + " : " + arrayListBusyPlace.size());
+
+                Integer differenceValue = 0;
+                ArrayList<Integer> arrayListFreePlace = new ArrayList<>();
+                //заполнение до первого элемента
+                if (arrayListBusyPlace.get(0) != 1) {
+                    for (int i = 1; i < arrayListBusyPlace.get(0); i++) {
+                        arrayListFreePlace.add(i);
+                    }
+                }
+                // заполнение в промежутке
+                for (int i = 0; i < arrayListBusyPlace.size() - 1; i++) {
+                    differenceValue = arrayListBusyPlace.get(i + 1) - arrayListBusyPlace.get(i);
+                    if (differenceValue != 1) {
+                        Integer start = arrayListBusyPlace.get(i) + 1;
+                        Integer finish = arrayListBusyPlace.get(i + 1);
+                        for (int j = start; j < finish; j++) {
+                            arrayListFreePlace.add(j);
+                        }
+                    }
+                }
+                // заполенение после последнего
+                if (arrayListBusyPlace.get(arrayListBusyPlace.size() - 1) != 27) {
+                    for (int i = arrayListBusyPlace.get(arrayListBusyPlace.size() - 1); i < 27; i++) {
+                        arrayListFreePlace.add(i + 1);
+                    }
+                }
+                System.out.println(arrayListFreePlace + " : " + arrayListFreePlace.size());
+                sendMessageChoiceFreePlace(chatId, arrayListFreePlace);
 
             }
 
@@ -185,30 +238,23 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
         MenuBot menuBot = new MenuBot();
         menuBot.doingAcceptContractMenu(sendDocument); //отправить вместе с сообщением меню
 
-        try {
-            execute(sendDocument);
-        } catch (TelegramApiException e) {
-            throw new RuntimeException(e);
-        }
+        executeDocument(sendDocument);
         log.debug(answer + ", " + chatID);
     }
 
-    private void openMessage(long chatID) {
+    @Override
+    public void openMessage(long chatID) {
         String answer = "Открываю";
         sendMessage(chatID, answer);
         log.debug(answer + "  sendMessage    " + sendMessage);
     }
 
-    private void sendMessage(long chatID, String textToSend) {
+    @Override
+    public void sendMessage(long chatID, String textToSend) {
         sendMessage.setChatId(String.valueOf(chatID));
         sendMessage.setText(textToSend);
 
-        try {
-            execute(sendMessage);
-            log.debug(textToSend);
-        } catch (TelegramApiException e) {
-            System.out.println("Не ушло");
-        }
+        executeMessage(sendMessage);
     }
 
     @Override
@@ -218,36 +264,44 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
         userRepository.save(user);
     }
 
-    public void timing(Long chatId) {
+    @Override
+    public void sendMessageTiming(Long chatId) {
         String text = "1 день - 300 руб.\n" +
                       "7 дней - 2000\n" +
                       "10 дней -2500\n" +
                       "15 дней - 3500\n" +
                       "1 месяц- 6000";
         MenuBot menuBot = new MenuBot();
-        SendMessage sendMessage1 = new SendMessage();
-        sendMessage1.setChatId(chatId);
-        sendMessage1.setText(text);
-        menuBot.timing(sendMessage1); //отправить вместе с сообщением меню
-//        sendMessage(chatId, text);
-        try {
-            execute(sendMessage1);
-        } catch (TelegramApiException e) {
-            throw new RuntimeException(e);
-        }
+        SendMessage sendMessage = new SendMessage();
+        sendMessage.setChatId(chatId);
+        sendMessage.setText(text);
+        menuBot.timing(sendMessage); //отправить вместе с сообщением меню
+
+        executeMessage(sendMessage);
     }
 
+    @Override
     public void sendLocalPhoto(String chatId) {
         SendPhoto sendPhoto = new SendPhoto();
         sendPhoto.setChatId(chatId);
         sendPhoto.setPhoto(new InputFile("http://test.school89.net/wp-content/uploads/2023/08/scheme_one_foras.jpg"));
-        sendPhoto.setCaption("Выберите пожалуйста место");
-        try {
-            execute(sendPhoto);
-        } catch (TelegramApiException e) {
-            throw new RuntimeException(e);
-        }
+//        sendPhoto.setCaption("Выберите пожалуйста место");
+
+        executePhoto(sendPhoto);
         log.debug(chatId);
+    }
+
+    @Override
+    public void sendMessageChoiceFreePlace(Long chatId, ArrayList arrayListFreePlace) {
+        String text = "Выбирай";
+        MenuBot menuBot = new MenuBot();
+        SendMessage sendMessage = new SendMessage();
+        sendMessage.setChatId(chatId);
+        sendMessage.setText(text);
+        menuBot.choiceFreePlace(sendMessage, arrayListFreePlace); //отправить вместе с сообщением меню
+        System.out.println(sendMessage);
+
+        executeMessage(sendMessage);
     }
 
 
