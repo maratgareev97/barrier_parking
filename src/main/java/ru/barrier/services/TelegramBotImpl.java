@@ -22,6 +22,7 @@ import ru.barrier.models.User;
 import ru.barrier.models.UserBarrier;
 import ru.barrier.repository.UserBarrierRepository;
 import ru.barrier.repository.UserRepository;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -42,6 +43,8 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
     @Autowired
     private AddData addData;
 
+    @Autowired
+    private DataBaseService dataBaseService;
     final BotConfig botConfig;
 
     SendMessage sendMessage = new SendMessage();
@@ -280,6 +283,8 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
                             Collections.singletonList(new LabeledPrice("label", money * 100)));
 
                     addData.newPayment(chatId, place, countTimingArrayList.get(countTimingArrayList.size() - 1));
+                    dataBaseService.getUserBarrierById(chatId);
+//                    userRepository.getUserBarrierById(chatId);
                 }
 
             }
@@ -401,6 +406,7 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
         return true;
     }
 
+    @Override
     public boolean payment(Long chatId, String title, String description, String payload, String providerToken,
                            String Currency, List<LabeledPrice> prices) {
         SendInvoice sendInvoice = new SendInvoice();
@@ -422,6 +428,5 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
 
         return true;
     }
-
 
 }
