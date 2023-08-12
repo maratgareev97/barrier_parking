@@ -19,14 +19,13 @@ public class User {
 
 //    @Transient
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    @PrimaryKeyJoinColumn
     @JoinColumn(name = "user_barrier")
     private UserBarrier userBarrier;
 
 
-    @Transient
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "chatId")
-    private Set<Payment> payments;
+//    @Transient
+//    @OneToMany(fetch = FetchType.EAGER, mappedBy = "chatId")
+//    private Set<Payment> payments;
 
 //    @Override
 //    public String toString() {

@@ -12,6 +12,5 @@ public interface TelegramBot {
     public void sendMessageTiming(Long chatId);
     public void sendLocalPhoto(String chatId);
     public void sendMessageChoiceFreePlace(Long chatId, ArrayList arrayListFreePlace);
-
-//    public void timing();
+    public boolean collOnBarrier(String urlCollCenter, String campaign_id, String phone, String public_key);
 }

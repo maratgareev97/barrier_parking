@@ -5,6 +5,10 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -15,24 +19,34 @@ public class UserBarrier {
     @Column(name = "chat_id", nullable = false)
     private long chatId;
 
-    @Column(name = "data_last_payment")
-    private LocalDate dataLastPayment;
-
     @Column(name = "stopped_by")
     private boolean stoppedBy;
 
     @Column(name = "parking_place")
     private int parkingPlace;
 
+    @Column(name = "data_time_last_payment")
+    private LocalDateTime dateTimeLastPayment;
+    @Column(name="data_time_next_payment")
+    private LocalDateTime dateTimeNextPayment;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL,mappedBy = "userBarrier")
+    @Column(name="amount_of_days")
+    private int amountOfDays;
+
+
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "userBarrier")
     private User user;
+
+//    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+////    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    @JoinColumn(name = "user_chat_id")
+//    private List<Payment> payments = new ArrayList<>();
 
     @Override
     public String toString() {
         return "UserBarrier{" +
                "chatId=" + chatId +
-               ", dataLastPayment=" + dataLastPayment +
+               ", dataLastPayment=" + dateTimeLastPayment +
                ", use=" + stoppedBy +
                ", test='" + parkingPlace + '\'' +
                ", user=" + user +
