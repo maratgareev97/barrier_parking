@@ -22,6 +22,8 @@ import org.telegram.telegrambots.meta.api.objects.commands.BotCommand;
 import org.telegram.telegrambots.meta.api.objects.commands.scope.BotCommandScopeDefault;
 import org.telegram.telegrambots.meta.api.objects.payments.Invoice;
 import org.telegram.telegrambots.meta.api.objects.payments.LabeledPrice;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import ru.barrier.configs.BotConfig;
 import ru.barrier.models.User;
@@ -106,7 +108,29 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
         }
     }
 
+    @Override
+    public String parserJson(String response, String keyValue) {
+        JSONObject jsonObject = new JSONObject(response);
+        Iterator<String> keys = jsonObject.keys();
+        JSONObject valueN = new JSONObject();
+        while (keys.hasNext()) {
+            String key = keys.next();
+            Object value = jsonObject.get(key);
+            if (key.equals(keyValue)) {
+                try {
+                    valueN = (JSONObject) value;
+                } catch (Exception e) {
+                    return String.valueOf(value);
+                }
+            }
+        }
+        String result = valueN.toString();
+        return result;
+    }
+
+
     ArrayList<Integer> countTimingArrayList = new ArrayList<>();
+
 
     @Transactional
     public void onUpdateReceived(Update update) {
@@ -205,53 +229,37 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
                         } else sendMessage(chatID, "Оплатите парковку");
                     } else if (messageTest.equals(extendRentEmoji + " Продлить аренду")) {
 
+//                        ------------------------------------------------------------------------------------------------------------------------
 
-                        OkHttpClient client = new OkHttpClient().newBuilder()
-                                .build();
-                        MediaType mediaType = MediaType.parse("application/json");
-                        RequestBody body = RequestBody.create(mediaType,
-                                "{\n        \"amount\": " +
-                                "{\n          \"value\": \"1.00\",\n          \"currency\": \"RUB\"\n        }," +
-                                "\n      \n        \"confirmation\": {\n          \"type\": \"redirect\"," +
-                                "\n          \"return_url\": \"https://www.example.com/return_url\"\n        }," +
-                                "\n        \"description\": \"Заказ №1\"\n      }");
-                        Request request = new Request.Builder()
-                                .url("https://api.yookassa.ru/v3/payments")
-                                .method("POST", body)
-                                .addHeader("Idempotence-Key", "11111")
-                                .addHeader("Content-Type", "application/json")
-                                .addHeader("Authorization", "Basic OTg0NzMzOmxpdmVfdG43anc5ZWtvZnhQWVM5VUpwV3JyNkNJTTEyaGlHWElMUnJVdzJQdnd4OA==")
-                                .build();
-
+                        Response response = creatingPayment();
+                        String result = null;
                         try {
-                            Response response = client.newCall(request).execute();
-                            String result = response.body().string();
-                            System.out.println(result);
-                            JSONObject jsonObject = new JSONObject(result);
-                            Iterator<String> keys = jsonObject.keys();
-                            JSONObject valueN = new JSONObject();
-                            while (keys.hasNext()) {
-                                String key = keys.next();
-                                Object value = jsonObject.get(key);
-                                System.out.println("Ключ: " + key + ", Значение: " + value);
-                                if (key.equals("confirmation")) {
-                                    valueN = (JSONObject) value;
-                                }
-                            }
-
-                            String valueNew = valueN.toString();
-                            System.out.println(valueNew);
-                            JSONObject jsonObjectNew = new JSONObject(valueNew);
-                            Iterator<String> keysNew = jsonObjectNew.keys();
-                            while (keysNew.hasNext()) {
-                                String keyNew = keysNew.next();
-                                Object valueNewn = jsonObjectNew.get(keyNew);
-                                System.out.println("Ключ!: " + keyNew + ", Значение:! " + valueNewn);
-                            }
+                            result = response.body().string();
                         } catch (IOException e) {
                             throw new RuntimeException(e);
                         }
+                        String result1 = parserJson(result, "confirmation");
+                        System.out.println(result1);
 
+
+                        SendMessage sendMessage1 = new SendMessage();
+                        sendMessage1.setChatId(chatID);
+                        String result2 = "";
+                        try {
+                            result2 = parserJson(result1, "confirmation_url").substring(8);
+
+                            System.out.println(result2);
+                            sendMessage1.setText("Теперь вы можете оплатить счёт:");
+                            sendMessage1.setParseMode("HTML");
+
+                            MenuBot menuBot = new MenuBot();
+                            menuBot.link(sendMessage1, result2, "Оплатить", "О");
+
+                            executeMessage(sendMessage1);
+                        } catch (Exception e) {
+                            sendMessage(chatID, "Счет устарел. Создайте пожалуйста новый");
+                        }
+//----------------------------------------
 
                         User user = userRepository.getUserById(chatID);
                         if (user != null && user.getUserBarrier() != null && user.getUserBarrier().getDateTimeNextPayment() != null) {
@@ -488,6 +496,33 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
     }
 
     @Override
+    public Response creatingPayment() {
+        OkHttpClient client = new OkHttpClient().newBuilder()
+                .build();
+        MediaType mediaType = MediaType.parse("application/json");
+        RequestBody body = RequestBody.create(mediaType,
+                "{\n        \"amount\": " +
+                "{\n          \"value\": \"1.00\",\n          \"currency\": \"RUB\"\n        }," +
+                "\n      \n        \"confirmation\": {\n          \"type\": \"redirect\"," +
+                "\n          \"return_url\": \"https://www.example.com/return_url\"\n        }," +
+                "\n        \"description\": \"Заказ №1\"\n      }");
+        Request request = new Request.Builder()
+                .url("https://api.yookassa.ru/v3/payments")
+                .method("POST", body)
+                .addHeader("Idempotence-Key", "1111111111")
+                .addHeader("Content-Type", "application/json")
+                .addHeader("Authorization", "Basic OTg0NzMzOmxpdmVfdG43anc5ZWtvZnhQWVM5VUpwV3JyNkNJTTEyaGlHWElMUnJVdzJQdnd4OA==")
+                .build();
+        Response response = null;
+        try {
+            response = client.newCall(request).execute();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return response;
+    }
+
+    @Override
     public void startMessage(long chatID, String name) {
         String answer = "Здравствуйте " + name + ".\n" + "Добро пожаловать на нашу парковку. " +
                         "Перед началом аренды, пожалуйста, ознакомьтесь с нашей офертой и " +
@@ -513,7 +548,6 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
     public void sendMessage(long chatID, String textToSend) {
         sendMessage.setChatId(String.valueOf(chatID));
         sendMessage.setText(textToSend);
-
         executeMessage(sendMessage);
     }
 

@@ -1,5 +1,6 @@
 package ru.barrier.services;
 
+import okhttp3.Response;
 import org.telegram.telegrambots.meta.api.methods.send.SendDocument;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.payments.LabeledPrice;
@@ -25,4 +26,6 @@ public interface TelegramBot {
     public SendDocument document(Long chatId, String url, String captionText);
 
     public Duration compareTime(LocalDateTime startTime, LocalDateTime endTime);
+    public String parserJson(String response, String keyValue);
+    public Response creatingPayment();
 }

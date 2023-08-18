@@ -7378,3 +7378,9 @@
 2023-08-18 01:20:07 DEBUG TelegramBotImpl:256 - 1292677678
 2023-08-18 01:20:07 DEBUG TelegramBotImpl:262 - null    null
 2023-08-18 01:20:08 DEBUG TelegramBotImpl:444 - Оплата прошла
+2023-08-18 22:51:27 DEBUG TelegramBotImpl:526 - Здравствуйте Marat.
+Добро пожаловать на нашу парковку. Перед началом аренды, пожалуйста, ознакомьтесь с нашей офертой и согласитесь с ней для продолжения., 1292677678
+2023-08-18 22:51:28 DEBUG TelegramBotImpl:303 - Maratgareev97
+2023-08-18 22:51:28 DEBUG TelegramBotImpl:304 - Marat
+2023-08-18 22:51:28 DEBUG TelegramBotImpl:305 - 1292677678
+2023-08-18 22:51:28 DEBUG TelegramBotImpl:311 - null    null

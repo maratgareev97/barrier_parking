@@ -219,4 +219,22 @@ public class MenuBot {
 
         return sendMessage;
     }
+
+    public SendMessage link(SendMessage sendMessage, String url, String textLink, String textOnButton) {
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> rowsInLine = new ArrayList<>();
+        List<InlineKeyboardButton> rowInLine = new ArrayList<>();
+
+        var yesButton = new InlineKeyboardButton();
+        String emoji = EmojiParser.parseToUnicode("💳");
+        yesButton.setText(emoji + textLink);
+        yesButton.setCallbackData(textOnButton);
+        yesButton.setUrl(url);
+        rowInLine.add(yesButton);
+        rowsInLine.add(rowInLine);
+        inlineKeyboardMarkup.setKeyboard(rowsInLine);
+        sendMessage.setReplyMarkup(inlineKeyboardMarkup);
+        return sendMessage;
+    }
+
 }
