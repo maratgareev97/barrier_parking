@@ -20,7 +20,7 @@ public class UserBarrier {
     private long chatId;
 
     @Column(name = "stopped_by")
-    private boolean stoppedBy;
+    private int stoppedBy;
 
     @Column(name = "parking_place")
     private int parkingPlace;

@@ -1,8 +1,11 @@
 package ru.barrier.services;
 
+import org.telegram.telegrambots.meta.api.methods.send.SendDocument;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.payments.LabeledPrice;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,4 +21,8 @@ public interface TelegramBot {
 
     public boolean payment(Long chatId, String title, String description, String payload, String providerToken,
                            String Currency, List<LabeledPrice> prices);
+
+    public SendDocument document(Long chatId, String url, String captionText);
+
+    public Duration compareTime(LocalDateTime startTime, LocalDateTime endTime);
 }

@@ -1,8 +1,8 @@
 package ru.barrier.services;
 
-import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import ru.barrier.models.Payment;
 import ru.barrier.models.User;
 import ru.barrier.models.UserBarrier;
@@ -10,13 +10,10 @@ import ru.barrier.repository.PaymentRepository;
 import ru.barrier.repository.UserBarrierRepository;
 import ru.barrier.repository.UserRepository;
 
-import java.time.DateTimeException;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
-import java.util.List;
 import java.util.TreeSet;
 
 @Component
@@ -30,6 +27,13 @@ public class AddData {
     @Autowired
     private PaymentRepository paymentRepository;
 
+    public void registerUser(Long chatId) {
+        User user = new User();
+        user.setChatId(chatId);
+        userRepository.save(user);
+    }
+
+    @Transactional
     public void newUserBarrier(Long chatId, Integer place) {
         User user = new User();
         UserBarrier userBarrier = new UserBarrier();
@@ -37,13 +41,60 @@ public class AddData {
         user.setChatId(chatId);
         userBarrier.setChatId(chatId);
         userBarrier.setParkingPlace(place);
+        userBarrier.setStoppedBy(0);
         user.setUserBarrier(userBarrier);
         userBarrier.setUser(user);
 
         userRepository.save(user);
+    }
+
+    @Transactional
+    public void stoppedByT(User user, int stoppedBy) {
+        UserBarrier userBarrier = user.getUserBarrier();
+
+        user.setChatId(user.getChatId());
+        userBarrier.setChatId(userBarrier.getChatId());
+        userBarrier.setStoppedBy(stoppedBy);
+
+        user.setUserBarrier(userBarrier);
+        userBarrier.setUser(user);
+        userRepository.save(user);
 
     }
 
+
+    @Transactional
+    public void timingRenting(User user, LocalDateTime localDateNextTime) {
+        UserBarrier userBarrier = user.getUserBarrier();
+
+        user.setChatId(user.getChatId());
+        userBarrier.setChatId(userBarrier.getChatId());
+//        userBarrier.setStoppedBy(stoppedBy);
+        userBarrier.setDateTimeLastPayment(LocalDateTime.now());
+        userBarrier.setDateTimeNextPayment(localDateNextTime);
+
+        user.setUserBarrier(userBarrier);
+        userBarrier.setUser(user);
+        userRepository.save(user);
+
+    }
+
+    @Transactional
+    public void stoppedBy(Long chatId, int stoppedBy) {
+        User user = new User();
+        UserBarrier userBarrier = new UserBarrier();
+
+        user.setChatId(chatId);
+        userBarrier.setChatId(chatId);
+        userBarrier.setStoppedBy(stoppedBy);
+
+        user.setUserBarrier(userBarrier);
+        userBarrier.setUser(user);
+        userRepository.save(user);
+
+    }
+
+    @Transactional
     public void newPayment(Long chatId, Integer parkingPlace, Integer amountOfDays) {
         UserBarrier userBarrier = new UserBarrier();
         userBarrier.setChatId(chatId);
@@ -60,7 +111,7 @@ public class AddData {
 
         LocalDateTime localDateTime = LocalDateTime.of(2023, Month.MAY, 12, 22, 12, 30);
         LocalDateTime localDateTime1 = LocalDateTime.of(2023, Month.MAY, 12, 22, 12, 30);
-        System.out.println(localDateTime1.compareTo(localDateTime1));
+        System.out.println(localDateTime1.compareTo(localDateTime));
         System.out.println(LocalDateTime.of(2023, Month.MAY, 12, 22, 12, 30));
 
 
@@ -111,6 +162,7 @@ public class AddData {
 //
 //    }
 
+    @Transactional
     public void newUserTest() {
         TreeSet states = new TreeSet<Integer>();
         int d = 1;
