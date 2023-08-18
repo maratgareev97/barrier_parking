@@ -509,7 +509,7 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
         Request request = new Request.Builder()
                 .url("https://api.yookassa.ru/v3/payments")
                 .method("POST", body)
-                .addHeader("Idempotence-Key", "1111111111")
+                .addHeader("Idempotence-Key", "11111111111")
                 .addHeader("Content-Type", "application/json")
                 .addHeader("Authorization", "Basic OTg0NzMzOmxpdmVfdG43anc5ZWtvZnhQWVM5VUpwV3JyNkNJTTEyaGlHWElMUnJVdzJQdnd4OA==")
                 .build();
