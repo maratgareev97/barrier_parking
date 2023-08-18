@@ -218,13 +218,13 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
                         Request request = new Request.Builder()
                                 .url("https://api.yookassa.ru/v3/payments")
                                 .method("POST", body)
-                                .addHeader("Idempotence-Key", "1111110211")
+                                .addHeader("Idempotence-Key", "11111")
                                 .addHeader("Content-Type", "application/json")
                                 .addHeader("Authorization", "Basic OTg0NzMzOmxpdmVfdG43anc5ZWtvZnhQWVM5VUpwV3JyNkNJTTEyaGlHWElMUnJVdzJQdnd4OA==")
                                 .build();
+
                         try {
                             Response response = client.newCall(request).execute();
-//                            System.out.println(response.body().string());
                             String result = response.body().string();
                             System.out.println(result);
                             JSONObject jsonObject = new JSONObject(result);
@@ -237,17 +237,17 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
                                 if (key.equals("confirmation")) {
                                     valueN = (JSONObject) value;
                                 }
-//                                System.out.println(jsonObject.getJSONArray(key));
                             }
-                            System.out.println(valueN);
 
-//
-//                            System.out.println(jsonObject.keys());
-//                            JSONArray Jarray = jsonObject.getJSONArray("id");
-//                            for (int i = 0; i < Jarray.length(); i++) {
-//                                JSONObject object     = Jarray.getJSONObject(i);
-//                            }
-
+                            String valueNew = valueN.toString();
+                            System.out.println(valueNew);
+                            JSONObject jsonObjectNew = new JSONObject(valueNew);
+                            Iterator<String> keysNew = jsonObjectNew.keys();
+                            while (keysNew.hasNext()) {
+                                String keyNew = keysNew.next();
+                                Object valueNewn = jsonObjectNew.get(keyNew);
+                                System.out.println("Ключ!: " + keyNew + ", Значение:! " + valueNewn);
+                            }
                         } catch (IOException e) {
                             throw new RuntimeException(e);
                         }
