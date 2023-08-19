@@ -27,5 +27,5 @@ public interface TelegramBot {
 
     public Duration compareTime(LocalDateTime startTime, LocalDateTime endTime);
     public String parserJson(String response, String keyValue);
-    public Response creatingPayment();
+    public Response creatingPayment(Integer money);
 }

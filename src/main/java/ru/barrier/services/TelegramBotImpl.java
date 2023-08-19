@@ -4,6 +4,7 @@ import com.vdurmont.emoji.EmojiParser;
 import lombok.extern.log4j.Log4j;
 import net.bytebuddy.asm.Advice;
 import okhttp3.*;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,9 @@ import java.time.LocalDateTime;
 import java.time.Month;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 @Component
 @Log4j
@@ -229,9 +233,21 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
                         } else sendMessage(chatID, "Оплатите парковку");
                     } else if (messageTest.equals(extendRentEmoji + " Продлить аренду")) {
 
+                        ScheduledExecutorService scheduledExecutorService = new ScheduledThreadPoolExecutor(2);
+                        scheduledExecutorService.schedule(new RRR(), 1, TimeUnit.SECONDS);
+
+//                        try {
+//                            Thread.sleep(20_000);
+//                        } catch (InterruptedException e) {
+//                            throw new RuntimeException(e);
+//                        }
+
+                        scheduledExecutorService.shutdown();
+                        System.out.println("end");
+
 //                        ------------------------------------------------------------------------------------------------------------------------
 
-                        Response response = creatingPayment();
+                        Response response = creatingPayment(1);
                         String result = null;
                         try {
                             result = response.body().string();
@@ -496,20 +512,22 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
     }
 
     @Override
-    public Response creatingPayment() {
-        OkHttpClient client = new OkHttpClient().newBuilder()
-                .build();
+    public Response creatingPayment(Integer money) {
+        OkHttpClient client = new OkHttpClient().newBuilder().build();
         MediaType mediaType = MediaType.parse("application/json");
+
+        String idempotenceKey = "Bill_" + RandomStringUtils.randomNumeric(20);
+
         RequestBody body = RequestBody.create(mediaType,
                 "{\n        \"amount\": " +
-                "{\n          \"value\": \"1.00\",\n          \"currency\": \"RUB\"\n        }," +
+                "{\n          \"value\": \"" + money + "\",\n          \"currency\": \"RUB\"\n        }," +
                 "\n      \n        \"confirmation\": {\n          \"type\": \"redirect\"," +
                 "\n          \"return_url\": \"https://www.example.com/return_url\"\n        }," +
-                "\n        \"description\": \"Заказ №1\"\n      }");
+                "\n        \"description\": \"Заказ №" + idempotenceKey + "\"\n      }");
         Request request = new Request.Builder()
                 .url("https://api.yookassa.ru/v3/payments")
                 .method("POST", body)
-                .addHeader("Idempotence-Key", "11111111111")
+                .addHeader("Idempotence-Key", idempotenceKey)
                 .addHeader("Content-Type", "application/json")
                 .addHeader("Authorization", "Basic OTg0NzMzOmxpdmVfdG43anc5ZWtvZnhQWVM5VUpwV3JyNkNJTTEyaGlHWElMUnJVdzJQdnd4OA==")
                 .build();
