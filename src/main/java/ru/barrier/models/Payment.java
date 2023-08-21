@@ -13,14 +13,19 @@ import java.util.Set;
 @Setter
 @Table(name = "payment")
 public class Payment {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private long id;
 
+    @Id
     @Column(name = "chat_id", nullable = false)
     private long chatId;
+
     @Column(name = "data_time_payment")
     private LocalDateTime dateTimePayment;
+
+    @Column(name = "id_payment")
+    private String idPayment;
 
 //    @ManyToOne(fetch = FetchType.LAZY)
 //    @JoinColumn(name = "user_barrier_id")

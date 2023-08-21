@@ -2,6 +2,7 @@ package ru.barrier.services;
 
 import okhttp3.Response;
 import org.telegram.telegrambots.meta.api.methods.send.SendDocument;
+import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.payments.LabeledPrice;
 
@@ -12,6 +13,7 @@ import java.util.List;
 
 public interface TelegramBot {
     public void startMessage(long chatID, String name);
+    public void executeMessage(SendMessage sendMessage);
     public void openMessage(long chatID);
     public void sendMessage(long chatID, String textToSend);
     public void registerUser(Long chatId);
@@ -26,6 +28,7 @@ public interface TelegramBot {
     public SendDocument document(Long chatId, String url, String captionText);
 
     public Duration compareTime(LocalDateTime startTime, LocalDateTime endTime);
-    public String parserJson(String response, String keyValue);
-    public Response creatingPayment(Integer money);
+    public void baseMethodPayment(Long chatId, Integer parkingPlace, Integer amountOfDays, Integer money);
+
 }
+

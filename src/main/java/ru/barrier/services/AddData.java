@@ -33,6 +33,12 @@ public class AddData {
         userRepository.save(user);
     }
 
+    public void newPayment(Long chatId, String idPayment){
+        Payment payment = new Payment();
+        payment.setChatId(chatId);
+        payment.setIdPayment(idPayment);
+        paymentRepository.save(payment);
+    }
     @Transactional
     public void newUserBarrier(Long chatId, Integer place) {
         User user = new User();
@@ -104,10 +110,10 @@ public class AddData {
         userBarrier.setAmountOfDays(amountOfDays);
         userBarrierRepository.save(userBarrier);
 
-        Payment payment = new Payment();
-        payment.setChatId(chatId);
-        payment.setDateTimePayment(LocalDateTime.now());
-        paymentRepository.save(payment);
+//        Payment payment = new Payment();
+//        payment.setChatId(chatId);
+//        payment.setDateTimePayment(LocalDateTime.now());
+//        paymentRepository.save(payment);
 
         LocalDateTime localDateTime = LocalDateTime.of(2023, Month.MAY, 12, 22, 12, 30);
         LocalDateTime localDateTime1 = LocalDateTime.of(2023, Month.MAY, 12, 22, 12, 30);

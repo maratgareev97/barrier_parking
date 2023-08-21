@@ -2,13 +2,8 @@ package ru.barrier.services;
 
 import com.vdurmont.emoji.EmojiParser;
 import lombok.extern.log4j.Log4j;
-import net.bytebuddy.asm.Advice;
 import okhttp3.*;
-import org.apache.commons.lang3.RandomStringUtils;
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
@@ -21,26 +16,22 @@ import org.telegram.telegrambots.meta.api.objects.InputFile;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.commands.BotCommand;
 import org.telegram.telegrambots.meta.api.objects.commands.scope.BotCommandScopeDefault;
-import org.telegram.telegrambots.meta.api.objects.payments.Invoice;
 import org.telegram.telegrambots.meta.api.objects.payments.LabeledPrice;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import ru.barrier.configs.BotConfig;
 import ru.barrier.models.User;
 import ru.barrier.models.UserBarrier;
+import ru.barrier.repository.PaymentRepository;
 import ru.barrier.repository.UserBarrierRepository;
 import ru.barrier.repository.UserRepository;
 
+import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.*;
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.time.Month;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
@@ -53,6 +44,7 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
     private UserRepository userRepository;
     @Autowired
     private UserBarrierRepository userBarrierRepository;
+
     @Autowired
     private AddData addData;
     @Autowired
@@ -96,7 +88,9 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
         }
     }
 
-    private void executeMessage(SendMessage sendMessage) {
+
+    @Override
+    public void executeMessage(SendMessage sendMessage) {
         try {
             execute(sendMessage);
         } catch (TelegramApiException e) {
@@ -111,27 +105,6 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
             throw new RuntimeException(e);
         }
     }
-
-    @Override
-    public String parserJson(String response, String keyValue) {
-        JSONObject jsonObject = new JSONObject(response);
-        Iterator<String> keys = jsonObject.keys();
-        JSONObject valueN = new JSONObject();
-        while (keys.hasNext()) {
-            String key = keys.next();
-            Object value = jsonObject.get(key);
-            if (key.equals(keyValue)) {
-                try {
-                    valueN = (JSONObject) value;
-                } catch (Exception e) {
-                    return String.valueOf(value);
-                }
-            }
-        }
-        String result = valueN.toString();
-        return result;
-    }
-
 
     ArrayList<Integer> countTimingArrayList = new ArrayList<>();
 
@@ -233,48 +206,11 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
                         } else sendMessage(chatID, "Оплатите парковку");
                     } else if (messageTest.equals(extendRentEmoji + " Продлить аренду")) {
 
-                        ScheduledExecutorService scheduledExecutorService = new ScheduledThreadPoolExecutor(2);
-                        scheduledExecutorService.schedule(new RRR(), 1, TimeUnit.SECONDS);
-
-//                        try {
-//                            Thread.sleep(20_000);
-//                        } catch (InterruptedException e) {
-//                            throw new RuntimeException(e);
-//                        }
-
-                        scheduledExecutorService.shutdown();
-                        System.out.println("end");
 
 //                        ------------------------------------------------------------------------------------------------------------------------
-
-                        Response response = creatingPayment(1);
-                        String result = null;
-                        try {
-                            result = response.body().string();
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
-                        }
-                        String result1 = parserJson(result, "confirmation");
-                        System.out.println(result1);
+//                        baseMethodPayment(chatID, 1);
 
 
-                        SendMessage sendMessage1 = new SendMessage();
-                        sendMessage1.setChatId(chatID);
-                        String result2 = "";
-                        try {
-                            result2 = parserJson(result1, "confirmation_url").substring(8);
-
-                            System.out.println(result2);
-                            sendMessage1.setText("Теперь вы можете оплатить счёт:");
-                            sendMessage1.setParseMode("HTML");
-
-                            MenuBot menuBot = new MenuBot();
-                            menuBot.link(sendMessage1, result2, "Оплатить", "О");
-
-                            executeMessage(sendMessage1);
-                        } catch (Exception e) {
-                            sendMessage(chatID, "Счет устарел. Создайте пожалуйста новый");
-                        }
 //----------------------------------------
 
                         User user = userRepository.getUserById(chatID);
@@ -396,12 +332,12 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
             }
             User user = userRepository.getUserById(chatId);
             if (countTimingRenting != 0 && user != null && user.getUserBarrier() != null && user.getUserBarrier().getDateTimeNextPayment() != null) {
-                payment(chatId, "Счёт",
-                        "Оплатите за " + Integer.toString(countTimingRenting) + " дней стоянки",
-                        "Выставлен счет на оплату",
-                        "390540012:LIVE:37489",
-                        "RUB",
-                        Collections.singletonList(new LabeledPrice("label", 100 * 100)));
+//                payment(chatId, "Счёт",
+//                        "Оплатите за " + Integer.toString(countTimingRenting) + " дней стоянки",
+//                        "Выставлен счет на оплату",
+//                        "390540012:LIVE:37489",
+//                        "RUB",
+//                        Collections.singletonList(new LabeledPrice("label", 100 * 100)));
 
                 LocalDateTime localDateTimeNew = user.getUserBarrier().getDateTimeNextPayment().plusDays(countTimingRenting);
                 addData.timingRenting(user, localDateTimeNew);
@@ -479,17 +415,20 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
                     sendMessage(chatId, "Оплатите счет в размере " + money + " руб.");
 
 //-----------------------get ------------------------------------------------------------------------------------------
+                    baseMethodPayment(chatId, place, countTimingArrayList.get(countTimingArrayList.size() - 1), 1);
 
-                    System.out.println(countTimingArrayList + "----------------------------------------------------------");
-                    payment(chatId, "Счёт",
-                            "Оплатите за " + Integer.toString(countTimingArrayList.get(countTimingArrayList.size() - 1)) + " дней стоянки",
-                            "Выставлен счет на оплату",
-                            "1832575495:TEST:845cc76ac2a56fa83b2b0b34a811f9fa26743a05eacf0919000bd6f2ffed934d",
-                            "RUB",
-                            Collections.singletonList(new LabeledPrice("label", 100 * 100)));
-//                            Collections.singletonList(new LabeledPrice("label", money * 100)));
 
-                    addData.newPayment(chatId, place, countTimingArrayList.get(countTimingArrayList.size() - 1));
+//                    System.out.println(countTimingArrayList + "----------------------------------------------------------");
+//                    payment(chatId, "Счёт",
+//                            "Оплатите за " + Integer.toString(countTimingArrayList.get(countTimingArrayList.size() - 1)) + " дней стоянки",
+//                            "Выставлен счет на оплату",
+//                            "1832575495:TEST:845cc76ac2a56fa83b2b0b34a811f9fa26743a05eacf0919000bd6f2ffed934d",
+//                            "RUB",
+//                            Collections.singletonList(new LabeledPrice("label", 100 * 100)));
+////                            Collections.singletonList(new LabeledPrice("label", money * 100)));
+//
+                    System.out.println(chatId + " " + place + " " + countTimingArrayList.get(countTimingArrayList.size() - 1));
+//                    addData.newPayment(chatId, place, countTimingArrayList.get(countTimingArrayList.size() - 1));
                     log.debug("Оплата прошла");
 //                    dataBaseService.getUserBarrierById(chatId);
 //                    userRepository.getUserBarrierById(chatId);
@@ -511,34 +450,6 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
         }
     }
 
-    @Override
-    public Response creatingPayment(Integer money) {
-        OkHttpClient client = new OkHttpClient().newBuilder().build();
-        MediaType mediaType = MediaType.parse("application/json");
-
-        String idempotenceKey = "Bill_" + RandomStringUtils.randomNumeric(20);
-
-        RequestBody body = RequestBody.create(mediaType,
-                "{\n        \"amount\": " +
-                "{\n          \"value\": \"" + money + "\",\n          \"currency\": \"RUB\"\n        }," +
-                "\n      \n        \"confirmation\": {\n          \"type\": \"redirect\"," +
-                "\n          \"return_url\": \"https://www.example.com/return_url\"\n        }," +
-                "\n        \"description\": \"Заказ №" + idempotenceKey + "\"\n      }");
-        Request request = new Request.Builder()
-                .url("https://api.yookassa.ru/v3/payments")
-                .method("POST", body)
-                .addHeader("Idempotence-Key", idempotenceKey)
-                .addHeader("Content-Type", "application/json")
-                .addHeader("Authorization", "Basic OTg0NzMzOmxpdmVfdG43anc5ZWtvZnhQWVM5VUpwV3JyNkNJTTEyaGlHWElMUnJVdzJQdnd4OA==")
-                .build();
-        Response response = null;
-        try {
-            response = client.newCall(request).execute();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        return response;
-    }
 
     @Override
     public void startMessage(long chatID, String name) {
@@ -721,5 +632,48 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
 
     public User myRents(Long chatId) {
         return dataBaseService.getUserBarrierById(chatId);
+    }
+
+    @Override
+    public void baseMethodPayment(Long chatId, Integer parkingPlace, Integer amountOfDays, Integer money) {
+        System.out.println("baseMethodPayment   " + chatId + parkingPlace + amountOfDays + money);
+        Payment payment = new Payment();
+        Response response = payment.creatingPayment(money);
+        String result = null;
+        try {
+            result = response.body().string();
+            System.out.println(result);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        String confirmation = payment.parserJson(result, "confirmation");
+        System.out.println(confirmation);
+
+        String idPayment = payment.parserJson(result, "id");
+        System.out.println("idPayment " + idPayment);
+        addData.newPayment(chatId, idPayment);
+
+        SendMessage sendMessage1 = new SendMessage();
+        sendMessage1.setChatId(chatId);
+
+        String confirmation_url = "";
+        try {
+            confirmation_url = payment.parserJson(confirmation, "confirmation_url").substring(8);
+            System.out.println(confirmation_url);
+            sendMessage1.setText("Теперь вы можете оплатить счёт:");
+            sendMessage1.setParseMode("HTML");
+            MenuBot menuBot = new MenuBot();
+            menuBot.link(sendMessage1, confirmation_url, "Оплатить", "О");
+            executeMessage(sendMessage1);
+            //           Запрос на существование счета
+            ScheduledExecutorService scheduledExecutorService = new ScheduledThreadPoolExecutor(4);
+            scheduledExecutorService.schedule(new Payment(chatId, parkingPlace, amountOfDays, idPayment, money), 1, TimeUnit.SECONDS);
+            scheduledExecutorService.shutdown();
+//            System.out.println(payment.getBoolean());
+
+        } catch (Exception e) {
+            sendMessage(chatId, "Счет устарел. Создайте пожалуйста новый");
+        }
+
     }
 }
