@@ -4,10 +4,23 @@ import com.vdurmont.emoji.EmojiParser;
 import okhttp3.*;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import ru.barrier.models.UserBarrier;
+import ru.barrier.repository.UserBarrierRepository;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.Month;
+import java.time.format.DateTimeFormatter;
 import java.util.Iterator;
 
+@Component
 public class Payment implements Runnable {
 
 //    private static boolean endPayment;
@@ -21,7 +34,11 @@ public class Payment implements Runnable {
 
     private String idempotenceKey = "Bill_" + RandomStringUtils.randomNumeric(20);
 
-    AddData addData = new AddData();
+    @Autowired
+    private AddData addData;
+
+    @Autowired
+    private UserBarrierRepository userBarrierRepository;
 
     public Payment() {
     }
@@ -37,6 +54,8 @@ public class Payment implements Runnable {
 
     @Override
     public void run() {
+//        Thread current = Thread.currentThread();
+
         Response informationAboutPayment = null;
         String informationAboutPaymentInString;
         String status;
@@ -69,15 +88,70 @@ public class Payment implements Runnable {
                 }
                 if (status.equals("succeeded")) {
                     System.out.println("succeeded");
-                    System.out.println(chatId + " " + parkingPlace + " " + amountOfDays);
-                    addData.newPayment(chatId, parkingPlace, amountOfDays);
-
-                    sendMessage(chatId, "Оплачено");
                     flag = 1;
+
+
+
+
+                    System.out.println("База данных");
+                    try {
+                        UserBarrier userBarrier = new UserBarrier();
+                        userBarrier.setChatId(chatId);
+                        userBarrier.setDateTimeLastPayment(LocalDateTime.now());
+                        userBarrier.setDateTimeNextPayment(LocalDateTime.now().plusDays(amountOfDays));
+                        userBarrier.setParkingPlace(parkingPlace);
+                        userBarrier.setAmountOfDays(amountOfDays);
+                        userBarrierRepository.save(userBarrier);
+
+//        Payment payment = new Payment();
+//        payment.setChatId(chatId);
+//        payment.setDateTimePayment(LocalDateTime.now());
+//        paymentRepository.save(payment);
+
+                        LocalDateTime localDateTime = LocalDateTime.of(2023, Month.MAY, 12, 22, 12, 30);
+                        LocalDateTime localDateTime1 = LocalDateTime.of(2023, Month.MAY, 12, 22, 12, 30);
+                        System.out.println(localDateTime1.compareTo(localDateTime));
+                        System.out.println(LocalDateTime.of(2023, Month.MAY, 12, 22, 12, 30));
+
+
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
+                        String ttt = "2016-05-11 00:46";
+                        LocalDateTime start = LocalDateTime.parse(ttt, formatter);
+                        LocalDateTime end = LocalDateTime.parse("2016-05-10 12:26", formatter);
+
+                        Duration duration = Duration.between(start, end);
+
+                        System.out.printf(
+                                "%dд %dч %dмин%n",
+                                duration.toDays(),
+                                duration.toHours() % 24,
+                                duration.toMinutes() % 60
+                        );
+                    }catch (Exception e){
+                        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!" );
+                    }
+
+
+
+
+
+
+
+
+
+
+                    break;
 //                    endPayment = true;
                 } else sendMessage(chatId, "Платеж не прошел");
                 break;
             }
+        }
+        if (flag == 1) {
+//            current.interrupt();
+//            addData.newPayment(chatId, parkingPlace, amountOfDays);
+            testAdd();
+            sendMessage(chatId, "Оплачено");
         }
         if (flag == 0) {
             String attention = EmojiParser.parseToUnicode("⚠");
@@ -85,9 +159,36 @@ public class Payment implements Runnable {
 //            System.out.println("Усе");
         }
     }
-//    public Boolean getBoolean(){
+
+    //    public Boolean getBoolean(){
 //        return endPayment;
 //    }
+    public void testAdd() {
+        System.out.println(chatId + " " + parkingPlace + " " + amountOfDays);
+
+
+        String url = "jdbc:postgresql://localhost:5432/barrier_db";
+        String user = "postgres";
+        String password = "GOGUDAserver123!";
+
+        try {
+            Connection connection = DriverManager.getConnection(url,user, password);
+            System.out.println(connection);
+            String query = "SELECT * FROM users u";
+            PreparedStatement preparedStatement = connection.prepareStatement(query){
+
+            }
+            System.out.println(preparedStatement);
+            connection.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+
+
+//        addData.newPayment(chatId, parkingPlace, amountOfDays);
+        System.out.println("GOOD!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+    }
 
     public Response creatingPayment(Integer money) {
         OkHttpClient client = new OkHttpClient().newBuilder().build();

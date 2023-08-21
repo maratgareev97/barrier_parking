@@ -7724,3 +7724,363 @@
 2023-08-21 15:24:17 DEBUG TelegramBotImpl:241 - 1292677678
 2023-08-21 15:24:17 DEBUG TelegramBotImpl:247 - null    null
 2023-08-21 15:24:17 DEBUG TelegramBotImpl:432 - Оплата прошла
+2023-08-21 15:27:48 DEBUG TelegramBotImpl:466 - Здравствуйте Marat.
+Добро пожаловать на нашу парковку. Перед началом аренды, пожалуйста, ознакомьтесь с нашей офертой и согласитесь с ней для продолжения., 1292677678
+2023-08-21 15:27:50 DEBUG TelegramBotImpl:239 - Maratgareev97
+2023-08-21 15:27:50 DEBUG TelegramBotImpl:240 - Marat
+2023-08-21 15:27:50 DEBUG TelegramBotImpl:241 - 1292677678
+2023-08-21 15:27:50 DEBUG TelegramBotImpl:247 - null    null
+2023-08-21 15:27:52 DEBUG TelegramBotImpl:239 - Maratgareev97
+2023-08-21 15:27:52 DEBUG TelegramBotImpl:240 - Marat
+2023-08-21 15:27:52 DEBUG TelegramBotImpl:241 - 1292677678
+2023-08-21 15:27:52 DEBUG TelegramBotImpl:247 - null    null
+2023-08-21 15:27:52 DEBUG TelegramBotImpl:350 - countTiming = 15
+2023-08-21 15:27:52 DEBUG TelegramBotImpl:527 - 1292677678
+2023-08-21 15:27:52 DEBUG TelegramBotImpl:353 - Тестовые данные загружены
+2023-08-21 15:27:55 DEBUG TelegramBotImpl:239 - Maratgareev97
+2023-08-21 15:27:55 DEBUG TelegramBotImpl:240 - Marat
+2023-08-21 15:27:55 DEBUG TelegramBotImpl:241 - 1292677678
+2023-08-21 15:27:55 DEBUG TelegramBotImpl:247 - null    null
+2023-08-21 15:28:36 DEBUG TelegramBotImpl:432 - Оплата прошла
+2023-08-21 15:29:59 DEBUG TelegramBotImpl:466 - Здравствуйте Marat.
+Добро пожаловать на нашу парковку. Перед началом аренды, пожалуйста, ознакомьтесь с нашей офертой и согласитесь с ней для продолжения., 1292677678
+2023-08-21 15:30:00 DEBUG TelegramBotImpl:239 - Maratgareev97
+2023-08-21 15:30:00 DEBUG TelegramBotImpl:240 - Marat
+2023-08-21 15:30:00 DEBUG TelegramBotImpl:241 - 1292677678
+2023-08-21 15:30:00 DEBUG TelegramBotImpl:247 - null    null
+2023-08-21 15:30:02 DEBUG TelegramBotImpl:239 - Maratgareev97
+2023-08-21 15:30:02 DEBUG TelegramBotImpl:240 - Marat
+2023-08-21 15:30:02 DEBUG TelegramBotImpl:241 - 1292677678
+2023-08-21 15:30:02 DEBUG TelegramBotImpl:247 - null    null
+2023-08-21 15:30:02 DEBUG TelegramBotImpl:350 - countTiming = 30
+2023-08-21 15:30:03 DEBUG TelegramBotImpl:527 - 1292677678
+2023-08-21 15:30:03 DEBUG TelegramBotImpl:353 - Тестовые данные загружены
+2023-08-21 15:30:04 DEBUG TelegramBotImpl:239 - Maratgareev97
+2023-08-21 15:30:04 DEBUG TelegramBotImpl:240 - Marat
+2023-08-21 15:30:04 DEBUG TelegramBotImpl:241 - 1292677678
+2023-08-21 15:30:04 DEBUG TelegramBotImpl:247 - null    null
+2023-08-21 15:30:11 DEBUG TelegramBotImpl:432 - Оплата прошла
+2023-08-21 15:35:02 DEBUG TelegramBotImpl:466 - Здравствуйте Marat.
+Добро пожаловать на нашу парковку. Перед началом аренды, пожалуйста, ознакомьтесь с нашей офертой и согласитесь с ней для продолжения., 1292677678
+2023-08-21 15:35:03 DEBUG TelegramBotImpl:239 - Maratgareev97
+2023-08-21 15:35:03 DEBUG TelegramBotImpl:240 - Marat
+2023-08-21 15:35:03 DEBUG TelegramBotImpl:241 - 1292677678
+2023-08-21 15:35:03 DEBUG TelegramBotImpl:247 - null    null
+2023-08-21 15:35:05 DEBUG TelegramBotImpl:239 - Maratgareev97
+2023-08-21 15:35:05 DEBUG TelegramBotImpl:240 - Marat
+2023-08-21 15:35:05 DEBUG TelegramBotImpl:241 - 1292677678
+2023-08-21 15:35:05 DEBUG TelegramBotImpl:247 - null    null
+2023-08-21 15:35:05 DEBUG TelegramBotImpl:350 - countTiming = 1
+2023-08-21 15:35:06 DEBUG TelegramBotImpl:527 - 1292677678
+2023-08-21 15:35:06 DEBUG TelegramBotImpl:353 - Тестовые данные загружены
+2023-08-21 15:35:07 DEBUG TelegramBotImpl:239 - Maratgareev97
+2023-08-21 15:35:07 DEBUG TelegramBotImpl:240 - Marat
+2023-08-21 15:35:07 DEBUG TelegramBotImpl:241 - 1292677678
+2023-08-21 15:35:07 DEBUG TelegramBotImpl:247 - null    null
+2023-08-21 15:35:13 DEBUG TelegramBotImpl:432 - Оплата прошла
+2023-08-21 15:36:31 DEBUG TelegramBotImpl:466 - Здравствуйте Marat.
+Добро пожаловать на нашу парковку. Перед началом аренды, пожалуйста, ознакомьтесь с нашей офертой и согласитесь с ней для продолжения., 1292677678
+2023-08-21 15:36:33 DEBUG TelegramBotImpl:239 - Maratgareev97
+2023-08-21 15:36:33 DEBUG TelegramBotImpl:240 - Marat
+2023-08-21 15:36:33 DEBUG TelegramBotImpl:241 - 1292677678
+2023-08-21 15:36:33 DEBUG TelegramBotImpl:247 - null    null
+2023-08-21 15:36:34 DEBUG TelegramBotImpl:239 - Maratgareev97
+2023-08-21 15:36:34 DEBUG TelegramBotImpl:240 - Marat
+2023-08-21 15:36:34 DEBUG TelegramBotImpl:241 - 1292677678
+2023-08-21 15:36:34 DEBUG TelegramBotImpl:247 - null    null
+2023-08-21 15:36:35 DEBUG TelegramBotImpl:350 - countTiming = 1
+2023-08-21 15:36:35 DEBUG TelegramBotImpl:527 - 1292677678
+2023-08-21 15:36:35 DEBUG TelegramBotImpl:353 - Тестовые данные загружены
+2023-08-21 15:36:36 DEBUG TelegramBotImpl:239 - Maratgareev97
+2023-08-21 15:36:36 DEBUG TelegramBotImpl:240 - Marat
+2023-08-21 15:36:36 DEBUG TelegramBotImpl:241 - 1292677678
+2023-08-21 15:36:36 DEBUG TelegramBotImpl:247 - null    null
+2023-08-21 15:36:38 DEBUG TelegramBotImpl:432 - Оплата прошла
+2023-08-21 15:38:19 DEBUG TelegramBotImpl:466 - Здравствуйте Marat.
+Добро пожаловать на нашу парковку. Перед началом аренды, пожалуйста, ознакомьтесь с нашей офертой и согласитесь с ней для продолжения., 1292677678
+2023-08-21 15:38:20 DEBUG TelegramBotImpl:239 - Maratgareev97
+2023-08-21 15:38:20 DEBUG TelegramBotImpl:240 - Marat
+2023-08-21 15:38:20 DEBUG TelegramBotImpl:241 - 1292677678
+2023-08-21 15:38:20 DEBUG TelegramBotImpl:247 - null    null
+2023-08-21 15:38:22 DEBUG TelegramBotImpl:239 - Maratgareev97
+2023-08-21 15:38:22 DEBUG TelegramBotImpl:240 - Marat
+2023-08-21 15:38:22 DEBUG TelegramBotImpl:241 - 1292677678
+2023-08-21 15:38:22 DEBUG TelegramBotImpl:247 - null    null
+2023-08-21 15:38:22 DEBUG TelegramBotImpl:350 - countTiming = 30
+2023-08-21 15:38:22 DEBUG TelegramBotImpl:527 - 1292677678
+2023-08-21 15:38:22 DEBUG TelegramBotImpl:353 - Тестовые данные загружены
+2023-08-21 15:38:24 DEBUG TelegramBotImpl:239 - Maratgareev97
+2023-08-21 15:38:24 DEBUG TelegramBotImpl:240 - Marat
+2023-08-21 15:38:24 DEBUG TelegramBotImpl:241 - 1292677678
+2023-08-21 15:38:24 DEBUG TelegramBotImpl:247 - null    null
+2023-08-21 15:38:25 DEBUG TelegramBotImpl:432 - Оплата прошла
+2023-08-21 15:39:49 DEBUG TelegramBotImpl:466 - Здравствуйте Marat.
+Добро пожаловать на нашу парковку. Перед началом аренды, пожалуйста, ознакомьтесь с нашей офертой и согласитесь с ней для продолжения., 1292677678
+2023-08-21 15:39:51 DEBUG TelegramBotImpl:239 - Maratgareev97
+2023-08-21 15:39:51 DEBUG TelegramBotImpl:240 - Marat
+2023-08-21 15:39:51 DEBUG TelegramBotImpl:241 - 1292677678
+2023-08-21 15:39:51 DEBUG TelegramBotImpl:247 - null    null
+2023-08-21 15:39:52 DEBUG TelegramBotImpl:239 - Maratgareev97
+2023-08-21 15:39:52 DEBUG TelegramBotImpl:240 - Marat
+2023-08-21 15:39:52 DEBUG TelegramBotImpl:241 - 1292677678
+2023-08-21 15:39:52 DEBUG TelegramBotImpl:247 - null    null
+2023-08-21 15:39:53 DEBUG TelegramBotImpl:350 - countTiming = 15
+2023-08-21 15:39:53 DEBUG TelegramBotImpl:527 - 1292677678
+2023-08-21 15:39:53 DEBUG TelegramBotImpl:353 - Тестовые данные загружены
+2023-08-21 15:39:54 DEBUG TelegramBotImpl:239 - Maratgareev97
+2023-08-21 15:39:54 DEBUG TelegramBotImpl:240 - Marat
+2023-08-21 15:39:54 DEBUG TelegramBotImpl:241 - 1292677678
+2023-08-21 15:39:54 DEBUG TelegramBotImpl:247 - null    null
+2023-08-21 15:39:55 DEBUG TelegramBotImpl:432 - Оплата прошла
+2023-08-21 15:42:08 DEBUG TelegramBotImpl:466 - Здравствуйте Marat.
+Добро пожаловать на нашу парковку. Перед началом аренды, пожалуйста, ознакомьтесь с нашей офертой и согласитесь с ней для продолжения., 1292677678
+2023-08-21 15:42:09 DEBUG TelegramBotImpl:239 - Maratgareev97
+2023-08-21 15:42:09 DEBUG TelegramBotImpl:240 - Marat
+2023-08-21 15:42:09 DEBUG TelegramBotImpl:241 - 1292677678
+2023-08-21 15:42:09 DEBUG TelegramBotImpl:247 - null    null
+2023-08-21 15:42:10 DEBUG TelegramBotImpl:239 - Maratgareev97
+2023-08-21 15:42:10 DEBUG TelegramBotImpl:240 - Marat
+2023-08-21 15:42:10 DEBUG TelegramBotImpl:241 - 1292677678
+2023-08-21 15:42:10 DEBUG TelegramBotImpl:247 - null    null
+2023-08-21 15:42:11 DEBUG TelegramBotImpl:350 - countTiming = 30
+2023-08-21 15:42:11 DEBUG TelegramBotImpl:527 - 1292677678
+2023-08-21 15:42:11 DEBUG TelegramBotImpl:353 - Тестовые данные загружены
+2023-08-21 15:42:12 DEBUG TelegramBotImpl:239 - Maratgareev97
+2023-08-21 15:42:12 DEBUG TelegramBotImpl:240 - Marat
+2023-08-21 15:42:12 DEBUG TelegramBotImpl:241 - 1292677678
+2023-08-21 15:42:12 DEBUG TelegramBotImpl:247 - null    null
+2023-08-21 15:42:13 DEBUG TelegramBotImpl:432 - Оплата прошла
+2023-08-21 15:45:24 DEBUG TelegramBotImpl:466 - Здравствуйте Marat.
+Добро пожаловать на нашу парковку. Перед началом аренды, пожалуйста, ознакомьтесь с нашей офертой и согласитесь с ней для продолжения., 1292677678
+2023-08-21 15:45:25 DEBUG TelegramBotImpl:239 - Maratgareev97
+2023-08-21 15:45:25 DEBUG TelegramBotImpl:240 - Marat
+2023-08-21 15:45:25 DEBUG TelegramBotImpl:241 - 1292677678
+2023-08-21 15:45:25 DEBUG TelegramBotImpl:247 - null    null
+2023-08-21 15:45:28 DEBUG TelegramBotImpl:239 - Maratgareev97
+2023-08-21 15:45:28 DEBUG TelegramBotImpl:240 - Marat
+2023-08-21 15:45:28 DEBUG TelegramBotImpl:241 - 1292677678
+2023-08-21 15:45:28 DEBUG TelegramBotImpl:247 - null    null
+2023-08-21 15:45:28 DEBUG TelegramBotImpl:350 - countTiming = 30
+2023-08-21 15:45:29 DEBUG TelegramBotImpl:527 - 1292677678
+2023-08-21 15:45:29 DEBUG TelegramBotImpl:353 - Тестовые данные загружены
+2023-08-21 15:45:34 DEBUG TelegramBotImpl:239 - Maratgareev97
+2023-08-21 15:45:34 DEBUG TelegramBotImpl:240 - Marat
+2023-08-21 15:45:34 DEBUG TelegramBotImpl:241 - 1292677678
+2023-08-21 15:45:34 DEBUG TelegramBotImpl:247 - null    null
+2023-08-21 15:47:54 DEBUG TelegramBotImpl:432 - Оплата прошла
+2023-08-21 15:53:38 DEBUG TelegramBotImpl:466 - Здравствуйте Marat.
+Добро пожаловать на нашу парковку. Перед началом аренды, пожалуйста, ознакомьтесь с нашей офертой и согласитесь с ней для продолжения., 1292677678
+2023-08-21 15:53:40 DEBUG TelegramBotImpl:239 - Maratgareev97
+2023-08-21 15:53:40 DEBUG TelegramBotImpl:240 - Marat
+2023-08-21 15:53:40 DEBUG TelegramBotImpl:241 - 1292677678
+2023-08-21 15:53:40 DEBUG TelegramBotImpl:247 - null    null
+2023-08-21 15:53:41 DEBUG TelegramBotImpl:239 - Maratgareev97
+2023-08-21 15:53:41 DEBUG TelegramBotImpl:240 - Marat
+2023-08-21 15:53:41 DEBUG TelegramBotImpl:241 - 1292677678
+2023-08-21 15:53:41 DEBUG TelegramBotImpl:247 - null    null
+2023-08-21 15:53:41 DEBUG TelegramBotImpl:350 - countTiming = 15
+2023-08-21 15:53:41 DEBUG TelegramBotImpl:527 - 1292677678
+2023-08-21 15:53:42 DEBUG TelegramBotImpl:353 - Тестовые данные загружены
+2023-08-21 15:53:43 DEBUG TelegramBotImpl:239 - Maratgareev97
+2023-08-21 15:53:43 DEBUG TelegramBotImpl:240 - Marat
+2023-08-21 15:53:43 DEBUG TelegramBotImpl:241 - 1292677678
+2023-08-21 15:53:43 DEBUG TelegramBotImpl:247 - null    null
+2023-08-21 15:54:10 DEBUG TelegramBotImpl:432 - Оплата прошла
+2023-08-21 16:01:18 DEBUG TelegramBotImpl:466 - Здравствуйте Marat.
+Добро пожаловать на нашу парковку. Перед началом аренды, пожалуйста, ознакомьтесь с нашей офертой и согласитесь с ней для продолжения., 1292677678
+2023-08-21 16:01:19 DEBUG TelegramBotImpl:239 - Maratgareev97
+2023-08-21 16:01:19 DEBUG TelegramBotImpl:240 - Marat
+2023-08-21 16:01:19 DEBUG TelegramBotImpl:241 - 1292677678
+2023-08-21 16:01:19 DEBUG TelegramBotImpl:247 - null    null
+2023-08-21 16:01:21 DEBUG TelegramBotImpl:239 - Maratgareev97
+2023-08-21 16:01:21 DEBUG TelegramBotImpl:240 - Marat
+2023-08-21 16:01:21 DEBUG TelegramBotImpl:241 - 1292677678
+2023-08-21 16:01:21 DEBUG TelegramBotImpl:247 - null    null
+2023-08-21 16:01:21 DEBUG TelegramBotImpl:350 - countTiming = 15
+2023-08-21 16:01:21 DEBUG TelegramBotImpl:527 - 1292677678
+2023-08-21 16:01:21 DEBUG TelegramBotImpl:353 - Тестовые данные загружены
+2023-08-21 16:01:23 DEBUG TelegramBotImpl:239 - Maratgareev97
+2023-08-21 16:01:23 DEBUG TelegramBotImpl:240 - Marat
+2023-08-21 16:01:23 DEBUG TelegramBotImpl:241 - 1292677678
+2023-08-21 16:01:23 DEBUG TelegramBotImpl:247 - null    null
+2023-08-21 16:01:24 DEBUG TelegramBotImpl:432 - Оплата прошла
+2023-08-21 16:18:31 DEBUG TelegramBotImpl:466 - Здравствуйте Marat.
+Добро пожаловать на нашу парковку. Перед началом аренды, пожалуйста, ознакомьтесь с нашей офертой и согласитесь с ней для продолжения., 1292677678
+2023-08-21 16:18:32 DEBUG TelegramBotImpl:239 - Maratgareev97
+2023-08-21 16:18:32 DEBUG TelegramBotImpl:240 - Marat
+2023-08-21 16:18:32 DEBUG TelegramBotImpl:241 - 1292677678
+2023-08-21 16:18:33 DEBUG TelegramBotImpl:247 - null    null
+2023-08-21 16:18:34 DEBUG TelegramBotImpl:239 - Maratgareev97
+2023-08-21 16:18:34 DEBUG TelegramBotImpl:240 - Marat
+2023-08-21 16:18:34 DEBUG TelegramBotImpl:241 - 1292677678
+2023-08-21 16:18:34 DEBUG TelegramBotImpl:247 - null    null
+2023-08-21 16:18:34 DEBUG TelegramBotImpl:350 - countTiming = 15
+2023-08-21 16:18:35 DEBUG TelegramBotImpl:527 - 1292677678
+2023-08-21 16:18:35 DEBUG TelegramBotImpl:353 - Тестовые данные загружены
+2023-08-21 16:18:36 DEBUG TelegramBotImpl:239 - Maratgareev97
+2023-08-21 16:18:36 DEBUG TelegramBotImpl:240 - Marat
+2023-08-21 16:18:36 DEBUG TelegramBotImpl:241 - 1292677678
+2023-08-21 16:18:36 DEBUG TelegramBotImpl:247 - null    null
+2023-08-21 16:18:38 DEBUG TelegramBotImpl:432 - Оплата прошла
+2023-08-21 16:23:54 DEBUG TelegramBotImpl:466 - Здравствуйте Marat.
+Добро пожаловать на нашу парковку. Перед началом аренды, пожалуйста, ознакомьтесь с нашей офертой и согласитесь с ней для продолжения., 1292677678
+2023-08-21 16:23:55 DEBUG TelegramBotImpl:239 - Maratgareev97
+2023-08-21 16:23:55 DEBUG TelegramBotImpl:240 - Marat
+2023-08-21 16:23:55 DEBUG TelegramBotImpl:241 - 1292677678
+2023-08-21 16:23:55 DEBUG TelegramBotImpl:247 - null    null
+2023-08-21 16:23:57 DEBUG TelegramBotImpl:239 - Maratgareev97
+2023-08-21 16:23:57 DEBUG TelegramBotImpl:240 - Marat
+2023-08-21 16:23:57 DEBUG TelegramBotImpl:241 - 1292677678
+2023-08-21 16:23:57 DEBUG TelegramBotImpl:247 - null    null
+2023-08-21 16:23:57 DEBUG TelegramBotImpl:350 - countTiming = 30
+2023-08-21 16:23:58 DEBUG TelegramBotImpl:527 - 1292677678
+2023-08-21 16:23:58 DEBUG TelegramBotImpl:353 - Тестовые данные загружены
+2023-08-21 16:23:59 DEBUG TelegramBotImpl:239 - Maratgareev97
+2023-08-21 16:23:59 DEBUG TelegramBotImpl:240 - Marat
+2023-08-21 16:23:59 DEBUG TelegramBotImpl:241 - 1292677678
+2023-08-21 16:23:59 DEBUG TelegramBotImpl:247 - null    null
+2023-08-21 16:24:00 DEBUG TelegramBotImpl:432 - Оплата прошла
+2023-08-21 16:28:32 DEBUG TelegramBotImpl:466 - Здравствуйте Marat.
+Добро пожаловать на нашу парковку. Перед началом аренды, пожалуйста, ознакомьтесь с нашей офертой и согласитесь с ней для продолжения., 1292677678
+2023-08-21 16:28:33 DEBUG TelegramBotImpl:239 - Maratgareev97
+2023-08-21 16:28:33 DEBUG TelegramBotImpl:240 - Marat
+2023-08-21 16:28:33 DEBUG TelegramBotImpl:241 - 1292677678
+2023-08-21 16:28:33 DEBUG TelegramBotImpl:247 - null    null
+2023-08-21 16:28:35 DEBUG TelegramBotImpl:239 - Maratgareev97
+2023-08-21 16:28:35 DEBUG TelegramBotImpl:240 - Marat
+2023-08-21 16:28:35 DEBUG TelegramBotImpl:241 - 1292677678
+2023-08-21 16:28:35 DEBUG TelegramBotImpl:247 - null    null
+2023-08-21 16:28:36 DEBUG TelegramBotImpl:350 - countTiming = 1
+2023-08-21 16:28:36 DEBUG TelegramBotImpl:527 - 1292677678
+2023-08-21 16:28:36 DEBUG TelegramBotImpl:353 - Тестовые данные загружены
+2023-08-21 16:28:37 DEBUG TelegramBotImpl:239 - Maratgareev97
+2023-08-21 16:28:37 DEBUG TelegramBotImpl:240 - Marat
+2023-08-21 16:28:37 DEBUG TelegramBotImpl:241 - 1292677678
+2023-08-21 16:28:37 DEBUG TelegramBotImpl:247 - null    null
+2023-08-21 16:28:38 DEBUG TelegramBotImpl:432 - Оплата прошла
+2023-08-21 16:31:53 DEBUG TelegramBotImpl:466 - Здравствуйте Marat.
+Добро пожаловать на нашу парковку. Перед началом аренды, пожалуйста, ознакомьтесь с нашей офертой и согласитесь с ней для продолжения., 1292677678
+2023-08-21 16:31:55 DEBUG TelegramBotImpl:239 - Maratgareev97
+2023-08-21 16:31:55 DEBUG TelegramBotImpl:240 - Marat
+2023-08-21 16:31:55 DEBUG TelegramBotImpl:241 - 1292677678
+2023-08-21 16:31:55 DEBUG TelegramBotImpl:247 - null    null
+2023-08-21 16:31:58 DEBUG TelegramBotImpl:239 - Maratgareev97
+2023-08-21 16:31:58 DEBUG TelegramBotImpl:240 - Marat
+2023-08-21 16:31:58 DEBUG TelegramBotImpl:241 - 1292677678
+2023-08-21 16:31:58 DEBUG TelegramBotImpl:247 - null    null
+2023-08-21 16:31:58 DEBUG TelegramBotImpl:350 - countTiming = 30
+2023-08-21 16:31:58 DEBUG TelegramBotImpl:527 - 1292677678
+2023-08-21 16:31:58 DEBUG TelegramBotImpl:353 - Тестовые данные загружены
+2023-08-21 16:32:00 DEBUG TelegramBotImpl:239 - Maratgareev97
+2023-08-21 16:32:00 DEBUG TelegramBotImpl:240 - Marat
+2023-08-21 16:32:00 DEBUG TelegramBotImpl:241 - 1292677678
+2023-08-21 16:32:00 DEBUG TelegramBotImpl:247 - null    null
+2023-08-21 16:32:01 DEBUG TelegramBotImpl:432 - Оплата прошла
+2023-08-21 16:33:00 DEBUG TelegramBotImpl:466 - Здравствуйте Marat.
+Добро пожаловать на нашу парковку. Перед началом аренды, пожалуйста, ознакомьтесь с нашей офертой и согласитесь с ней для продолжения., 1292677678
+2023-08-21 16:33:02 DEBUG TelegramBotImpl:239 - Maratgareev97
+2023-08-21 16:33:02 DEBUG TelegramBotImpl:240 - Marat
+2023-08-21 16:33:02 DEBUG TelegramBotImpl:241 - 1292677678
+2023-08-21 16:33:02 DEBUG TelegramBotImpl:247 - null    null
+2023-08-21 16:33:03 DEBUG TelegramBotImpl:239 - Maratgareev97
+2023-08-21 16:33:03 DEBUG TelegramBotImpl:240 - Marat
+2023-08-21 16:33:03 DEBUG TelegramBotImpl:241 - 1292677678
+2023-08-21 16:33:03 DEBUG TelegramBotImpl:247 - null    null
+2023-08-21 16:33:04 DEBUG TelegramBotImpl:350 - countTiming = 30
+2023-08-21 16:33:04 DEBUG TelegramBotImpl:527 - 1292677678
+2023-08-21 16:33:04 DEBUG TelegramBotImpl:353 - Тестовые данные загружены
+2023-08-21 16:33:06 DEBUG TelegramBotImpl:239 - Maratgareev97
+2023-08-21 16:33:06 DEBUG TelegramBotImpl:240 - Marat
+2023-08-21 16:33:06 DEBUG TelegramBotImpl:241 - 1292677678
+2023-08-21 16:33:06 DEBUG TelegramBotImpl:247 - null    null
+2023-08-21 16:33:06 DEBUG TelegramBotImpl:432 - Оплата прошла
+2023-08-21 16:33:33 DEBUG TelegramBotImpl:466 - Здравствуйте Marat.
+Добро пожаловать на нашу парковку. Перед началом аренды, пожалуйста, ознакомьтесь с нашей офертой и согласитесь с ней для продолжения., 1292677678
+2023-08-21 16:33:35 DEBUG TelegramBotImpl:239 - Maratgareev97
+2023-08-21 16:33:35 DEBUG TelegramBotImpl:240 - Marat
+2023-08-21 16:33:35 DEBUG TelegramBotImpl:241 - 1292677678
+2023-08-21 16:33:35 DEBUG TelegramBotImpl:247 - null    null
+2023-08-21 16:33:37 DEBUG TelegramBotImpl:239 - Maratgareev97
+2023-08-21 16:33:37 DEBUG TelegramBotImpl:240 - Marat
+2023-08-21 16:33:37 DEBUG TelegramBotImpl:241 - 1292677678
+2023-08-21 16:33:37 DEBUG TelegramBotImpl:247 - null    null
+2023-08-21 16:33:37 DEBUG TelegramBotImpl:350 - countTiming = 30
+2023-08-21 16:33:37 DEBUG TelegramBotImpl:527 - 1292677678
+2023-08-21 16:33:37 DEBUG TelegramBotImpl:353 - Тестовые данные загружены
+2023-08-21 16:33:39 DEBUG TelegramBotImpl:239 - Maratgareev97
+2023-08-21 16:33:39 DEBUG TelegramBotImpl:240 - Marat
+2023-08-21 16:33:39 DEBUG TelegramBotImpl:241 - 1292677678
+2023-08-21 16:33:39 DEBUG TelegramBotImpl:247 - null    null
+2023-08-21 16:34:00 DEBUG TelegramBotImpl:432 - Оплата прошла
+2023-08-21 16:36:18 DEBUG TelegramBotImpl:466 - Здравствуйте Marat.
+Добро пожаловать на нашу парковку. Перед началом аренды, пожалуйста, ознакомьтесь с нашей офертой и согласитесь с ней для продолжения., 1292677678
+2023-08-21 16:36:19 DEBUG TelegramBotImpl:239 - Maratgareev97
+2023-08-21 16:36:19 DEBUG TelegramBotImpl:240 - Marat
+2023-08-21 16:36:19 DEBUG TelegramBotImpl:241 - 1292677678
+2023-08-21 16:36:19 DEBUG TelegramBotImpl:247 - null    null
+2023-08-21 16:36:21 DEBUG TelegramBotImpl:239 - Maratgareev97
+2023-08-21 16:36:21 DEBUG TelegramBotImpl:240 - Marat
+2023-08-21 16:36:21 DEBUG TelegramBotImpl:241 - 1292677678
+2023-08-21 16:36:21 DEBUG TelegramBotImpl:247 - null    null
+2023-08-21 16:36:21 DEBUG TelegramBotImpl:350 - countTiming = 15
+2023-08-21 16:36:21 DEBUG TelegramBotImpl:527 - 1292677678
+2023-08-21 16:36:21 DEBUG TelegramBotImpl:353 - Тестовые данные загружены
+2023-08-21 16:36:22 DEBUG TelegramBotImpl:239 - Maratgareev97
+2023-08-21 16:36:22 DEBUG TelegramBotImpl:240 - Marat
+2023-08-21 16:36:22 DEBUG TelegramBotImpl:241 - 1292677678
+2023-08-21 16:36:22 DEBUG TelegramBotImpl:247 - null    null
+2023-08-21 16:36:29 DEBUG TelegramBotImpl:432 - Оплата прошла
+2023-08-21 16:40:54 DEBUG TelegramBotImpl:466 - Здравствуйте Marat.
+Добро пожаловать на нашу парковку. Перед началом аренды, пожалуйста, ознакомьтесь с нашей офертой и согласитесь с ней для продолжения., 1292677678
+2023-08-21 16:40:55 DEBUG TelegramBotImpl:239 - Maratgareev97
+2023-08-21 16:40:55 DEBUG TelegramBotImpl:240 - Marat
+2023-08-21 16:40:55 DEBUG TelegramBotImpl:241 - 1292677678
+2023-08-21 16:40:55 DEBUG TelegramBotImpl:247 - null    null
+2023-08-21 16:40:56 DEBUG TelegramBotImpl:239 - Maratgareev97
+2023-08-21 16:40:56 DEBUG TelegramBotImpl:240 - Marat
+2023-08-21 16:40:56 DEBUG TelegramBotImpl:241 - 1292677678
+2023-08-21 16:40:56 DEBUG TelegramBotImpl:247 - null    null
+2023-08-21 16:40:57 DEBUG TelegramBotImpl:350 - countTiming = 15
+2023-08-21 16:40:57 DEBUG TelegramBotImpl:527 - 1292677678
+2023-08-21 16:40:57 DEBUG TelegramBotImpl:353 - Тестовые данные загружены
+2023-08-21 16:40:58 DEBUG TelegramBotImpl:239 - Maratgareev97
+2023-08-21 16:40:58 DEBUG TelegramBotImpl:240 - Marat
+2023-08-21 16:40:58 DEBUG TelegramBotImpl:241 - 1292677678
+2023-08-21 16:40:58 DEBUG TelegramBotImpl:247 - null    null
+2023-08-21 16:40:59 DEBUG TelegramBotImpl:432 - Оплата прошла
+2023-08-21 17:05:24 DEBUG TelegramBotImpl:466 - Здравствуйте Marat.
+Добро пожаловать на нашу парковку. Перед началом аренды, пожалуйста, ознакомьтесь с нашей офертой и согласитесь с ней для продолжения., 1292677678
+2023-08-21 17:05:26 DEBUG TelegramBotImpl:239 - Maratgareev97
+2023-08-21 17:05:26 DEBUG TelegramBotImpl:240 - Marat
+2023-08-21 17:05:26 DEBUG TelegramBotImpl:241 - 1292677678
+2023-08-21 17:05:26 DEBUG TelegramBotImpl:247 - null    null
+2023-08-21 17:05:28 DEBUG TelegramBotImpl:239 - Maratgareev97
+2023-08-21 17:05:28 DEBUG TelegramBotImpl:240 - Marat
+2023-08-21 17:05:28 DEBUG TelegramBotImpl:241 - 1292677678
+2023-08-21 17:05:28 DEBUG TelegramBotImpl:247 - null    null
+2023-08-21 17:05:28 DEBUG TelegramBotImpl:350 - countTiming = 10
+2023-08-21 17:05:28 DEBUG TelegramBotImpl:527 - 1292677678
+2023-08-21 17:05:28 DEBUG TelegramBotImpl:353 - Тестовые данные загружены
+2023-08-21 17:05:30 DEBUG TelegramBotImpl:239 - Maratgareev97
+2023-08-21 17:05:30 DEBUG TelegramBotImpl:240 - Marat
+2023-08-21 17:05:30 DEBUG TelegramBotImpl:241 - 1292677678
+2023-08-21 17:05:30 DEBUG TelegramBotImpl:247 - null    null
+2023-08-21 17:05:31 DEBUG TelegramBotImpl:432 - Оплата прошла
+2023-08-21 17:24:38 DEBUG TelegramBotImpl:466 - Здравствуйте Marat.
+Добро пожаловать на нашу парковку. Перед началом аренды, пожалуйста, ознакомьтесь с нашей офертой и согласитесь с ней для продолжения., 1292677678
+2023-08-21 17:24:40 DEBUG TelegramBotImpl:239 - Maratgareev97
+2023-08-21 17:24:40 DEBUG TelegramBotImpl:240 - Marat
+2023-08-21 17:24:40 DEBUG TelegramBotImpl:241 - 1292677678
+2023-08-21 17:24:40 DEBUG TelegramBotImpl:247 - null    null
+2023-08-21 17:24:42 DEBUG TelegramBotImpl:239 - Maratgareev97
+2023-08-21 17:24:42 DEBUG TelegramBotImpl:240 - Marat
+2023-08-21 17:24:42 DEBUG TelegramBotImpl:241 - 1292677678
+2023-08-21 17:24:42 DEBUG TelegramBotImpl:247 - null    null
+2023-08-21 17:24:43 DEBUG TelegramBotImpl:350 - countTiming = 30
+2023-08-21 17:24:43 DEBUG TelegramBotImpl:527 - 1292677678
+2023-08-21 17:24:43 DEBUG TelegramBotImpl:353 - Тестовые данные загружены
+2023-08-21 17:24:44 DEBUG TelegramBotImpl:239 - Maratgareev97
+2023-08-21 17:24:44 DEBUG TelegramBotImpl:240 - Marat
+2023-08-21 17:24:44 DEBUG TelegramBotImpl:241 - 1292677678
+2023-08-21 17:24:44 DEBUG TelegramBotImpl:247 - null    null
+2023-08-21 17:24:45 DEBUG TelegramBotImpl:432 - Оплата прошла

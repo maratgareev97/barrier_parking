@@ -102,40 +102,44 @@ public class AddData {
 
     @Transactional
     public void newPayment(Long chatId, Integer parkingPlace, Integer amountOfDays) {
-        UserBarrier userBarrier = new UserBarrier();
-        userBarrier.setChatId(chatId);
-        userBarrier.setDateTimeLastPayment(LocalDateTime.now());
-        userBarrier.setDateTimeNextPayment(LocalDateTime.now().plusDays(amountOfDays));
-        userBarrier.setParkingPlace(parkingPlace);
-        userBarrier.setAmountOfDays(amountOfDays);
-        userBarrierRepository.save(userBarrier);
+        System.out.println("База данных");
+        try {
+            UserBarrier userBarrier = new UserBarrier();
+            userBarrier.setChatId(chatId);
+            userBarrier.setDateTimeLastPayment(LocalDateTime.now());
+            userBarrier.setDateTimeNextPayment(LocalDateTime.now().plusDays(amountOfDays));
+            userBarrier.setParkingPlace(parkingPlace);
+            userBarrier.setAmountOfDays(amountOfDays);
+            userBarrierRepository.save(userBarrier);
 
 //        Payment payment = new Payment();
 //        payment.setChatId(chatId);
 //        payment.setDateTimePayment(LocalDateTime.now());
 //        paymentRepository.save(payment);
 
-        LocalDateTime localDateTime = LocalDateTime.of(2023, Month.MAY, 12, 22, 12, 30);
-        LocalDateTime localDateTime1 = LocalDateTime.of(2023, Month.MAY, 12, 22, 12, 30);
-        System.out.println(localDateTime1.compareTo(localDateTime));
-        System.out.println(LocalDateTime.of(2023, Month.MAY, 12, 22, 12, 30));
+            LocalDateTime localDateTime = LocalDateTime.of(2023, Month.MAY, 12, 22, 12, 30);
+            LocalDateTime localDateTime1 = LocalDateTime.of(2023, Month.MAY, 12, 22, 12, 30);
+            System.out.println(localDateTime1.compareTo(localDateTime));
+            System.out.println(LocalDateTime.of(2023, Month.MAY, 12, 22, 12, 30));
 
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
-        String ttt = "2016-05-11 00:46";
-        LocalDateTime start = LocalDateTime.parse(ttt, formatter);
-        LocalDateTime end = LocalDateTime.parse("2016-05-10 12:26", formatter);
+            String ttt = "2016-05-11 00:46";
+            LocalDateTime start = LocalDateTime.parse(ttt, formatter);
+            LocalDateTime end = LocalDateTime.parse("2016-05-10 12:26", formatter);
 
-        Duration duration = Duration.between(start, end);
+            Duration duration = Duration.between(start, end);
 
-        System.out.printf(
-                "%dд %dч %dмин%n",
-                duration.toDays(),
-                duration.toHours() % 24,
-                duration.toMinutes() % 60
-        );
-
+            System.out.printf(
+                    "%dд %dч %dмин%n",
+                    duration.toDays(),
+                    duration.toHours() % 24,
+                    duration.toMinutes() % 60
+            );
+        }catch (Exception e){
+            System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!" );
+        }
     }
 
 //    public void newPaymentTest(Long chatId){
@@ -201,5 +205,9 @@ public class AddData {
 
             userRepository.save(user);
         }
+    }
+
+    public void testAddBase(){
+        System.out.println("Заработало !!!!!!!!!!!!!!!!!");
     }
 }
