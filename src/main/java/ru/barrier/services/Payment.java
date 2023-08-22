@@ -4,60 +4,58 @@ import com.vdurmont.emoji.EmojiParser;
 import okhttp3.*;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.json.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import ru.barrier.models.UserBarrier;
-import ru.barrier.repository.UserBarrierRepository;
 
 import java.io.IOException;
+import java.sql.*;
 import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.time.Duration;
 import java.time.LocalDateTime;
-import java.time.Month;
-import java.time.format.DateTimeFormatter;
 import java.util.Iterator;
 
 @Component
 public class Payment implements Runnable {
 
-//    private static boolean endPayment;
-
+    private final String url = "jdbc:postgresql://localhost:5432/barrier_db";
+    private final String user = "postgres";
+    private final String password = "GOGUDAserver123!";
     private Integer i = 0;
     private String idPayment;
     private Long chatId;
     private Integer money;
     private Integer parkingPlace;
     private Integer amountOfDays;
-
+    private LocalDateTime dataTimeNextPayment;
+    private String newOrAdd;
     private String idempotenceKey = "Bill_" + RandomStringUtils.randomNumeric(20);
-
-    @Autowired
-    private AddData addData;
-
-    @Autowired
-    private UserBarrierRepository userBarrierRepository;
 
     public Payment() {
     }
 
-    public Payment(Long chatId, Integer parkingPlace, Integer amountOfDays, String idPayment, Integer money) {
+    public Payment(Long chatId, Integer amountOfDays, String idPayment, Integer money, LocalDateTime dataTimeNextPayment, String newOrAdd) {
+        this.chatId = chatId;
+        this.amountOfDays = amountOfDays;
+        this.idPayment = idPayment;
+        this.money = money;
+        this.dataTimeNextPayment = dataTimeNextPayment;
+        this.newOrAdd = newOrAdd;
+    }
+
+    public Payment(Long chatId, Integer parkingPlace, Integer amountOfDays, String idPayment, Integer money, String newOrAdd) {
         this.chatId = chatId;
         this.parkingPlace = parkingPlace;
         this.amountOfDays = amountOfDays;
         this.idPayment = idPayment;
         this.money = money;
-
+        this.newOrAdd = newOrAdd;
     }
 
     @Override
     public void run() {
 //        Thread current = Thread.currentThread();
+        System.out.println(dataTimeNextPayment + "----------------------------------------------------- " + newOrAdd);
 
         Response informationAboutPayment = null;
-        String informationAboutPaymentInString;
+        String informationAboutPaymentInString = "";
         String status;
         int flag = 0;
         while (i < 50) {
@@ -71,12 +69,13 @@ public class Payment implements Runnable {
             informationAboutPayment = informationAboutPayment(idPayment);
             try {
                 informationAboutPaymentInString = informationAboutPayment.body().string();
+                System.out.println(informationAboutPaymentInString);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
 
             status = parserJson(informationAboutPaymentInString, "status");
-//            System.out.println(status);
+            System.out.println(status);
             String paymentConfirmationString = "";
             if (status.equals("waiting_for_capture")) {
                 Response paymentConfirmation = paymentConfirmation(idPayment, idempotenceKey, money);
@@ -90,57 +89,8 @@ public class Payment implements Runnable {
                     System.out.println("succeeded");
                     flag = 1;
 
-
-
-
-                    System.out.println("База данных");
-                    try {
-                        UserBarrier userBarrier = new UserBarrier();
-                        userBarrier.setChatId(chatId);
-                        userBarrier.setDateTimeLastPayment(LocalDateTime.now());
-                        userBarrier.setDateTimeNextPayment(LocalDateTime.now().plusDays(amountOfDays));
-                        userBarrier.setParkingPlace(parkingPlace);
-                        userBarrier.setAmountOfDays(amountOfDays);
-                        userBarrierRepository.save(userBarrier);
-
-//        Payment payment = new Payment();
-//        payment.setChatId(chatId);
-//        payment.setDateTimePayment(LocalDateTime.now());
-//        paymentRepository.save(payment);
-
-                        LocalDateTime localDateTime = LocalDateTime.of(2023, Month.MAY, 12, 22, 12, 30);
-                        LocalDateTime localDateTime1 = LocalDateTime.of(2023, Month.MAY, 12, 22, 12, 30);
-                        System.out.println(localDateTime1.compareTo(localDateTime));
-                        System.out.println(LocalDateTime.of(2023, Month.MAY, 12, 22, 12, 30));
-
-
-                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-
-                        String ttt = "2016-05-11 00:46";
-                        LocalDateTime start = LocalDateTime.parse(ttt, formatter);
-                        LocalDateTime end = LocalDateTime.parse("2016-05-10 12:26", formatter);
-
-                        Duration duration = Duration.between(start, end);
-
-                        System.out.printf(
-                                "%dд %dч %dмин%n",
-                                duration.toDays(),
-                                duration.toHours() % 24,
-                                duration.toMinutes() % 60
-                        );
-                    }catch (Exception e){
-                        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!" );
-                    }
-
-
-
-
-
-
-
-
-
-
+//                    System.out.println("База данных");
+//                    addData();
                     break;
 //                    endPayment = true;
                 } else sendMessage(chatId, "Платеж не прошел");
@@ -150,7 +100,15 @@ public class Payment implements Runnable {
         if (flag == 1) {
 //            current.interrupt();
 //            addData.newPayment(chatId, parkingPlace, amountOfDays);
-            testAdd();
+            if (newOrAdd.equals("new")) {
+                System.out.println("11111111111111111111111111111new111111111111111111111111111111111new");
+                addData();
+            } else {
+                System.out.println("ADDDDDDDDDDDDDDD");
+                addDataRenting();
+                System.out.println("DDDDDDADDDDDDDDDDDDDD");
+
+            }
             sendMessage(chatId, "Оплачено");
         }
         if (flag == 0) {
@@ -163,27 +121,64 @@ public class Payment implements Runnable {
     //    public Boolean getBoolean(){
 //        return endPayment;
 //    }
-    public void testAdd() {
-        System.out.println(chatId + " " + parkingPlace + " " + amountOfDays);
 
-
-        String url = "jdbc:postgresql://localhost:5432/barrier_db";
-        String user = "postgres";
-        String password = "GOGUDAserver123!";
-
+    public void addDataRenting() {
+        System.out.println("addDataRenting   " + dataTimeNextPayment);
         try {
-            Connection connection = DriverManager.getConnection(url,user, password);
-            System.out.println(connection);
-            String query = "SELECT * FROM users u";
-            PreparedStatement preparedStatement = connection.prepareStatement(query){
+            Connection connection = DriverManager.getConnection(url, user, password);
 
-            }
-            System.out.println(preparedStatement);
+            String query = "UPDATE user_barrier SET data_time_next_payment=? WHERE chat_id=?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setTimestamp(1, Timestamp.valueOf(dataTimeNextPayment));
+//            preparedStatement.setTimestamp(2, Timestamp.valueOf(LocalDateTime.now()));
+//            preparedStatement.setTimestamp(3, Timestamp.valueOf(LocalDateTime.now().plusDays(amountOfDays)));
+            preparedStatement.setLong(2, chatId);
+            preparedStatement.executeUpdate();
+
+            query = "UPDATE payment SET data_time_payment = ? WHERE chat_id=?";
+            preparedStatement = connection.prepareStatement(query);
+//            preparedStatement.setInt(1, amountOfDays);
+            preparedStatement.setTimestamp(1, Timestamp.valueOf(LocalDateTime.now()));
+//            preparedStatement.setTimestamp(3, Timestamp.valueOf(LocalDateTime.now().plusDays(amountOfDays)));
+            preparedStatement.setLong(2, chatId);
+            preparedStatement.executeUpdate();
+
             connection.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
+
+//        addData.newPayment(chatId, parkingPlace, amountOfDays);
+        System.out.println("GOOD!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+    }
+
+    public void addData() {
+        System.out.println(chatId + " " + parkingPlace + " " + amountOfDays);
+        try {
+            Connection connection = DriverManager.getConnection(url, user, password);
+
+            String query = "UPDATE user_barrier SET amount_of_days = ?, " +
+                           "data_time_last_payment = ?, data_time_next_payment=? WHERE chat_id=?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, amountOfDays);
+            preparedStatement.setTimestamp(2, Timestamp.valueOf(LocalDateTime.now()));
+            preparedStatement.setTimestamp(3, Timestamp.valueOf(LocalDateTime.now().plusDays(amountOfDays)));
+            preparedStatement.setLong(4, chatId);
+            preparedStatement.executeUpdate();
+
+            query = "UPDATE payment SET data_time_payment = ? WHERE chat_id=?";
+            preparedStatement = connection.prepareStatement(query);
+//            preparedStatement.setInt(1, amountOfDays);
+            preparedStatement.setTimestamp(1, Timestamp.valueOf(LocalDateTime.now()));
+//            preparedStatement.setTimestamp(3, Timestamp.valueOf(LocalDateTime.now().plusDays(amountOfDays)));
+            preparedStatement.setLong(2, chatId);
+            preparedStatement.executeUpdate();
+
+            connection.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
 
 //        addData.newPayment(chatId, parkingPlace, amountOfDays);

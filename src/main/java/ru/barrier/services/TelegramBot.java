@@ -21,14 +21,9 @@ public interface TelegramBot {
     public void sendLocalPhoto(String chatId);
     public void sendMessageChoiceFreePlace(Long chatId, ArrayList arrayListFreePlace);
     public boolean collOnBarrier(String urlCollCenter, String campaign_id, String phone, String public_key);
-
-    public boolean payment(Long chatId, String title, String description, String payload, String providerToken,
-                           String Currency, List<LabeledPrice> prices);
-
     public SendDocument document(Long chatId, String url, String captionText);
-
     public Duration compareTime(LocalDateTime startTime, LocalDateTime endTime);
-    public void baseMethodPayment(Long chatId, Integer parkingPlace, Integer amountOfDays, Integer money);
+    public void baseMethodPayment(Long chatId, Integer parkingPlace, Integer amountOfDays, Integer money, LocalDateTime dataTimeNextPayment, String newOrAdd);
 
 }
 

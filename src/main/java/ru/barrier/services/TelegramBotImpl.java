@@ -340,7 +340,8 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
 //                        Collections.singletonList(new LabeledPrice("label", 100 * 100)));
 
                 LocalDateTime localDateTimeNew = user.getUserBarrier().getDateTimeNextPayment().plusDays(countTimingRenting);
-                addData.timingRenting(user, localDateTimeNew);
+                baseMethodPayment(chatId, null, countTimingRenting, 1, localDateTimeNew, "add");
+//                addData.timingRenting(user, localDateTimeNew);
                 sendMessage(chatId, String.valueOf(localDateTimeNew) + "  " + String.valueOf(countTimingRenting));
 //                Collections.singletonList(new LabeledPrice("label", money * 100)));
             }
@@ -415,23 +416,9 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
                     sendMessage(chatId, "Оплатите счет в размере " + money + " руб.");
 
 //-----------------------get ------------------------------------------------------------------------------------------
-                    baseMethodPayment(chatId, place, countTimingArrayList.get(countTimingArrayList.size() - 1), 1);
-
-
-//                    System.out.println(countTimingArrayList + "----------------------------------------------------------");
-//                    payment(chatId, "Счёт",
-//                            "Оплатите за " + Integer.toString(countTimingArrayList.get(countTimingArrayList.size() - 1)) + " дней стоянки",
-//                            "Выставлен счет на оплату",
-//                            "1832575495:TEST:845cc76ac2a56fa83b2b0b34a811f9fa26743a05eacf0919000bd6f2ffed934d",
-//                            "RUB",
-//                            Collections.singletonList(new LabeledPrice("label", 100 * 100)));
-////                            Collections.singletonList(new LabeledPrice("label", money * 100)));
-//
+                    baseMethodPayment(chatId, place, countTimingArrayList.get(countTimingArrayList.size() - 1), 1, null, "new");
                     System.out.println(chatId + " " + place + " " + countTimingArrayList.get(countTimingArrayList.size() - 1));
-//                    addData.newPayment(chatId, place, countTimingArrayList.get(countTimingArrayList.size() - 1));
                     log.debug("Оплата прошла");
-//                    dataBaseService.getUserBarrierById(chatId);
-//                    userRepository.getUserBarrierById(chatId);
 
 //----------------------- другое меню ------------------------------------------------------------------------------------
 //                    sendMessage.setChatId(String.valueOf(chatId));
@@ -574,30 +561,6 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
     }
 
     @Override
-    public boolean payment(Long chatId, String title, String description, String payload, String providerToken,
-                           String Currency, List<LabeledPrice> prices) {
-        SendInvoice sendInvoice = new SendInvoice();
-        sendInvoice.setChatId(chatId);
-        sendInvoice.setTitle(title);
-        sendInvoice.setDescription(description);
-        sendInvoice.setPayload(payload);
-        sendInvoice.setProviderToken(providerToken);
-        sendInvoice.setCurrency(Currency);
-        sendInvoice.setPrices(prices);
-//        sendInvoice.setSt
-
-        try {
-            execute(sendInvoice);
-        } catch (TelegramApiException e) {
-            sendMessage(chatId, "Счёт не выставлен. Попробуйте еще.");
-            throw new RuntimeException(e);
-        }
-        System.out.println(sendInvoice);
-
-        return true;
-    }
-
-    @Override
     public SendDocument document(Long chatId, String url, String captionText) {
         SendDocument sendDocument = new SendDocument();
         sendDocument.setChatId(chatId);
@@ -635,14 +598,16 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
     }
 
     @Override
-    public void baseMethodPayment(Long chatId, Integer parkingPlace, Integer amountOfDays, Integer money) {
+    public void baseMethodPayment(Long chatId, Integer parkingPlace, Integer amountOfDays, Integer money, LocalDateTime dataTimeNextPayment, String newOrAdd) {
         System.out.println("baseMethodPayment   " + chatId + parkingPlace + amountOfDays + money);
         Payment payment = new Payment();
         Response response = payment.creatingPayment(money);
         String result = null;
         try {
             result = response.body().string();
+            System.out.println("********* Счет на оплату *****************");
             System.out.println(result);
+            System.out.println("********* Счет на оплату *****************");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -666,9 +631,16 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
             menuBot.link(sendMessage1, confirmation_url, "Оплатить", "О");
             executeMessage(sendMessage1);
             //           Запрос на существование счета
-            ScheduledExecutorService scheduledExecutorService = new ScheduledThreadPoolExecutor(4);
-            scheduledExecutorService.schedule(new Payment(chatId, parkingPlace, amountOfDays, idPayment, money), 1, TimeUnit.SECONDS);
-            scheduledExecutorService.shutdown();
+            if (newOrAdd.equals("new")) {
+                ScheduledExecutorService scheduledExecutorService = new ScheduledThreadPoolExecutor(4);
+                scheduledExecutorService.schedule(new Payment(chatId, parkingPlace, amountOfDays, idPayment, money, "new"), 1, TimeUnit.SECONDS);
+                scheduledExecutorService.shutdown();
+            }
+            if (newOrAdd.equals("add")) {
+                ScheduledExecutorService scheduledExecutorService = new ScheduledThreadPoolExecutor(4);
+                scheduledExecutorService.schedule(new Payment(chatId, amountOfDays, idPayment, money, dataTimeNextPayment, "add"), 1, TimeUnit.SECONDS);
+                scheduledExecutorService.shutdown();
+            }
 //            System.out.println(payment.getBoolean());
 
         } catch (Exception e) {
