@@ -16,6 +16,9 @@ public interface UserBarrierRepository extends JpaRepository<UserBarrier, Long> 
 
     @Query("select ub.chatId from UserBarrier ub where ub.dateTimeNextPayment<=:dateTimeNextPayment")
     List<Long> getUserBarrierDataTime(@Param("dateTimeNextPayment") LocalDateTime dateTimeNextPayment);
+
+    @Query("select ub.chatId from UserBarrier ub where ub.dateTimeNextPayment<:dateTimeNow and ub.stoppedBy=0")
+    List<Long> getUserByEndTime(@Param("dateTimeNow") LocalDateTime dateTimeNow);
 }
 
 

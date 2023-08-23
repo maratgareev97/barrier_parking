@@ -2,6 +2,8 @@ package ru.barrier.models;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -27,14 +29,16 @@ public class UserBarrier {
 
     @Column(name = "data_time_last_payment")
     private LocalDateTime dateTimeLastPayment;
-    @Column(name="data_time_next_payment")
+    @Column(name = "data_time_next_payment")
     private LocalDateTime dateTimeNextPayment;
 
-    @Column(name="amount_of_days")
+    @Column(name = "amount_of_days")
     private int amountOfDays;
 
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "userBarrier")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+//    @OneToOne(fetch = FetchType.LAZY, mappedBy = "userBarrier")
     private User user;
 
 //    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)

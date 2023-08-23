@@ -66,7 +66,7 @@ public class Payment implements Runnable {
             informationAboutPayment = informationAboutPayment(idPayment);
             try {
                 informationAboutPaymentInString = informationAboutPayment.body().string();
-                System.out.println(informationAboutPaymentInString);
+//                System.out.println(informationAboutPaymentInString);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

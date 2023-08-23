@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.commands.SetMyCommands;
-import org.telegram.telegrambots.meta.api.methods.invoices.SendInvoice;
 import org.telegram.telegrambots.meta.api.methods.send.SendDocument;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
@@ -16,16 +15,13 @@ import org.telegram.telegrambots.meta.api.objects.InputFile;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.commands.BotCommand;
 import org.telegram.telegrambots.meta.api.objects.commands.scope.BotCommandScopeDefault;
-import org.telegram.telegrambots.meta.api.objects.payments.LabeledPrice;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import ru.barrier.configs.BotConfig;
 import ru.barrier.models.User;
 import ru.barrier.models.UserBarrier;
-import ru.barrier.repository.PaymentRepository;
 import ru.barrier.repository.UserBarrierRepository;
 import ru.barrier.repository.UserRepository;
 
-import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -59,9 +55,6 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
         // Меню
         List<BotCommand> listOfCommands = new ArrayList<>();
         listOfCommands.add(new BotCommand("/start", "Войти в бот"));
-        listOfCommands.add(new BotCommand("/open", "Открыть шлагбаум"));
-        listOfCommands.add(new BotCommand("/pay", "Оплатить парковку"));
-        listOfCommands.add(new BotCommand("/balance", "Баланс вашей парковки"));
         listOfCommands.add(new BotCommand("/help", "Инструкция"));
         listOfCommands.add(new BotCommand("/agreement", "Соглашение"));
 
@@ -125,7 +118,7 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
                     startMessage(chatID, update.getMessage().getChat().getFirstName());
                     break;
                 case "Открыть шлагбаум":
-                    sendMessage(chatID, "ОТКРЫВАЮ");
+//                    sendMessage(chatID, "ОТКРЫВАЮ");
 //                    collOnBarrier("https://zvonok.com/manager/cabapi_external/api/v1/phones/call/?",
 //                            "1598159358",
 //                            "9153700127",
@@ -135,9 +128,9 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
 //                            ""));
 //                    dataBaseService.getUserById(chatID);
                     break;
-                case "/open":
-                    openMessage(chatID);
-                    break;
+//                case "/open":
+//                    openMessage(chatID);
+//                    break;
                 case "/agreement":
                     executeDocument(document(chatID,
                             "http://test.school89.net/wp-content/uploads/2023/07/public_contract_foras.pdf",
@@ -332,12 +325,6 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
             }
             User user = userRepository.getUserById(chatId);
             if (countTimingRenting != 0 && user != null && user.getUserBarrier() != null && user.getUserBarrier().getDateTimeNextPayment() != null) {
-//                payment(chatId, "Счёт",
-//                        "Оплатите за " + Integer.toString(countTimingRenting) + " дней стоянки",
-//                        "Выставлен счет на оплату",
-//                        "390540012:LIVE:37489",
-//                        "RUB",
-//                        Collections.singletonList(new LabeledPrice("label", 100 * 100)));
 
                 LocalDateTime localDateTimeNew = user.getUserBarrier().getDateTimeNextPayment().plusDays(countTimingRenting);
                 baseMethodPayment(chatId, null, countTimingRenting, 1, localDateTimeNew, "add");

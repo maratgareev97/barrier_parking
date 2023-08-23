@@ -2,6 +2,8 @@ package ru.barrier.models;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -20,6 +22,7 @@ public class User {
     //    @Transient
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "user_barrier")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private UserBarrier userBarrier;
 
 //    @Override
