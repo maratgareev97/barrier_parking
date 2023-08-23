@@ -51,9 +51,6 @@ public class Payment implements Runnable {
 
     @Override
     public void run() {
-//        Thread current = Thread.currentThread();
-        System.out.println(dataTimeNextPayment + "----------------------------------------------------- " + newOrAdd);
-
         Response informationAboutPayment = null;
         String informationAboutPaymentInString = "";
         String status;
@@ -88,39 +85,44 @@ public class Payment implements Runnable {
                 if (status.equals("succeeded")) {
                     System.out.println("succeeded");
                     flag = 1;
-
-//                    System.out.println("База данных");
-//                    addData();
                     break;
-//                    endPayment = true;
                 } else sendMessage(chatId, "Платеж не прошел");
                 break;
             }
         }
         if (flag == 1) {
-//            current.interrupt();
-//            addData.newPayment(chatId, parkingPlace, amountOfDays);
             if (newOrAdd.equals("new")) {
-                System.out.println("11111111111111111111111111111new111111111111111111111111111111111new");
                 addData();
+                addDataAllPayments();
             } else {
-                System.out.println("ADDDDDDDDDDDDDDD");
                 addDataRenting();
-                System.out.println("DDDDDDADDDDDDDDDDDDDD");
-
+                addDataAllPayments();
             }
+
             sendMessage(chatId, "Оплачено");
         }
         if (flag == 0) {
             String attention = EmojiParser.parseToUnicode("⚠");
             sendMessage(chatId, String.valueOf(attention) + " Счет на оплату отменен! " + String.valueOf(attention));
-//            System.out.println("Усе");
         }
     }
 
-    //    public Boolean getBoolean(){
-//        return endPayment;
-//    }
+    public void addDataAllPayments() {
+        try {
+            Connection connection = DriverManager.getConnection(url, user, password);
+
+            String query = "INSERT INTO public.all_payments (chat_id, data_time_payment, id_payment) VALUES(?, ?, ?);";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setLong(1, chatId);
+            preparedStatement.setTimestamp(2, Timestamp.valueOf(LocalDateTime.now()));
+            preparedStatement.setString(3, idPayment);
+            preparedStatement.executeUpdate();
+
+            connection.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     public void addDataRenting() {
         System.out.println("addDataRenting   " + dataTimeNextPayment);
@@ -130,18 +132,15 @@ public class Payment implements Runnable {
             String query = "UPDATE user_barrier SET data_time_next_payment=? WHERE chat_id=?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setTimestamp(1, Timestamp.valueOf(dataTimeNextPayment));
-//            preparedStatement.setTimestamp(2, Timestamp.valueOf(LocalDateTime.now()));
-//            preparedStatement.setTimestamp(3, Timestamp.valueOf(LocalDateTime.now().plusDays(amountOfDays)));
             preparedStatement.setLong(2, chatId);
             preparedStatement.executeUpdate();
 
             query = "UPDATE payment SET data_time_payment = ? WHERE chat_id=?";
             preparedStatement = connection.prepareStatement(query);
-//            preparedStatement.setInt(1, amountOfDays);
             preparedStatement.setTimestamp(1, Timestamp.valueOf(LocalDateTime.now()));
-//            preparedStatement.setTimestamp(3, Timestamp.valueOf(LocalDateTime.now().plusDays(amountOfDays)));
             preparedStatement.setLong(2, chatId);
             preparedStatement.executeUpdate();
+
 
             connection.close();
         } catch (SQLException e) {
