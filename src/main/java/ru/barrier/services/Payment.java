@@ -1,6 +1,7 @@
 package ru.barrier.services;
 
 import com.vdurmont.emoji.EmojiParser;
+import lombok.extern.log4j.Log4j;
 import okhttp3.*;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.json.JSONObject;
@@ -13,6 +14,7 @@ import java.time.LocalDateTime;
 import java.util.Iterator;
 
 @Component
+@Log4j
 public class Payment implements Runnable {
 
     private final String url = "jdbc:postgresql://localhost:5432/barrier_db";
@@ -57,7 +59,6 @@ public class Payment implements Runnable {
         int flag = 0;
         while (i < 50) {
             i++;
-            System.out.println(i);
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
@@ -66,13 +67,12 @@ public class Payment implements Runnable {
             informationAboutPayment = informationAboutPayment(idPayment);
             try {
                 informationAboutPaymentInString = informationAboutPayment.body().string();
-//                System.out.println(informationAboutPaymentInString);
             } catch (IOException e) {
+                log.error("informationAboutPayment  " + new RuntimeException(e));
                 throw new RuntimeException(e);
             }
 
             status = parserJson(informationAboutPaymentInString, "status");
-            System.out.println(status);
             String paymentConfirmationString = "";
             if (status.equals("waiting_for_capture")) {
                 Response paymentConfirmation = paymentConfirmation(idPayment, idempotenceKey, money);
@@ -80,13 +80,16 @@ public class Payment implements Runnable {
                     paymentConfirmationString = paymentConfirmation.body().string();
                     status = parserJson(paymentConfirmationString, "status");
                 } catch (IOException e) {
+                    log.error("paymentConfirmation  " + new RuntimeException(e));
                     throw new RuntimeException(e);
                 }
                 if (status.equals("succeeded")) {
-                    System.out.println("succeeded");
                     flag = 1;
                     break;
-                } else sendMessage(chatId, "Платеж не прошел");
+                } else {
+                    sendMessage(chatId, "Платеж не прошел");
+                    log.debug(chatId + " Платеж не прошел");
+                }
                 break;
             }
         }
@@ -100,10 +103,27 @@ public class Payment implements Runnable {
             }
 
             sendMessage(chatId, "Оплачено");
+            log.debug(chatId + " Оплачено");
         }
         if (flag == 0) {
             String attention = EmojiParser.parseToUnicode("⚠");
             sendMessage(chatId, String.valueOf(attention) + " Счет на оплату отменен! " + String.valueOf(attention));
+            deleteUserForNotPayment();
+            log.debug(chatId + "   " + String.valueOf(attention) + " Счет на оплату отменен! " + String.valueOf(attention));
+        }
+    }
+
+    public void deleteUserForNotPayment(){
+        try{
+            Connection connection = DriverManager.getConnection(url, user, password);
+
+//            DELETE FROM public.user_barrier WHERE chat_id=1292677678;
+            String query = "DELETE FROM public.user_barrier WHERE chat_id=?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setLong(1, chatId);
+            preparedStatement.executeUpdate();
+        }catch (Exception e){
+            log.error("Не удален");
         }
     }
 
@@ -120,12 +140,12 @@ public class Payment implements Runnable {
 
             connection.close();
         } catch (SQLException e) {
+            log.error("DriverManager.getConnection  " + new RuntimeException(e));
             throw new RuntimeException(e);
         }
     }
 
     public void addDataRenting() {
-        System.out.println("addDataRenting   " + dataTimeNextPayment);
         try {
             Connection connection = DriverManager.getConnection(url, user, password);
 
@@ -144,16 +164,12 @@ public class Payment implements Runnable {
 
             connection.close();
         } catch (SQLException e) {
+            log.error("DriverManager.getConnection addDataRenting   " + new RuntimeException(e));
             throw new RuntimeException(e);
         }
-
-
-//        addData.newPayment(chatId, parkingPlace, amountOfDays);
-        System.out.println("GOOD!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
     }
 
     public void addData() {
-        System.out.println(chatId + " " + parkingPlace + " " + amountOfDays);
         try {
             Connection connection = DriverManager.getConnection(url, user, password);
 
@@ -168,26 +184,20 @@ public class Payment implements Runnable {
 
             query = "UPDATE payment SET data_time_payment = ? WHERE chat_id=?";
             preparedStatement = connection.prepareStatement(query);
-//            preparedStatement.setInt(1, amountOfDays);
             preparedStatement.setTimestamp(1, Timestamp.valueOf(LocalDateTime.now()));
-//            preparedStatement.setTimestamp(3, Timestamp.valueOf(LocalDateTime.now().plusDays(amountOfDays)));
             preparedStatement.setLong(2, chatId);
             preparedStatement.executeUpdate();
 
             connection.close();
         } catch (SQLException e) {
+            log.error("DriverManager.getConnection addData   " + new RuntimeException(e));
             throw new RuntimeException(e);
         }
-
-
-//        addData.newPayment(chatId, parkingPlace, amountOfDays);
-        System.out.println("GOOD!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
     }
 
     public Response creatingPayment(Integer money) {
         OkHttpClient client = new OkHttpClient().newBuilder().build();
         MediaType mediaType = MediaType.parse("application/json");
-        System.out.println("idempotenceKey " + idempotenceKey);
 
         RequestBody body = RequestBody.create(mediaType,
                 "{\n        \"amount\": " +
@@ -206,6 +216,7 @@ public class Payment implements Runnable {
         try {
             response = client.newCall(request).execute();
         } catch (IOException e) {
+            log.error("creatingPayment   " + new RuntimeException(e));
             throw new RuntimeException(e);
         }
         return response;
@@ -222,6 +233,7 @@ public class Payment implements Runnable {
                 try {
                     valueN = (JSONObject) value;
                 } catch (Exception e) {
+//                    log.error("JSONObject " + String.valueOf(value));
                     return String.valueOf(value);
                 }
             }
@@ -244,6 +256,7 @@ public class Payment implements Runnable {
         try {
             response = client.newCall(request).execute();
         } catch (IOException e) {
+            log.error("informationAboutPayment" + new RuntimeException(e));
             throw new RuntimeException(e);
         }
         return response;
@@ -262,8 +275,8 @@ public class Payment implements Runnable {
                 .build();
         try {
             Response response = client.newCall(request).execute();
-            System.out.println(response);
         } catch (IOException e) {
+            log.error("sendMessage Payment");
             throw new RuntimeException(e);
         }
     }
@@ -285,6 +298,7 @@ public class Payment implements Runnable {
         try {
             response = client.newCall(request).execute();
         } catch (IOException e) {
+            log.error("client.newCall(request)");
             throw new RuntimeException(e);
         }
         return response;

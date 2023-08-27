@@ -38,21 +38,18 @@ public class ClientAlertScheduled {
             try {
                 telegramBot.sendMessage(chatId, "Время стоянки заканчивается.");
             } catch (Exception e) {
-                log.debug("Нет такого контакта");
+                log.debug("Scheduled. Нет такого контакта");
             }
         }
-        System.out.println(arrayList);
-        System.out.println("scheduled");
+
         try {
             ArrayList<Long> arrayList1 = (ArrayList<Long>) userBarrierRepository.getUserByEndTime(LocalDateTime.now());
             for (Long chatId : arrayList1) {
-//                System.out.println("11111 " + i);
                 userRepository.deleteById(chatId);
                 telegramBot.sendMessage(chatId, "Время стоянки закончилось.\nБлагодарим Вас.\nДля возобновления использования наших услуг нажмите\n/start");
-
             }
-//            userRepository.deleteById(1292677678L);}
         } catch (Exception e) {
+            log.debug("Scheduled. При удалении пользователя из базы что-то пошло не так");
         }
     }
 

@@ -14,7 +14,6 @@ import java.util.List;
 public interface TelegramBot {
     public void startMessage(long chatID, String name);
     public void executeMessage(SendMessage sendMessage);
-    public void openMessage(long chatID);
     public void sendMessage(long chatID, String textToSend);
     public void registerUser(Long chatId);
     public void sendMessageTiming(Long chatId);

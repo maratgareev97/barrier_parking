@@ -15,7 +15,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Transactional
     @Query("SELECT  u.chatId from User u where u.chatId=:chatId")
-    Long getChatIdUserById(@Param("chatId") Long chatId);
+    Long getChatIdUserById(@Param("chatId") Long chatId);     //-----------------------
 
     @Transactional
     @Query("SELECT  u from User u where u.chatId=:chatId")
@@ -29,7 +29,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
             on u.userBarrier.chatId = ub.chatId 
             where u.chatId = :chatId
                         """)
-    User getUserBarrierById(@Param("chatId") Long chatId);
+    User getUserBarrierById(@Param("chatId") Long chatId);     //-----------------
 
     @Transactional
     @Query("""

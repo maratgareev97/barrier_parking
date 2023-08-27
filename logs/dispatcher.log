@@ -9305,3 +9305,278 @@
 2023-08-23 17:07:14 DEBUG TelegramBotImpl:241 - 1292677678
 2023-08-23 17:07:14 DEBUG TelegramBotImpl:247 - null    null
 2023-08-23 17:07:15 DEBUG TelegramBotImpl:421 - Оплата прошла
+2023-08-24 02:05:03 DEBUG TelegramBotImpl:440 - Здравствуйте Marat.
+Добро пожаловать на нашу парковку. Перед началом аренды, пожалуйста, ознакомьтесь с нашей офертой и согласитесь с ней для продолжения., 1292677678
+2023-08-24 02:05:04 DEBUG TelegramBotImpl:232 - Maratgareev97
+2023-08-24 02:05:04 DEBUG TelegramBotImpl:233 - Marat
+2023-08-24 02:05:04 DEBUG TelegramBotImpl:234 - 1292677678
+2023-08-24 02:05:04 DEBUG TelegramBotImpl:240 - null    null
+2023-08-24 02:05:06 DEBUG TelegramBotImpl:232 - Maratgareev97
+2023-08-24 02:05:06 DEBUG TelegramBotImpl:233 - Marat
+2023-08-24 02:05:06 DEBUG TelegramBotImpl:234 - 1292677678
+2023-08-24 02:05:06 DEBUG TelegramBotImpl:240 - null    null
+2023-08-24 02:05:06 DEBUG TelegramBotImpl:338 - countTiming = 1
+2023-08-24 02:05:06 DEBUG TelegramBotImpl:501 - 1292677678
+2023-08-24 02:05:06 DEBUG TelegramBotImpl:341 - Тестовые данные загружены
+2023-08-24 02:05:08 DEBUG TelegramBotImpl:232 - Maratgareev97
+2023-08-24 02:05:08 DEBUG TelegramBotImpl:233 - Marat
+2023-08-24 02:05:08 DEBUG TelegramBotImpl:234 - 1292677678
+2023-08-24 02:05:08 DEBUG TelegramBotImpl:240 - null    null
+2023-08-24 02:05:09 DEBUG TelegramBotImpl:408 - Оплата прошла
+2023-08-27 19:45:39 DEBUG TelegramBotImpl:438 - Здравствуйте Marat.
+Добро пожаловать на нашу парковку. Перед началом аренды, пожалуйста, ознакомьтесь с нашей офертой и согласитесь с ней для продолжения., 1292677678
+2023-08-27 19:46:00 DEBUG TelegramBotImpl:438 - Здравствуйте Marat.
+Добро пожаловать на нашу парковку. Перед началом аренды, пожалуйста, ознакомьтесь с нашей офертой и согласитесь с ней для продолжения., 1292677678
+2023-08-27 19:46:02 DEBUG TelegramBotImpl:230 - Maratgareev97
+2023-08-27 19:46:02 DEBUG TelegramBotImpl:231 - Marat
+2023-08-27 19:46:02 DEBUG TelegramBotImpl:232 - 1292677678
+2023-08-27 19:46:02 DEBUG TelegramBotImpl:238 - null    null
+2023-08-27 19:56:25 DEBUG TelegramBotImpl:438 - Здравствуйте Marat.
+Добро пожаловать на нашу парковку. Перед началом аренды, пожалуйста, ознакомьтесь с нашей офертой и согласитесь с ней для продолжения., 1292677678
+2023-08-27 19:56:27 DEBUG TelegramBotImpl:230 - Maratgareev97
+2023-08-27 19:56:27 DEBUG TelegramBotImpl:231 - Marat
+2023-08-27 19:56:27 DEBUG TelegramBotImpl:232 - 1292677678
+2023-08-27 19:56:27 DEBUG TelegramBotImpl:238 - null    null
+2023-08-27 19:56:28 DEBUG TelegramBotImpl:230 - Maratgareev97
+2023-08-27 19:56:28 DEBUG TelegramBotImpl:231 - Marat
+2023-08-27 19:56:28 DEBUG TelegramBotImpl:232 - 1292677678
+2023-08-27 19:56:28 DEBUG TelegramBotImpl:238 - null    null
+2023-08-27 19:56:28 DEBUG TelegramBotImpl:336 - countTiming = 15
+2023-08-27 19:56:28 DEBUG TelegramBotImpl:499 - 1292677678
+2023-08-27 19:56:29 DEBUG TelegramBotImpl:339 - Тестовые данные загружены
+2023-08-27 19:56:30 DEBUG TelegramBotImpl:230 - Maratgareev97
+2023-08-27 19:56:30 DEBUG TelegramBotImpl:231 - Marat
+2023-08-27 19:56:30 DEBUG TelegramBotImpl:232 - 1292677678
+2023-08-27 19:56:30 DEBUG TelegramBotImpl:238 - null    null
+2023-08-27 19:56:31 DEBUG TelegramBotImpl:406 - Оплата прошла
+2023-08-27 20:14:40 DEBUG TelegramBotImpl:435 - Здравствуйте Marat.
+Добро пожаловать на нашу парковку. Перед началом аренды, пожалуйста, ознакомьтесь с нашей офертой и согласитесь с ней для продолжения., 1292677678
+2023-08-27 20:14:42 DEBUG TelegramBotImpl:227 - Maratgareev97
+2023-08-27 20:14:42 DEBUG TelegramBotImpl:228 - Marat
+2023-08-27 20:14:42 DEBUG TelegramBotImpl:229 - 1292677678
+2023-08-27 20:14:42 DEBUG TelegramBotImpl:235 - null    null
+2023-08-27 20:14:43 DEBUG TelegramBotImpl:227 - Maratgareev97
+2023-08-27 20:14:43 DEBUG TelegramBotImpl:228 - Marat
+2023-08-27 20:14:43 DEBUG TelegramBotImpl:229 - 1292677678
+2023-08-27 20:14:43 DEBUG TelegramBotImpl:235 - null    null
+2023-08-27 20:14:44 DEBUG TelegramBotImpl:333 - countTiming = 7
+2023-08-27 20:14:44 DEBUG TelegramBotImpl:496 - 1292677678
+2023-08-27 20:14:44 DEBUG TelegramBotImpl:336 - Тестовые данные загружены
+2023-08-27 20:14:45 DEBUG TelegramBotImpl:227 - Maratgareev97
+2023-08-27 20:14:45 DEBUG TelegramBotImpl:228 - Marat
+2023-08-27 20:14:45 DEBUG TelegramBotImpl:229 - 1292677678
+2023-08-27 20:14:45 DEBUG TelegramBotImpl:235 - null    null
+2023-08-27 20:14:46 DEBUG TelegramBotImpl:403 - Оплата прошла
+2023-08-27 20:28:19 DEBUG TelegramBotImpl:430 - Здравствуйте Marat.
+Добро пожаловать на нашу парковку. Перед началом аренды, пожалуйста, ознакомьтесь с нашей офертой и согласитесь с ней для продолжения., 1292677678
+2023-08-27 20:28:21 DEBUG TelegramBotImpl:222 - Maratgareev97
+2023-08-27 20:28:21 DEBUG TelegramBotImpl:223 - Marat
+2023-08-27 20:28:21 DEBUG TelegramBotImpl:224 - 1292677678
+2023-08-27 20:28:21 DEBUG TelegramBotImpl:230 - null    null
+2023-08-27 20:39:42 DEBUG TelegramBotImpl:434 - Здравствуйте Marat.
+Добро пожаловать на нашу парковку. Перед началом аренды, пожалуйста, ознакомьтесь с нашей офертой и согласитесь с ней для продолжения., 1292677678
+2023-08-27 20:40:00 DEBUG TelegramBotImpl:226 - Maratgareev97
+2023-08-27 20:40:00 DEBUG TelegramBotImpl:227 - Marat
+2023-08-27 20:40:00 DEBUG TelegramBotImpl:228 - 1292677678
+2023-08-27 20:40:00 DEBUG TelegramBotImpl:234 - null    null
+2023-08-27 20:40:07 DEBUG TelegramBotImpl:226 - Maratgareev97
+2023-08-27 20:40:07 DEBUG TelegramBotImpl:227 - Marat
+2023-08-27 20:40:07 DEBUG TelegramBotImpl:228 - 1292677678
+2023-08-27 20:40:07 DEBUG TelegramBotImpl:234 - null    null
+2023-08-27 20:40:07 DEBUG TelegramBotImpl:332 - countTiming = 30
+2023-08-27 20:40:07 DEBUG TelegramBotImpl:495 - 1292677678
+2023-08-27 20:40:07 DEBUG TelegramBotImpl:335 - Тестовые данные загружены
+2023-08-27 20:40:09 DEBUG TelegramBotImpl:226 - Maratgareev97
+2023-08-27 20:40:09 DEBUG TelegramBotImpl:227 - Marat
+2023-08-27 20:40:09 DEBUG TelegramBotImpl:228 - 1292677678
+2023-08-27 20:40:09 DEBUG TelegramBotImpl:234 - null    null
+2023-08-27 20:40:09 DEBUG TelegramBotImpl:402 - Оплата прошла
+2023-08-27 20:42:04 DEBUG TelegramBotImpl:434 - Здравствуйте Marat.
+Добро пожаловать на нашу парковку. Перед началом аренды, пожалуйста, ознакомьтесь с нашей офертой и согласитесь с ней для продолжения., 1292677678
+2023-08-27 20:42:05 DEBUG TelegramBotImpl:226 - Maratgareev97
+2023-08-27 20:42:05 DEBUG TelegramBotImpl:227 - Marat
+2023-08-27 20:42:05 DEBUG TelegramBotImpl:228 - 1292677678
+2023-08-27 20:42:05 DEBUG TelegramBotImpl:234 - null    null
+2023-08-27 20:42:07 DEBUG TelegramBotImpl:226 - Maratgareev97
+2023-08-27 20:42:07 DEBUG TelegramBotImpl:227 - Marat
+2023-08-27 20:42:07 DEBUG TelegramBotImpl:228 - 1292677678
+2023-08-27 20:42:07 DEBUG TelegramBotImpl:234 - null    null
+2023-08-27 20:42:07 DEBUG TelegramBotImpl:332 - countTiming = 1
+2023-08-27 20:42:07 DEBUG TelegramBotImpl:495 - 1292677678
+2023-08-27 20:42:07 DEBUG TelegramBotImpl:335 - Тестовые данные загружены
+2023-08-27 20:42:09 DEBUG TelegramBotImpl:226 - Maratgareev97
+2023-08-27 20:42:09 DEBUG TelegramBotImpl:227 - Marat
+2023-08-27 20:42:09 DEBUG TelegramBotImpl:228 - 1292677678
+2023-08-27 20:42:09 DEBUG TelegramBotImpl:234 - null    null
+2023-08-27 20:42:09 DEBUG TelegramBotImpl:402 - Оплата прошла
+2023-08-27 20:42:20 DEBUG TelegramBotImpl:536 - collOnBarrier {"balance": "17.450000", "call_id": 2308272010415709, "created": "2023-08-27T17:42:20.753Z", "phone": "+79153700127"}
+2023-08-27 20:42:57 DEBUG TelegramBotImpl:536 - collOnBarrier {"balance": "17.450000", "call_id": 2308271676660893, "created": "2023-08-27T17:42:57.055Z", "phone": "+79153700127"}
+2023-08-27 21:06:51 DEBUG TelegramBotImpl:196 - 1292677678  Оплатите парковку
+2023-08-27 21:06:53 DEBUG TelegramBotImpl:173 - 1292677678  Оплатите парковку
+2023-08-27 21:27:16 DEBUG TelegramBotImpl:253 - 1292677678  Теперь Вы можете оплатить услугу
+2023-08-27 21:27:31 DEBUG TelegramBotImpl:386 - 1292677678  Вы выбрали место - 🚘    19
+2023-08-27 21:27:31 DEBUG TelegramBotImpl:388 - 1292677678  Оплатите счет в размере 3500 руб.
+2023-08-27 21:27:32 DEBUG TelegramBotImpl:564 - SendMessage(chatId=1292677678, messageThreadId=null, text=Теперь вы можете оплатить счёт:, parseMode=HTML, disableWebPagePreview=null, disableNotification=null, replyToMessageId=null, replyMarkup=InlineKeyboardMarkup(keyboard=[[InlineKeyboardButton(text=💳Оплатить, url=yoomoney.ru/checkout/payments/v2/contract?orderId=2c7da953-000f-5000-a000-191b16918868, callbackData=О, callbackGame=null, switchInlineQuery=null, switchInlineQueryCurrentChat=null, pay=null, loginUrl=null, webApp=null)]]), entities=null, allowSendingWithoutReply=null, protectContent=null)
+2023-08-27 21:57:54 DEBUG TelegramBotImpl:212 - 1292677678  Оплатите парковку
+2023-08-27 21:57:56 DEBUG TelegramBotImpl:253 - 1292677678  Теперь Вы можете оплатить услугу
+2023-08-27 21:58:00 DEBUG TelegramBotImpl:386 - 1292677678  Вы выбрали место - 🚘    3
+2023-08-27 21:58:00 DEBUG TelegramBotImpl:388 - 1292677678  Оплатите счет в размере 6000 руб.
+2023-08-27 21:58:00 DEBUG TelegramBotImpl:564 - SendMessage(chatId=1292677678, messageThreadId=null, text=Теперь вы можете оплатить счёт:, parseMode=HTML, disableWebPagePreview=null, disableNotification=null, replyToMessageId=null, replyMarkup=InlineKeyboardMarkup(keyboard=[[InlineKeyboardButton(text=💳Оплатить, url=yoomoney.ru/checkout/payments/v2/contract?orderId=2c7db078-000f-5000-9000-14189f1f6c40, callbackData=О, callbackGame=null, switchInlineQuery=null, switchInlineQueryCurrentChat=null, pay=null, loginUrl=null, webApp=null)]]), entities=null, allowSendingWithoutReply=null, protectContent=null)
+2023-08-27 21:58:15 DEBUG TelegramBotImpl:564 - SendMessage(chatId=1292677678, messageThreadId=null, text=Теперь вы можете оплатить счёт:, parseMode=HTML, disableWebPagePreview=null, disableNotification=null, replyToMessageId=null, replyMarkup=InlineKeyboardMarkup(keyboard=[[InlineKeyboardButton(text=💳Оплатить, url=yoomoney.ru/checkout/payments/v2/contract?orderId=2c7db087-000f-5000-9000-11829c3bb193, callbackData=О, callbackGame=null, switchInlineQuery=null, switchInlineQueryCurrentChat=null, pay=null, loginUrl=null, webApp=null)]]), entities=null, allowSendingWithoutReply=null, protectContent=null)
+2023-08-27 21:58:15 DEBUG TelegramBotImpl:324 - 1292677678    2023-09-27T21:58:09.344689  1
+2023-08-27 22:00:49 DEBUG TelegramBotImpl:212 - 1292677678  Оплатите парковку
+2023-08-27 22:00:53 DEBUG TelegramBotImpl:253 - 1292677678  Теперь Вы можете оплатить услугу
+2023-08-27 22:00:57 DEBUG TelegramBotImpl:386 - 1292677678  Вы выбрали место - 🚘    8
+2023-08-27 22:00:57 DEBUG TelegramBotImpl:388 - 1292677678  Оплатите счет в размере 300 руб.
+2023-08-27 22:00:57 DEBUG TelegramBotImpl:564 - SendMessage(chatId=1292677678, messageThreadId=null, text=Теперь вы можете оплатить счёт:, parseMode=HTML, disableWebPagePreview=null, disableNotification=null, replyToMessageId=null, replyMarkup=InlineKeyboardMarkup(keyboard=[[InlineKeyboardButton(text=💳Оплатить, url=yoomoney.ru/checkout/payments/v2/contract?orderId=2c7db129-000f-5000-9000-10d189467776, callbackData=О, callbackGame=null, switchInlineQuery=null, switchInlineQueryCurrentChat=null, pay=null, loginUrl=null, webApp=null)]]), entities=null, allowSendingWithoutReply=null, protectContent=null)
+2023-08-27 22:01:12 DEBUG TelegramBotImpl:564 - SendMessage(chatId=1292677678, messageThreadId=null, text=Теперь вы можете оплатить счёт:, parseMode=HTML, disableWebPagePreview=null, disableNotification=null, replyToMessageId=null, replyMarkup=InlineKeyboardMarkup(keyboard=[[InlineKeyboardButton(text=💳Оплатить, url=yoomoney.ru/checkout/payments/v2/contract?orderId=2c7db138-000f-5000-9000-11fa95f08dcf, callbackData=О, callbackGame=null, switchInlineQuery=null, switchInlineQueryCurrentChat=null, pay=null, loginUrl=null, webApp=null)]]), entities=null, allowSendingWithoutReply=null, protectContent=null)
+2023-08-27 22:01:25 DEBUG TelegramBotImpl:188 - 1292677678 Ваше парковочное место №8
+Дата окончания аренды через: 30дн, 23 час, 59мин.
+2023-08-27 22:01:29 DEBUG TelegramBotImpl:509 - collOnBarrier {"balance": "17.390000", "call_id": 230827839817558, "created": "2023-08-27T19:01:29.662Z", "phone": "+79153700127"}
+2023-08-27 22:01:29 DEBUG TelegramBotImpl:160 - 1292677678    ЗАЕЗЖАЙТЕ!
+через несколько секунд откроется шлагбаум
+2023-08-27 22:01:36 DEBUG TelegramBotImpl:141 - 1292677678  У Вас имеется действующая аренда. Вы можете продлить аренду.
+2023-08-27 22:18:22 DEBUG TelegramBotImpl:173 - 1292677678  Оплатите парковку
+2023-08-27 22:18:25 DEBUG TelegramBotImpl:253 - 1292677678  Теперь Вы можете оплатить услугу
+2023-08-27 22:19:04 DEBUG TelegramBotImpl:382 - 1292677678  Вы выбрали место - 🚘    1
+2023-08-27 22:19:04 DEBUG TelegramBotImpl:384 - 1292677678  Оплатите счет в размере 300 руб.
+2023-08-27 22:19:04 ERROR Payment:221 - JSONObject 2c7db568-000f-5000-9000-1d8191e08d3b
+2023-08-27 22:19:04 ERROR Payment:221 - JSONObject https://yoomoney.ru/checkout/payments/v2/contract?orderId=2c7db568-000f-5000-9000-1d8191e08d3b
+2023-08-27 22:19:04 DEBUG TelegramBotImpl:560 - SendMessage(chatId=1292677678, messageThreadId=null, text=Теперь вы можете оплатить счёт:, parseMode=HTML, disableWebPagePreview=null, disableNotification=null, replyToMessageId=null, replyMarkup=InlineKeyboardMarkup(keyboard=[[InlineKeyboardButton(text=💳Оплатить, url=yoomoney.ru/checkout/payments/v2/contract?orderId=2c7db568-000f-5000-9000-1d8191e08d3b, callbackData=О, callbackGame=null, switchInlineQuery=null, switchInlineQueryCurrentChat=null, pay=null, loginUrl=null, webApp=null)]]), entities=null, allowSendingWithoutReply=null, protectContent=null)
+2023-08-27 22:19:07 ERROR Payment:221 - JSONObject pending
+2023-08-27 22:19:08 ERROR Payment:221 - JSONObject pending
+2023-08-27 22:19:09 ERROR Payment:221 - JSONObject pending
+2023-08-27 22:19:10 ERROR Payment:221 - JSONObject pending
+2023-08-27 22:19:11 ERROR Payment:221 - JSONObject pending
+2023-08-27 22:19:13 ERROR Payment:221 - JSONObject pending
+2023-08-27 22:19:14 ERROR Payment:221 - JSONObject pending
+2023-08-27 22:19:15 ERROR Payment:221 - JSONObject pending
+2023-08-27 22:19:16 ERROR Payment:221 - JSONObject pending
+2023-08-27 22:19:17 ERROR Payment:221 - JSONObject pending
+2023-08-27 22:19:18 ERROR Payment:221 - JSONObject pending
+2023-08-27 22:19:19 ERROR Payment:221 - JSONObject pending
+2023-08-27 22:19:21 ERROR Payment:221 - JSONObject pending
+2023-08-27 22:19:22 ERROR Payment:221 - JSONObject pending
+2023-08-27 22:19:23 ERROR Payment:221 - JSONObject pending
+2023-08-27 22:19:24 ERROR Payment:221 - JSONObject pending
+2023-08-27 22:19:25 ERROR Payment:221 - JSONObject pending
+2023-08-27 22:19:26 ERROR Payment:221 - JSONObject pending
+2023-08-27 22:19:28 ERROR Payment:221 - JSONObject pending
+2023-08-27 22:19:29 ERROR Payment:221 - JSONObject pending
+2023-08-27 22:19:30 ERROR Payment:221 - JSONObject pending
+2023-08-27 22:19:31 ERROR Payment:221 - JSONObject pending
+2023-08-27 22:19:32 ERROR Payment:221 - JSONObject pending
+2023-08-27 22:19:33 ERROR Payment:221 - JSONObject pending
+2023-08-27 22:19:35 ERROR Payment:221 - JSONObject pending
+2023-08-27 22:19:49 DEBUG TelegramBotImpl:253 - 1292677678  Теперь Вы можете оплатить услугу
+2023-08-27 22:20:04 DEBUG TelegramBotImpl:382 - 1292677678  Вы выбрали место - 🚘    1
+2023-08-27 22:20:04 DEBUG TelegramBotImpl:384 - 1292677678  Оплатите счет в размере 300 руб.
+2023-08-27 22:20:04 ERROR Payment:221 - JSONObject 2c7db5a4-000f-5000-9000-1ef3671ebda5
+2023-08-27 22:20:04 ERROR Payment:221 - JSONObject https://yoomoney.ru/checkout/payments/v2/contract?orderId=2c7db5a4-000f-5000-9000-1ef3671ebda5
+2023-08-27 22:20:04 DEBUG TelegramBotImpl:560 - SendMessage(chatId=1292677678, messageThreadId=null, text=Теперь вы можете оплатить счёт:, parseMode=HTML, disableWebPagePreview=null, disableNotification=null, replyToMessageId=null, replyMarkup=InlineKeyboardMarkup(keyboard=[[InlineKeyboardButton(text=💳Оплатить, url=yoomoney.ru/checkout/payments/v2/contract?orderId=2c7db5a4-000f-5000-9000-1ef3671ebda5, callbackData=О, callbackGame=null, switchInlineQuery=null, switchInlineQueryCurrentChat=null, pay=null, loginUrl=null, webApp=null)]]), entities=null, allowSendingWithoutReply=null, protectContent=null)
+2023-08-27 22:20:06 ERROR Payment:221 - JSONObject pending
+2023-08-27 22:20:08 ERROR Payment:221 - JSONObject pending
+2023-08-27 22:20:09 ERROR Payment:221 - JSONObject pending
+2023-08-27 22:20:10 ERROR Payment:221 - JSONObject pending
+2023-08-27 22:20:11 ERROR Payment:221 - JSONObject pending
+2023-08-27 22:20:12 ERROR Payment:221 - JSONObject pending
+2023-08-27 22:20:13 ERROR Payment:221 - JSONObject pending
+2023-08-27 22:20:15 ERROR Payment:221 - JSONObject pending
+2023-08-27 22:20:16 ERROR Payment:221 - JSONObject pending
+2023-08-27 22:20:17 ERROR Payment:221 - JSONObject pending
+2023-08-27 22:20:18 ERROR Payment:221 - JSONObject pending
+2023-08-27 22:20:19 ERROR Payment:221 - JSONObject pending
+2023-08-27 22:20:20 ERROR Payment:221 - JSONObject pending
+2023-08-27 22:20:22 ERROR Payment:221 - JSONObject pending
+2023-08-27 22:20:23 ERROR Payment:221 - JSONObject pending
+2023-08-27 22:20:24 ERROR Payment:221 - JSONObject pending
+2023-08-27 22:20:25 ERROR Payment:221 - JSONObject pending
+2023-08-27 22:20:26 ERROR Payment:221 - JSONObject pending
+2023-08-27 22:20:27 ERROR Payment:221 - JSONObject pending
+2023-08-27 22:20:28 ERROR Payment:221 - JSONObject pending
+2023-08-27 22:20:30 ERROR Payment:221 - JSONObject pending
+2023-08-27 22:20:31 ERROR Payment:221 - JSONObject pending
+2023-08-27 22:20:32 ERROR Payment:221 - JSONObject pending
+2023-08-27 22:20:33 ERROR Payment:221 - JSONObject pending
+2023-08-27 22:20:34 ERROR Payment:221 - JSONObject pending
+2023-08-27 22:20:35 ERROR Payment:221 - JSONObject pending
+2023-08-27 22:20:37 ERROR Payment:221 - JSONObject pending
+2023-08-27 22:20:38 ERROR Payment:221 - JSONObject pending
+2023-08-27 22:20:39 ERROR Payment:221 - JSONObject pending
+2023-08-27 22:20:40 ERROR Payment:221 - JSONObject pending
+2023-08-27 22:20:41 ERROR Payment:221 - JSONObject pending
+2023-08-27 22:20:42 ERROR Payment:221 - JSONObject pending
+2023-08-27 22:20:44 ERROR Payment:221 - JSONObject pending
+2023-08-27 22:20:45 ERROR Payment:221 - JSONObject pending
+2023-08-27 22:20:46 ERROR Payment:221 - JSONObject pending
+2023-08-27 22:20:47 ERROR Payment:221 - JSONObject pending
+2023-08-27 22:20:48 ERROR Payment:221 - JSONObject pending
+2023-08-27 22:20:49 ERROR Payment:221 - JSONObject pending
+2023-08-27 22:20:51 ERROR Payment:221 - JSONObject pending
+2023-08-27 22:20:52 ERROR Payment:221 - JSONObject pending
+2023-08-27 22:20:53 ERROR Payment:221 - JSONObject pending
+2023-08-27 22:20:54 ERROR Payment:221 - JSONObject pending
+2023-08-27 22:20:55 ERROR Payment:221 - JSONObject pending
+2023-08-27 22:20:56 ERROR Payment:221 - JSONObject pending
+2023-08-27 22:20:58 ERROR Payment:221 - JSONObject pending
+2023-08-27 22:20:59 ERROR Payment:221 - JSONObject pending
+2023-08-27 22:21:00 ERROR Payment:221 - JSONObject pending
+2023-08-27 22:21:01 ERROR Payment:221 - JSONObject pending
+2023-08-27 22:21:02 ERROR Payment:221 - JSONObject pending
+2023-08-27 22:21:03 ERROR Payment:221 - JSONObject pending
+2023-08-27 22:21:04 DEBUG Payment:111 - 1292677678   ⚠ Счет на оплату отменен! ⚠
+2023-08-27 22:22:18 DEBUG TelegramBotImpl:253 - 1292677678  Теперь Вы можете оплатить услугу
+2023-08-27 22:22:23 DEBUG TelegramBotImpl:382 - 1292677678  Вы выбрали место - 🚘    24
+2023-08-27 22:22:23 DEBUG TelegramBotImpl:384 - 1292677678  Оплатите счет в размере 300 руб.
+2023-08-27 22:22:24 DEBUG TelegramBotImpl:560 - SendMessage(chatId=1292677678, messageThreadId=null, text=Теперь вы можете оплатить счёт:, parseMode=HTML, disableWebPagePreview=null, disableNotification=null, replyToMessageId=null, replyMarkup=InlineKeyboardMarkup(keyboard=[[InlineKeyboardButton(text=💳Оплатить, url=yoomoney.ru/checkout/payments/v2/contract?orderId=2c7db62f-000f-5000-8000-157483600629, callbackData=О, callbackGame=null, switchInlineQuery=null, switchInlineQueryCurrentChat=null, pay=null, loginUrl=null, webApp=null)]]), entities=null, allowSendingWithoutReply=null, protectContent=null)
+2023-08-27 22:23:09 DEBUG TelegramBotImpl:253 - 1292677678  Теперь Вы можете оплатить услугу
+2023-08-27 22:25:47 DEBUG TelegramBotImpl:253 - 1292677678  Теперь Вы можете оплатить услугу
+2023-08-27 22:26:04 DEBUG TelegramBotImpl:253 - 1292677678  Теперь Вы можете оплатить услугу
+2023-08-27 22:27:49 DEBUG TelegramBotImpl:253 - 1292677678  Теперь Вы можете оплатить услугу
+2023-08-27 22:28:01 DEBUG TelegramBotImpl:382 - 1292677678  Вы выбрали место - 🚘    1
+2023-08-27 22:28:01 DEBUG TelegramBotImpl:384 - 1292677678  Оплатите счет в размере 6000 руб.
+2023-08-27 22:28:02 DEBUG TelegramBotImpl:560 - SendMessage(chatId=1292677678, messageThreadId=null, text=Теперь вы можете оплатить счёт:, parseMode=HTML, disableWebPagePreview=null, disableNotification=null, replyToMessageId=null, replyMarkup=InlineKeyboardMarkup(keyboard=[[InlineKeyboardButton(text=💳Оплатить, url=yoomoney.ru/checkout/payments/v2/contract?orderId=2c7db781-000f-5000-9000-199f259065a7, callbackData=О, callbackGame=null, switchInlineQuery=null, switchInlineQueryCurrentChat=null, pay=null, loginUrl=null, webApp=null)]]), entities=null, allowSendingWithoutReply=null, protectContent=null)
+2023-08-27 22:28:22 DEBUG Payment:106 - 1292677678 Оплачено
+2023-08-27 22:28:29 DEBUG TelegramBotImpl:141 - 1292677678  У Вас имеется действующая аренда. Вы можете продлить аренду.
+2023-08-27 22:28:33 DEBUG TelegramBotImpl:188 - 1292677678 Ваше парковочное место №1
+Дата окончания аренды через: 29дн, 23 час, 59мин.
+2023-08-27 22:28:57 DEBUG TelegramBotImpl:141 - 1292677678  У Вас имеется действующая аренда. Вы можете продлить аренду.
+2023-08-27 22:30:15 DEBUG TelegramBotImpl:253 - 1292677678  Теперь Вы можете оплатить услугу
+2023-08-27 22:35:28 DEBUG TelegramBotImpl:253 - 1292677678  Теперь Вы можете оплатить услугу
+2023-08-27 22:35:32 DEBUG TelegramBotImpl:382 - 1292677678  Вы выбрали место - 🚘    25
+2023-08-27 22:35:32 DEBUG TelegramBotImpl:384 - 1292677678  Оплатите счет в размере 300 руб.
+2023-08-27 22:35:33 DEBUG TelegramBotImpl:560 - SendMessage(chatId=1292677678, messageThreadId=null, text=Теперь вы можете оплатить счёт:, parseMode=HTML, disableWebPagePreview=null, disableNotification=null, replyToMessageId=null, replyMarkup=InlineKeyboardMarkup(keyboard=[[InlineKeyboardButton(text=💳Оплатить, url=yoomoney.ru/checkout/payments/v2/contract?orderId=2c7db945-000f-5000-8000-14fc8ed26fc9, callbackData=О, callbackGame=null, switchInlineQuery=null, switchInlineQueryCurrentChat=null, pay=null, loginUrl=null, webApp=null)]]), entities=null, allowSendingWithoutReply=null, protectContent=null)
+2023-08-27 22:35:44 DEBUG Payment:106 - 1292677678 Оплачено
+2023-08-27 22:36:34 DEBUG TelegramBotImpl:253 - 5222353508  Теперь Вы можете оплатить услугу
+2023-08-27 22:37:07 DEBUG TelegramBotImpl:382 - 5222353508  Вы выбрали место - 🚘    26
+2023-08-27 22:37:07 DEBUG TelegramBotImpl:384 - 5222353508  Оплатите счет в размере 300 руб.
+2023-08-27 22:37:07 DEBUG TelegramBotImpl:560 - SendMessage(chatId=5222353508, messageThreadId=null, text=Теперь вы можете оплатить счёт:, parseMode=HTML, disableWebPagePreview=null, disableNotification=null, replyToMessageId=null, replyMarkup=InlineKeyboardMarkup(keyboard=[[InlineKeyboardButton(text=💳Оплатить, url=yoomoney.ru/checkout/payments/v2/contract?orderId=2c7db9a3-000f-5000-a000-154739a89b45, callbackData=О, callbackGame=null, switchInlineQuery=null, switchInlineQueryCurrentChat=null, pay=null, loginUrl=null, webApp=null)]]), entities=null, allowSendingWithoutReply=null, protectContent=null)
+2023-08-27 22:38:07 DEBUG Payment:111 - 5222353508   ⚠ Счет на оплату отменен! ⚠
+2023-08-27 22:44:09 DEBUG TelegramBotImpl:253 - 1292677678  Теперь Вы можете оплатить услугу
+2023-08-27 22:44:13 DEBUG TelegramBotImpl:382 - 1292677678  Вы выбрали место - 🚘    1
+2023-08-27 22:44:14 DEBUG TelegramBotImpl:384 - 1292677678  Оплатите счет в размере 300 руб.
+2023-08-27 22:44:14 DEBUG TelegramBotImpl:560 - SendMessage(chatId=1292677678, messageThreadId=null, text=Теперь вы можете оплатить счёт:, parseMode=HTML, disableWebPagePreview=null, disableNotification=null, replyToMessageId=null, replyMarkup=InlineKeyboardMarkup(keyboard=[[InlineKeyboardButton(text=💳Оплатить, url=yoomoney.ru/checkout/payments/v2/contract?orderId=2c7dbb4e-000f-5000-a000-1356a84e1c62, callbackData=О, callbackGame=null, switchInlineQuery=null, switchInlineQueryCurrentChat=null, pay=null, loginUrl=null, webApp=null)]]), entities=null, allowSendingWithoutReply=null, protectContent=null)
+2023-08-27 22:45:14 DEBUG Payment:111 - 1292677678   ⚠ Счет на оплату отменен! ⚠
+2023-08-27 22:56:19 DEBUG TelegramBotImpl:253 - 1292677678  Теперь Вы можете оплатить услугу
+2023-08-27 22:56:23 DEBUG TelegramBotImpl:382 - 1292677678  Вы выбрали место - 🚘    2
+2023-08-27 22:56:23 DEBUG TelegramBotImpl:384 - 1292677678  Оплатите счет в размере 300 руб.
+2023-08-27 22:56:24 DEBUG TelegramBotImpl:560 - SendMessage(chatId=1292677678, messageThreadId=null, text=Теперь вы можете оплатить счёт:, parseMode=HTML, disableWebPagePreview=null, disableNotification=null, replyToMessageId=null, replyMarkup=InlineKeyboardMarkup(keyboard=[[InlineKeyboardButton(text=💳Оплатить, url=yoomoney.ru/checkout/payments/v2/contract?orderId=2c7dbe28-000f-5000-9000-1661ed16a4a5, callbackData=О, callbackGame=null, switchInlineQuery=null, switchInlineQueryCurrentChat=null, pay=null, loginUrl=null, webApp=null)]]), entities=null, allowSendingWithoutReply=null, protectContent=null)
+2023-08-27 22:57:24 DEBUG Payment:112 - 1292677678   ⚠ Счет на оплату отменен! ⚠
+2023-08-27 22:58:02 DEBUG TelegramBotImpl:253 - 1292677678  Теперь Вы можете оплатить услугу
+2023-08-27 22:58:05 DEBUG TelegramBotImpl:382 - 1292677678  Вы выбрали место - 🚘    1
+2023-08-27 22:58:05 DEBUG TelegramBotImpl:384 - 1292677678  Оплатите счет в размере 300 руб.
+2023-08-27 22:58:06 DEBUG TelegramBotImpl:560 - SendMessage(chatId=1292677678, messageThreadId=null, text=Теперь вы можете оплатить счёт:, parseMode=HTML, disableWebPagePreview=null, disableNotification=null, replyToMessageId=null, replyMarkup=InlineKeyboardMarkup(keyboard=[[InlineKeyboardButton(text=💳Оплатить, url=yoomoney.ru/checkout/payments/v2/contract?orderId=2c7dbe8e-000f-5000-9000-1fdff9f545ee, callbackData=О, callbackGame=null, switchInlineQuery=null, switchInlineQueryCurrentChat=null, pay=null, loginUrl=null, webApp=null)]]), entities=null, allowSendingWithoutReply=null, protectContent=null)
+2023-08-27 22:58:16 DEBUG Payment:106 - 1292677678 Оплачено
+2023-08-27 22:59:16 DEBUG TelegramBotImpl:253 - 5222353508  Теперь Вы можете оплатить услугу
+2023-08-27 22:59:21 DEBUG TelegramBotImpl:382 - 5222353508  Вы выбрали место - 🚘    27
+2023-08-27 22:59:21 DEBUG TelegramBotImpl:384 - 5222353508  Оплатите счет в размере 300 руб.
+2023-08-27 22:59:21 DEBUG TelegramBotImpl:560 - SendMessage(chatId=5222353508, messageThreadId=null, text=Теперь вы можете оплатить счёт:, parseMode=HTML, disableWebPagePreview=null, disableNotification=null, replyToMessageId=null, replyMarkup=InlineKeyboardMarkup(keyboard=[[InlineKeyboardButton(text=💳Оплатить, url=yoomoney.ru/checkout/payments/v2/contract?orderId=2c7dbed9-000f-5000-8000-1b33d30234b9, callbackData=О, callbackGame=null, switchInlineQuery=null, switchInlineQueryCurrentChat=null, pay=null, loginUrl=null, webApp=null)]]), entities=null, allowSendingWithoutReply=null, protectContent=null)
+2023-08-27 23:00:21 DEBUG Payment:112 - 5222353508   ⚠ Счет на оплату отменен! ⚠
+2023-08-27 23:13:03 DEBUG TelegramBotImpl:253 - 1292677678  Теперь Вы можете оплатить услугу
+2023-08-27 23:16:05 DEBUG TelegramBotImpl:253 - 1292677678  Теперь Вы можете оплатить услугу
+2023-08-27 23:18:23 DEBUG TelegramBotImpl:253 - 1292677678  Теперь Вы можете оплатить услугу
+2023-08-27 23:20:53 DEBUG TelegramBotImpl:253 - 1292677678  Теперь Вы можете оплатить услугу
+2023-08-27 23:22:09 DEBUG TelegramBotImpl:382 - 1292677678  Вы выбрали место - 🚘    27
+2023-08-27 23:22:09 DEBUG TelegramBotImpl:384 - 1292677678  Оплатите счет в размере 300 руб.
+2023-08-27 23:22:10 DEBUG TelegramBotImpl:560 - SendMessage(chatId=1292677678, messageThreadId=null, text=Теперь вы можете оплатить счёт:, parseMode=HTML, disableWebPagePreview=null, disableNotification=null, replyToMessageId=null, replyMarkup=InlineKeyboardMarkup(keyboard=[[InlineKeyboardButton(text=💳Оплатить, url=yoomoney.ru/checkout/payments/v2/contract?orderId=2c7dc432-000f-5000-a000-13187021bc14, callbackData=О, callbackGame=null, switchInlineQuery=null, switchInlineQueryCurrentChat=null, pay=null, loginUrl=null, webApp=null)]]), entities=null, allowSendingWithoutReply=null, protectContent=null)
+2023-08-27 23:22:33 DEBUG Payment:106 - 1292677678 Оплачено

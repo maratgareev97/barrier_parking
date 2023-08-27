@@ -19,8 +19,6 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import ru.barrier.configs.BotConfig;
 import ru.barrier.models.User;
 import ru.barrier.models.UserBarrier;
-import ru.barrier.repository.UserBarrierRepository;
-import ru.barrier.repository.UserRepository;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -36,11 +34,6 @@ import java.util.concurrent.TimeUnit;
 @Component
 @Log4j
 public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramBot {
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private UserBarrierRepository userBarrierRepository;
-
     @Autowired
     private AddData addData;
     @Autowired
@@ -77,6 +70,7 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
         try {
             execute(sendDocument);
         } catch (TelegramApiException e) {
+            log.error("no SendDocument: " + new RuntimeException(e));
             throw new RuntimeException(e);
         }
     }
@@ -87,6 +81,7 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
         try {
             execute(sendMessage);
         } catch (TelegramApiException e) {
+            log.error("no SendMessage: " + new RuntimeException(e));
             throw new RuntimeException(e);
         }
     }
@@ -95,6 +90,7 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
         try {
             execute(sendPhoto);
         } catch (TelegramApiException e) {
+            log.error("no SendPhoto: " + new RuntimeException(e));
             throw new RuntimeException(e);
         }
     }
@@ -137,54 +133,49 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
                             ""));
                     break;
                 default:
-                    System.out.println(messageTest.toString());
-
                     if (messageTest.equals(rentEmoji + " Арендовать место")) {
-                        User user = userRepository.getUserById(chatID);
-                        System.out.println(user);
+                        User user = dataBaseService.getUserById(chatID);
                         if (user != null) {
                             if (user.getUserBarrier() != null && user.getUserBarrier().getDateTimeNextPayment() != null) {
-//                            sendMessageTiming(chatID);
                                 sendMessage(chatID, "У Вас имеется действующая аренда. Вы можете продлить аренду.");
+                                log.debug(chatID + "  У Вас имеется действующая аренда. Вы можете продлить аренду.");
                             } else sendMessageTiming(chatID);
-                        } else sendMessage(chatID, "Вас нет в базе");
+                        } else {
+                            sendMessage(chatID, "Вас нет в базе");
+                            log.debug(chatID + "   Вас нет в базе");
+                        }
                     } else if (messageTest.equals(openBarrierEmoji + " ОТКРЫТЬ ШЛАГБАУМ")) {
-                        LocalDateTime localDateTime = userRepository.getDateNextPayment(chatID);
-                        System.out.println("............." + localDateTime);
+                        LocalDateTime localDateTime = dataBaseService.getDateNextPayment(chatID);
                         if (localDateTime != null) {
-                            System.out.println("Тест   " + userRepository.getDateNextPayment(chatID));
                             Duration duration = compareTime(LocalDateTime.now(), localDateTime);
                             if (duration.toDays() >= 0 && duration.toHours() % 24 >= 0 && duration.toMinutes() >= 0) {
-                                System.out.println("Проезжайте");
-//                                collOnBarrier("https://zvonok.com/manager/cabapi_external/api/v1/phones/call/?",
-//                                        "1598159358",
-//                                        "9153700127",
-//                                        "bbc1cbcde48564215c0b78b649081cac");
+                                collOnBarrier("https://zvonok.com/manager/cabapi_external/api/v1/phones/call/?",
+                                        "1598159358",
+                                        "9153700127",
+                                        "bbc1cbcde48564215c0b78b649081cac");
 
-                                if (userRepository.getUserById(chatID).getUserBarrier().getStoppedBy() == 0) {
-                                    addData.stoppedByT(userRepository.getUserById(chatID), 1);
-                                    sendMessage(chatID, "ЗАЕЗЖАЙТЕ!");
+                                if (dataBaseService.getUserById(chatID).getUserBarrier().getStoppedBy() == 0) {
+                                    addData.stoppedByT(dataBaseService.getUserById(chatID), 1);
+                                    sendMessage(chatID, "ЗАЕЗЖАЙТЕ!\nчерез несколько секунд откроется шлагбаум");
+                                    log.debug(chatID + "    ЗАЕЗЖАЙТЕ!\nчерез несколько секунд откроется шлагбаум");
                                 } else {
-                                    addData.stoppedByT(userRepository.getUserById(chatID), 0);
-                                    sendMessage(chatID, "ВЫЕЗЖАЙТЕ!");
+                                    addData.stoppedByT(dataBaseService.getUserById(chatID), 0);
+                                    sendMessage(chatID, "ВЫЕЗЖАЙТЕ!\nчерез несколько секунд откроется шлагбаум");
+                                    log.debug(chatID + "    ЗАЕЗЖАЙТЕ!\nчерез несколько секунд откроется шлагбаум");
                                 }
 
                             } else {
                                 sendMessage(chatID, "Оплатите парковку");
+                                log.debug(chatID + "  Оплатите парковку");
                             }
-                            System.out.printf(
-                                    "%dд %dч %dмин%n",
-                                    duration.toDays(),
-                                    duration.toHours() % 24,
-                                    duration.toMinutes() % 60
-                            );
                         } else {
                             sendMessage(chatID, "Оплатите парковку");
+                            log.debug(chatID + "  Оплатите парковку");
                         }
                     } else if (messageTest.equals(myRentsEmoji + " Мои аренды")) {
 
 //                        User user = dataBaseService.getUserBarrierById(chatID).getUserBarrier().getUser();
-                        User user = userRepository.getUserById(chatID);
+                        User user = dataBaseService.getUserById(chatID);
                         if (user != null && user.getUserBarrier() != null && user.getUserBarrier().getDateTimeNextPayment() != null) {
                             LocalDateTime localDateTime = user.getUserBarrier().getDateTimeNextPayment();
                             Duration duration = compareTime(LocalDateTime.now(), localDateTime);
@@ -194,9 +185,16 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
                                     "Дата окончания аренды через: " + duration.toDays() + "дн, " +
                                     duration.toHours() % 24 + " час, " +
                                     duration.toMinutes() % 60 + "мин.");
-//                            LocalDateTime localDateTime = user.getUserBarrier().getDateTimeNextPayment();
-                            System.out.println(user.getUserBarrier().getDateTimeNextPayment().getDayOfMonth());
-                        } else sendMessage(chatID, "Оплатите парковку");
+                            log.debug(chatID +
+                                      " Ваше парковочное место №" +
+                                      Integer.toString(user.getUserBarrier().getParkingPlace()) + "\n" +
+                                      "Дата окончания аренды через: " + duration.toDays() + "дн, " +
+                                      duration.toHours() % 24 + " час, " +
+                                      duration.toMinutes() % 60 + "мин.");
+                        } else {
+                            sendMessage(chatID, "Оплатите парковку");
+                            log.debug(chatID + "  Оплатите парковку");
+                        }
                     } else if (messageTest.equals(extendRentEmoji + " Продлить аренду")) {
 
 
@@ -206,14 +204,17 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
 
 //----------------------------------------
 
-                        User user = userRepository.getUserById(chatID);
+                        User user = dataBaseService.getUserById(chatID);
                         if (user != null && user.getUserBarrier() != null && user.getUserBarrier().getDateTimeNextPayment() != null) {
                             sendMessageTimingForRenting(chatID);
-
-
-                            sendMessage(chatID, "!");
-                        } else sendMessage(chatID, "?");
-                    } else sendMessage(chatID, "Оплатите парковку");
+                        } else {
+                            sendMessage(chatID, "Оплатите парковку");
+                            log.debug(chatID + "  Оплатите парковку");
+                        }
+                    } else {
+                        sendMessage(chatID, "Оплатите парковку");
+                        log.debug(chatID + "  Оплатите парковку");
+                    }
 
             }
 
@@ -224,21 +225,12 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
 
             Long chatId = update.getCallbackQuery().getFrom().getId();
 
-            System.out.println("!!!!!!!!!!   " + update.hasCallbackQuery());
             String getData = update.getCallbackQuery().getData().toString();
-            System.out.println("?????????????   " + getData);
-            System.out.println(getData.substring(0, 5));
-
-            log.debug(update.getCallbackQuery().getFrom().getUserName());
-            log.debug(update.getCallbackQuery().getFrom().getFirstName());
-            log.debug(chatId);
 
             Integer countTiming = 0;
             Integer countTimingRenting = 0;
 
-            LocalDateTime localDateTime = userRepository.getDateNextPayment(chatId);
-            log.debug(localDateTime + "    null");
-            System.out.println("!!!!!!!!!!!!!!!!!!!!!!1" + dataBaseService.getUserBarrierById(chatId) + "  " + chatId + " " + userRepository.getDateNextPayment(chatId));
+            LocalDateTime localDateTime = dataBaseService.getDateNextPayment(chatId);
 
             if (update.getCallbackQuery().getData().toString().equals("Accept")) {
 
@@ -247,12 +239,9 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
                 }
 
                 // добавить основное меню
-//                SendMessage sendMessage = new SendMessage();
                 sendMessage.setChatId(String.valueOf(chatId));
                 sendMessage.setText("");
-//                System.out.println(dataBaseService.getUserBarrierById(chatId)+"  "+);
-//                if (dataBaseService.getUserBarrierById(chatId) != null &&
-//                    dataBaseService.getUserBarrierById(chatId).getUserBarrier().getDateTimeNextPayment() != null) {
+
                 MenuBot menuBot = new MenuBot();
                 menuBot.baseMenu(sendMessage);
 //                    sendMessage(chatId, "MENU");
@@ -261,7 +250,9 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
 //                    menuBot.openBarrier(sendMessage);
 //                }
                 sendMessage(chatId, "Теперь Вы можете оплатить услугу");
+                log.debug(chatId + "  Теперь Вы можете оплатить услугу");
                 sendMessageTiming(chatId);
+
             }
 
             if (update.getCallbackQuery().getData().toString().equals("oneDay")) {
@@ -323,39 +314,28 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
                 countTimingRenting = 30;
                 money = 6000;
             }
-            User user = userRepository.getUserById(chatId);
+            User user = dataBaseService.getUserById(chatId);
             if (countTimingRenting != 0 && user != null && user.getUserBarrier() != null && user.getUserBarrier().getDateTimeNextPayment() != null) {
 
                 LocalDateTime localDateTimeNew = user.getUserBarrier().getDateTimeNextPayment().plusDays(countTimingRenting);
                 baseMethodPayment(chatId, null, countTimingRenting, 1, localDateTimeNew, "add");
-//                addData.timingRenting(user, localDateTimeNew);
-                sendMessage(chatId, String.valueOf(localDateTimeNew) + "  " + String.valueOf(countTimingRenting));
-//                Collections.singletonList(new LabeledPrice("label", money * 100)));
             }
 
 
             if (countTiming != 0) {
-                log.debug("countTiming = " + countTiming);
                 sendLocalPhoto(String.valueOf(chatId));
-                addData.newUserTest(); //--------------------------------------------- тестовые данные ------------------
-                log.debug("Тестовые данные загружены");
-                List<User> users = userRepository.findAll().stream().toList();
+//                addData.newUserTest(); //--------------------------------------------- тестовые данные ------------------
+                List<User> users = dataBaseService.getAllUsers();
                 choicePlace = true;
-                System.out.println("countTiming = " + countTiming + "    choosePlace = " + choicePlace);
             }
 
-            System.out.println(money + " money");
-
-            System.out.println("choicePlace:   " + choicePlace);
             if (choicePlace == true) {
-                List<UserBarrier> listBusyPlace = userBarrierRepository.findAll().stream().toList();
+                List<UserBarrier> listBusyPlace = dataBaseService.getAllUsersBarrier();
                 ArrayList<Integer> arrayListBusyPlace = new ArrayList<>();
                 for (int i = 0; i < listBusyPlace.size(); i++) {
                     arrayListBusyPlace.add(listBusyPlace.get(i).getParkingPlace());
                 }
-                System.out.println(arrayListBusyPlace);
                 Collections.sort(arrayListBusyPlace);
-                System.out.println(arrayListBusyPlace + " : " + arrayListBusyPlace.size());
 
                 Integer differenceValue = 0;
                 ArrayList<Integer> arrayListFreePlace = new ArrayList<>();
@@ -390,32 +370,24 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
                             arrayListFreePlace.add(i + 1);
                         }
                     }
-                System.out.println(arrayListFreePlace + " : " + arrayListFreePlace.size());
                 sendMessageChoiceFreePlace(chatId, arrayListFreePlace);
 
             }
 
             if (getData.substring(0, 5).equals("place")) {
                 Integer place = Integer.parseInt(getData.substring(5));
-                if (userRepository.getChatIdUserById(chatId) != null) {
+                if (dataBaseService.getChatIdUserById(chatId) != null) {
                     addData.newUserBarrier(chatId, place);
                     sendMessage(chatId, "Вы выбрали место - " + EmojiParser.parseToUnicode("🚘") + "    " + getData.substring(5));
+                    log.debug(chatId + "  Вы выбрали место - " + EmojiParser.parseToUnicode("🚘") + "    " + getData.substring(5));
                     sendMessage(chatId, "Оплатите счет в размере " + money + " руб.");
+                    log.debug(chatId + "  Оплатите счет в размере " + money + " руб.");
 
 //-----------------------get ------------------------------------------------------------------------------------------
                     baseMethodPayment(chatId, place, countTimingArrayList.get(countTimingArrayList.size() - 1), 1, null, "new");
-                    System.out.println(chatId + " " + place + " " + countTimingArrayList.get(countTimingArrayList.size() - 1));
-                    log.debug("Оплата прошла");
 
-//----------------------- другое меню ------------------------------------------------------------------------------------
-//                    sendMessage.setChatId(String.valueOf(chatId));
-//                    sendMessage.setText("");
-////                    sendMessage(chatId, "cccccc");
-//                    MenuBot menuBot = new MenuBot();
-//                    menuBot.openBarrier(sendMessage); //отправить вместе с сообщением меню
                 } else {
                     sendMessage(chatId, "Скорее всего вы не подписали соглашение. Нажмите /start");
-
                 }
 
             }
@@ -437,14 +409,6 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
         menuBot.doingAcceptContractMenu(sendDocument); //отправить вместе с сообщением меню
 
         executeDocument(sendDocument);
-        log.debug(answer + ", " + chatID);
-    }
-
-    @Override
-    public void openMessage(long chatID) {
-        String answer = "Открываю";
-        sendMessage(chatID, answer);
-        log.debug(answer + "  sendMessage    " + sendMessage);
     }
 
     @Override
@@ -495,10 +459,8 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
         SendPhoto sendPhoto = new SendPhoto();
         sendPhoto.setChatId(chatId);
         sendPhoto.setPhoto(new InputFile("http://test.school89.net/wp-content/uploads/2023/08/scheme_one_foras.jpg"));
-//        sendPhoto.setCaption("Выберите пожалуйста место");
 
         executePhoto(sendPhoto);
-        log.debug(chatId);
     }
 
     @Override
@@ -509,7 +471,6 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
         sendMessage.setChatId(chatId);
         sendMessage.setText(text);
         menuBot.choiceFreePlace(sendMessage, arrayListFreePlace); //отправить вместе с сообщением меню
-        System.out.println(sendMessage);
 
         executeMessage(sendMessage);
     }
@@ -526,12 +487,14 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
                           "&public_key=" +
                           public_key);
         } catch (MalformedURLException e) {
+            log.error("no creat url for coll: " + new RuntimeException(e));
             throw new RuntimeException(e);
         }
         URLConnection connection = null;
         try {
             connection = url.openConnection();
         } catch (IOException e) {
+            log.error("no creat connection coll: " + new RuntimeException(e));
             throw new RuntimeException(e);
         }
 
@@ -539,9 +502,10 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
                 new InputStreamReader(connection.getInputStream()))) {
             String line;
             while ((line = in.readLine()) != null) {
-                System.out.println(line);
+                log.debug("collOnBarrier " + line);
             }
         } catch (IOException e) {
+            log.error("no colling: " + new RuntimeException(e));
             throw new RuntimeException(e);
         }
         return true;
@@ -559,24 +523,6 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
     @Override
     public Duration compareTime(LocalDateTime nowTime, LocalDateTime startTime) {
         Duration duration = Duration.between(nowTime, startTime);
-
-
-//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-//        String ttt = "2018-05-11 00:46";
-//        LocalDateTime start = LocalDateTime.parse(ttt, formatter);
-//        LocalDateTime end = LocalDateTime.parse("2016-05-10 12:26", formatter);
-//
-////                            LocalDateTime start = LocalDateTime.now();
-////                            LocalDateTime end = LocalDateTime.parse("2016-05-10 12:26", formatter);
-//
-//        Duration duration = Duration.between(start, end);
-////
-//        System.out.printf(
-//                "%dд %dч %dмин%n",
-//                duration.toDays(),
-//                duration.toHours() % 24,
-//                duration.toMinutes() % 60
-//        );ё
         return duration;
     }
 
@@ -586,23 +532,18 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
 
     @Override
     public void baseMethodPayment(Long chatId, Integer parkingPlace, Integer amountOfDays, Integer money, LocalDateTime dataTimeNextPayment, String newOrAdd) {
-        System.out.println("baseMethodPayment   " + chatId + parkingPlace + amountOfDays + money);
         Payment payment = new Payment();
         Response response = payment.creatingPayment(money);
         String result = null;
         try {
             result = response.body().string();
-            System.out.println("********* Счет на оплату *****************");
-            System.out.println(result);
-            System.out.println("********* Счет на оплату *****************");
         } catch (IOException e) {
+            log.error("не получен ответ при формировании счета: " + new RuntimeException(e));
             throw new RuntimeException(e);
         }
         String confirmation = payment.parserJson(result, "confirmation");
-        System.out.println(confirmation);
 
         String idPayment = payment.parserJson(result, "id");
-        System.out.println("idPayment " + idPayment);
         addData.newPayment(chatId, idPayment);
 
         SendMessage sendMessage1 = new SendMessage();
@@ -611,12 +552,12 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
         String confirmation_url = "";
         try {
             confirmation_url = payment.parserJson(confirmation, "confirmation_url").substring(8);
-            System.out.println(confirmation_url);
             sendMessage1.setText("Теперь вы можете оплатить счёт:");
             sendMessage1.setParseMode("HTML");
             MenuBot menuBot = new MenuBot();
             menuBot.link(sendMessage1, confirmation_url, "Оплатить", "О");
             executeMessage(sendMessage1);
+            log.debug(sendMessage1);
             //           Запрос на существование счета
             if (newOrAdd.equals("new")) {
                 ScheduledExecutorService scheduledExecutorService = new ScheduledThreadPoolExecutor(4);
@@ -628,9 +569,9 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
                 scheduledExecutorService.schedule(new Payment(chatId, amountOfDays, idPayment, money, dataTimeNextPayment, "add"), 1, TimeUnit.SECONDS);
                 scheduledExecutorService.shutdown();
             }
-//            System.out.println(payment.getBoolean());
 
         } catch (Exception e) {
+            log.error("Счет устарел. Создайте пожалуйста новый");
             sendMessage(chatId, "Счет устарел. Создайте пожалуйста новый");
         }
 
