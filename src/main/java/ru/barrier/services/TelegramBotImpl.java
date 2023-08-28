@@ -113,16 +113,14 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
                 case "/start":
                     startMessage(chatID, update.getMessage().getChat().getFirstName());
                     break;
-                case "Открыть шлагбаум":
-//                    sendMessage(chatID, "ОТКРЫВАЮ");
-//                    collOnBarrier("https://zvonok.com/manager/cabapi_external/api/v1/phones/call/?",
-//                            "1598159358",
-//                            "9153700127",
-//                            "bbc1cbcde48564215c0b78b649081cac");
-//                    executeDocument(document(chatID,
-//                            "http://test.school89.net/wp-content/uploads/2023/07/public_contract_foras.pdf",
-//                            ""));
-//                    dataBaseService.getUserById(chatID);
+                case "/admin list all place":
+//                    sendMessage(chatID, dataBaseService.getAllUsers().stream().toList().toString());
+                    List<UserBarrier> userBarrierList = dataBaseService.getAllUsersBarrier().stream().toList();
+                    for (UserBarrier i : userBarrierList) {
+                        sendMessage(chatID, i.getChatId() + " | " + i.getAmountOfDays() + " | " +
+                                            i.getDateTimeLastPayment() + " | " + i.getDateTimeNextPayment() + " | " +
+                                            i.getParkingPlace() + " | " + i.getStoppedBy());
+                    }
                     break;
 //                case "/open":
 //                    openMessage(chatID);
@@ -552,6 +550,7 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
         String confirmation_url = "";
         try {
             confirmation_url = payment.parserJson(confirmation, "confirmation_url").substring(8);
+//            confirmation_url = "http://127.0.0.1:8084/test.html";
             sendMessage1.setText("Теперь вы можете оплатить счёт:");
             sendMessage1.setParseMode("HTML");
             MenuBot menuBot = new MenuBot();

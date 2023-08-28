@@ -55,7 +55,7 @@ public class Payment implements Runnable {
     public void run() {
         Response informationAboutPayment = null;
         String informationAboutPaymentInString = "";
-        String status;
+        String status = null;
         int flag = 0;
         while (i < 50) {
             i++;
@@ -107,14 +107,16 @@ public class Payment implements Runnable {
         }
         if (flag == 0) {
             String attention = EmojiParser.parseToUnicode("⚠");
+            String noUrl = EmojiParser.parseToUnicode("📵");
             sendMessage(chatId, String.valueOf(attention) + " Счет на оплату отменен! " + String.valueOf(attention));
+            sendMessage(chatId, String.valueOf(noUrl) + " Ссылка более не действительна! " + String.valueOf(noUrl));
             deleteUserForNotPayment();
             log.debug(chatId + "   " + String.valueOf(attention) + " Счет на оплату отменен! " + String.valueOf(attention));
         }
     }
 
-    public void deleteUserForNotPayment(){
-        try{
+    public void deleteUserForNotPayment() {
+        try {
             Connection connection = DriverManager.getConnection(url, user, password);
 
 //            DELETE FROM public.user_barrier WHERE chat_id=1292677678;
@@ -122,7 +124,7 @@ public class Payment implements Runnable {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setLong(1, chatId);
             preparedStatement.executeUpdate();
-        }catch (Exception e){
+        } catch (Exception e) {
             log.error("Не удален");
         }
     }
@@ -203,7 +205,7 @@ public class Payment implements Runnable {
                 "{\n        \"amount\": " +
                 "{\n          \"value\": \"" + money + "\",\n          \"currency\": \"RUB\"\n        }," +
                 "\n      \n        \"confirmation\": {\n          \"type\": \"redirect\"," +
-                "\n          \"return_url\": \"https://www.example.com/return_url\"\n        }," +
+                "\n          \"return_url\": \"https://t.me/open_barrier_bot\"\n        }," +
                 "\n        \"description\": \"Заказ №" + idempotenceKey + "\"\n      }");
         Request request = new Request.Builder()
                 .url("https://api.yookassa.ru/v3/payments")
