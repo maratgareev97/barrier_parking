@@ -30,6 +30,8 @@ public class Payment implements Runnable {
     private String newOrAdd;
     private String idempotenceKey = "Bill_" + RandomStringUtils.randomNumeric(20);
 
+    private int finishTimeWorkPayment = 300;
+
     public Payment() {
     }
 
@@ -57,7 +59,7 @@ public class Payment implements Runnable {
         String informationAboutPaymentInString = "";
         String status = null;
         int flag = 0;
-        while (i < 50) {
+        while (i < finishTimeWorkPayment) {
             i++;
             try {
                 Thread.sleep(1000);
@@ -119,7 +121,6 @@ public class Payment implements Runnable {
         try {
             Connection connection = DriverManager.getConnection(url, user, password);
 
-//            DELETE FROM public.user_barrier WHERE chat_id=1292677678;
             String query = "DELETE FROM public.user_barrier WHERE chat_id=?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setLong(1, chatId);

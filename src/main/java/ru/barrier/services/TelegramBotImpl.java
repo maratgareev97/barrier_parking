@@ -20,9 +20,7 @@ import ru.barrier.configs.BotConfig;
 import ru.barrier.models.User;
 import ru.barrier.models.UserBarrier;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.*;
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -75,6 +73,12 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
         }
     }
 
+    private Properties getWorkProperties() throws IOException {
+        Properties props = new Properties();
+//        props.load(new FileInputStream("src/main/java/ru/barrier/work.properties"));
+        props.load(new FileInputStream("src/main/resources/work.properties"));
+        return props;
+    }
 
     @Override
     public void executeMessage(SendMessage sendMessage) {
@@ -117,9 +121,13 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
 //                    sendMessage(chatID, dataBaseService.getAllUsers().stream().toList().toString());
                     List<UserBarrier> userBarrierList = dataBaseService.getAllUsersBarrier().stream().toList();
                     for (UserBarrier i : userBarrierList) {
-                        sendMessage(chatID, i.getChatId() + " | " + i.getAmountOfDays() + " | " +
-                                            i.getDateTimeLastPayment() + " | " + i.getDateTimeNextPayment() + " | " +
-                                            i.getParkingPlace() + " | " + i.getStoppedBy());
+                        sendMessage(chatID, "ID: " + i.getChatId() + "\n" +
+                                            "Имя: " + update.getMessage().getChat().getFirstName() + "\n" +
+                                            "дни: " + i.getAmountOfDays() + "\n" +
+                                            "от: " + i.getDateTimeLastPayment() + "\n" +
+                                            "до: " + i.getDateTimeNextPayment() + "\n" +
+                                            "место: " + i.getParkingPlace() + "\n" +
+                                            "на территории или нет: " + i.getStoppedBy());
                     }
                     break;
 //                case "/open":
@@ -140,16 +148,24 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
                             } else sendMessageTiming(chatID);
                         } else {
                             sendMessage(chatID, "Вас нет в базе");
+                            sendMessage(chatID, "Нажмите /start");
                             log.debug(chatID + "   Вас нет в базе");
                         }
                     } else if (messageTest.equals(openBarrierEmoji + " ОТКРЫТЬ ШЛАГБАУМ")) {
                         LocalDateTime localDateTime = dataBaseService.getDateNextPayment(chatID);
+                        Integer stoppedBy = dataBaseService.getUserById(chatID).getUserBarrier().getStoppedBy();
                         if (localDateTime != null) {
                             Duration duration = compareTime(LocalDateTime.now(), localDateTime);
                             if (duration.toDays() >= 0 && duration.toHours() % 24 >= 0 && duration.toMinutes() >= 0) {
+                                String numberPhoneBarrier = "";
+                                try {
+                                    numberPhoneBarrier = getWorkProperties().getProperty("numberPhoneBarrier");
+                                } catch (IOException e) {
+                                    throw new RuntimeException(e);
+                                }
                                 collOnBarrier("https://zvonok.com/manager/cabapi_external/api/v1/phones/call/?",
                                         "1598159358",
-                                        "9153700127",
+                                        numberPhoneBarrier,
                                         "bbc1cbcde48564215c0b78b649081cac");
 
                                 if (dataBaseService.getUserById(chatID).getUserBarrier().getStoppedBy() == 0) {
@@ -524,12 +540,16 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
         return duration;
     }
 
-    public User myRents(Long chatId) {
-        return dataBaseService.getUserBarrierById(chatId);
-    }
-
     @Override
-    public void baseMethodPayment(Long chatId, Integer parkingPlace, Integer amountOfDays, Integer money, LocalDateTime dataTimeNextPayment, String newOrAdd) {
+    public void baseMethodPayment(Long chatId, Integer parkingPlace, Integer amountOfDays, Integer money,
+                                  LocalDateTime dataTimeNextPayment, String newOrAdd) {
+        String urlServer = "";
+        try {
+            urlServer = getWorkProperties().getProperty("confirmation_url");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
         Payment payment = new Payment();
         Response response = payment.creatingPayment(money);
         String result = null;
@@ -550,7 +570,8 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
         String confirmation_url = "";
         try {
             confirmation_url = payment.parserJson(confirmation, "confirmation_url").substring(8);
-//            confirmation_url = "http://127.0.0.1:8084/test.html";
+//            https://yoomoney.ru/checkout/payments/v2/contract?orderId=2c804aee-000f-5000-8000-137e76042135
+            confirmation_url = urlServer + idPayment + "/" + chatId;
             sendMessage1.setText("Теперь вы можете оплатить счёт:");
             sendMessage1.setParseMode("HTML");
             MenuBot menuBot = new MenuBot();

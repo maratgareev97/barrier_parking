@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.example</groupId>
     <artifactId>barrier_parking</artifactId>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
@@ -11,6 +11,11 @@
     <version>1.0-SNAPSHOT</version>
     <name>barrier_parking Maven Webapp</name>
     <url>http://maven.apache.org</url>
+<!--    <parent>-->
+<!--        <groupId>org.springframework.boot</groupId>-->
+<!--        <artifactId>spring-boot-starter-parent</artifactId>-->
+<!--        <version>3.0.4</version>-->
+<!--    </parent>-->
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
@@ -163,6 +168,11 @@
                 <configuration>
                     <executable>true</executable>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.4.0</version>
             </plugin>
             <!--      <plugin>-->
             <!--        <groupId>org.apache.maven.plugins</groupId>-->

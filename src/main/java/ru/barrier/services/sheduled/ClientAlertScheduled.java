@@ -31,7 +31,7 @@ public class ClientAlertScheduled {
         this.allPaymentsRepository = allPaymentsRepository;
     }
 
-    @Scheduled(fixedRate = 10000)
+    @Scheduled(fixedRate = 900000)
     public void alertClientInOneHour() {
         ArrayList<Long> arrayList = (ArrayList<Long>) userBarrierRepository.getUserBarrierDataTime(LocalDateTime.now().plusHours(1));
         for (Long chatId : arrayList) {
