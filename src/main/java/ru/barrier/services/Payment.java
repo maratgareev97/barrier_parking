@@ -30,7 +30,7 @@ public class Payment implements Runnable {
     private String newOrAdd;
     private String idempotenceKey = "Bill_" + RandomStringUtils.randomNumeric(20);
 
-    private int finishTimeWorkPayment = 30;
+    private int finishTimeWorkPayment = 300;
 
     public Payment() {
     }
