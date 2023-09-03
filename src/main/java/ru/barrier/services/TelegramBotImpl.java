@@ -75,7 +75,6 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
 
     private Properties getWorkProperties() throws IOException {
         Properties props = new Properties();
-//        props.load(new FileInputStream("src/main/java/ru/barrier/work.properties"));
         props.load(new FileInputStream("src/main/resources/work.properties"));
         return props;
     }
@@ -117,6 +116,20 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
                 case "/start":
                     startMessage(chatID, update.getMessage().getChat().getFirstName());
                     break;
+                case "1":
+                    if (dataBaseService.getAdminUsersByChatId(chatID) != null) {
+                        addData.cashPayment(1);
+                        log.debug(chatID + " Можно оплатить");
+                        sendMessage(chatID, "Можно оплатить");
+                    }
+                    break;
+                case "0":
+                    if (dataBaseService.getAdminUsersByChatId(chatID) != null) {
+                        addData.cashPayment(0);
+                        log.debug(chatID + " Оплата запрещена");
+                        sendMessage(chatID, "Оплата запрещена");
+                    }
+                    break;
                 case "/admin list all place":
 //                    sendMessage(chatID, dataBaseService.getAllUsers().stream().toList().toString());
                     List<UserBarrier> userBarrierList = dataBaseService.getAllUsersBarrier().stream().toList();
@@ -130,9 +143,6 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
                                             "на территории или нет: " + i.getStoppedBy());
                     }
                     break;
-//                case "/open":
-//                    openMessage(chatID);
-//                    break;
                 case "/agreement":
                     executeDocument(document(chatID,
                             "http://test.school89.net/wp-content/uploads/2023/07/public_contract_foras.pdf",
@@ -225,6 +235,13 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
                             sendMessage(chatID, "Оплатите парковку");
                             log.debug(chatID + "  Оплатите парковку");
                         }
+                    } else if (messageTest.startsWith("add admin user:")) {
+                        addData.addAdminUsers(Long.valueOf(messageTest.substring(16)));
+
+                        sendMessage(chatID, "Вы добавили " + messageTest.substring(16));
+                    } else if (messageTest.equals("delete all admin users")) {
+                        dataBaseService.truncateTableAdminUsers();
+                        sendMessage(chatID, "Все админы удалены");
                     } else {
                         sendMessage(chatID, "Оплатите парковку");
                         log.debug(chatID + "  Оплатите парковку");
@@ -305,29 +322,59 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
             if (update.getCallbackQuery().getData().toString().equals("oneDayRenting")) {
                 sendMessage(chatId, "Один день");
                 countTimingRenting = 1;
+                countTimingArrayList.add(countTimingRenting);
                 money = 300;
 
             }
             if (update.getCallbackQuery().getData().toString().equals("sevenDayRenting")) {
                 sendMessage(chatId, "Семь дней");
                 countTimingRenting = 7;
+                countTimingArrayList.add(countTimingRenting);
                 money = 2000;
             }
             if (update.getCallbackQuery().getData().toString().equals("tenDayRenting")) {
                 sendMessage(chatId, "10 дней");
                 countTimingRenting = 10;
+                countTimingArrayList.add(countTimingRenting);
                 money = 2500;
             }
             if (update.getCallbackQuery().getData().toString().equals("fifteenDayRenting")) {
                 sendMessage(chatId, "15 дней");
                 countTimingRenting = 15;
+                countTimingArrayList.add(countTimingRenting);
                 money = 3500;
             }
             if (update.getCallbackQuery().getData().toString().equals("oneMonthRenting")) {
                 sendMessage(chatId, "1 месяц");
                 countTimingRenting = 30;
+                countTimingArrayList.add(countTimingRenting);
                 money = 6000;
             }
+
+            if (update.getCallbackQuery().getData().toString().equals("cashPayment")) {
+                if (dataBaseService.getCashPayment(1) != null && dataBaseService.getCashPayment(1) == 1) {
+                    User user = dataBaseService.getUserById(chatId);
+                    LocalDateTime dataTimeLastPayment = user.getUserBarrier().getDateTimeLastPayment();
+                    LocalDateTime dataTimeNextPayment = user.getUserBarrier().getDateTimeNextPayment();
+                    if (dataTimeLastPayment != null) {
+                        dataTimeNextPayment = dataTimeNextPayment.plusDays(countTimingArrayList.get(countTimingArrayList.size() - 1));
+                    } else {
+                        dataTimeLastPayment = LocalDateTime.now();
+                        dataTimeNextPayment = LocalDateTime.now().plusDays(countTimingArrayList.get(countTimingArrayList.size() - 1));
+                    }
+                    addData.newUserBarrier(chatId,
+                            user.getUserBarrier().getName(),
+                            user.getUserBarrier().getParkingPlace(),
+                            countTimingArrayList.get(countTimingArrayList.size() - 1),
+                            dataTimeLastPayment,
+                            dataTimeNextPayment);
+
+                    addData.cashPayment(0);
+                    log.debug(chatId + " Оплачено наличными");
+                    sendMessage(chatId, "Оплачено наличными");
+                } else sendMessage(chatId, "Обратитесь к администратору");
+            }
+
             User user = dataBaseService.getUserById(chatId);
             if (countTimingRenting != 0 && user != null && user.getUserBarrier() != null && user.getUserBarrier().getDateTimeNextPayment() != null) {
 
@@ -377,7 +424,7 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
                         }
                     }
                 }
-                // заполенение после последнего
+                // заполнение после последнего
                 if (arrayListBusyPlace.size() != 0)
                     if (arrayListBusyPlace.get(arrayListBusyPlace.size() - 1) != 27) {
                         for (int i = arrayListBusyPlace.get(arrayListBusyPlace.size() - 1); i < 27; i++) {
@@ -391,7 +438,7 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
             if (getData.substring(0, 5).equals("place")) {
                 Integer place = Integer.parseInt(getData.substring(5));
                 if (dataBaseService.getChatIdUserById(chatId) != null) {
-                    addData.newUserBarrier(chatId, place);
+                    addData.newUserBarrier(chatId, String.valueOf(update.getCallbackQuery().getFrom().getFirstName()), place, 0, null, null);
                     sendMessage(chatId, "Вы выбрали место - " + EmojiParser.parseToUnicode("🚘") + "    " + getData.substring(5));
                     log.debug(chatId + "  Вы выбрали место - " + EmojiParser.parseToUnicode("🚘") + "    " + getData.substring(5));
                     sendMessage(chatId, "Оплатите счет в размере " + money + " руб.");
@@ -479,7 +526,7 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
 
     @Override
     public void sendMessageChoiceFreePlace(Long chatId, ArrayList arrayListFreePlace) {
-        String text = "Выбирай";
+        String text = "Выберите парковочное место:";
         MenuBot menuBot = new MenuBot();
         SendMessage sendMessage = new SendMessage();
         sendMessage.setChatId(chatId);

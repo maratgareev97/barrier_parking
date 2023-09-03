@@ -223,15 +223,26 @@ public class MenuBot {
     public SendMessage link(SendMessage sendMessage, String url, String textLink, String textOnButton) {
         InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
         List<List<InlineKeyboardButton>> rowsInLine = new ArrayList<>();
-        List<InlineKeyboardButton> rowInLine = new ArrayList<>();
+        List<InlineKeyboardButton> rowInLineCashlessPayment = new ArrayList<>();
+        List<InlineKeyboardButton> rowInLineCashPayment = new ArrayList<>();
 
-        var yesButton = new InlineKeyboardButton();
+        var cashlessPaymentButton = new InlineKeyboardButton();
         String emoji = EmojiParser.parseToUnicode("💳");
-        yesButton.setText(emoji + textLink);
-        yesButton.setCallbackData(textOnButton);
-        yesButton.setUrl(url);
-        rowInLine.add(yesButton);
-        rowsInLine.add(rowInLine);
+        cashlessPaymentButton.setText(emoji + textLink + " онлайн");
+        cashlessPaymentButton.setCallbackData(textOnButton);
+        cashlessPaymentButton.setUrl(url);
+
+        var cashPaymentButton = new InlineKeyboardButton();
+        String emojiCashMoney = EmojiParser.parseToUnicode("💴");
+        cashPaymentButton.setText(emojiCashMoney + "Оплатить наличными");
+        cashPaymentButton.setCallbackData("cashPayment");
+
+        rowInLineCashlessPayment.add(cashlessPaymentButton);
+        rowsInLine.add(rowInLineCashlessPayment);
+
+        rowInLineCashPayment.add(cashPaymentButton);
+        rowsInLine.add(rowInLineCashPayment);
+
         inlineKeyboardMarkup.setKeyboard(rowsInLine);
         sendMessage.setReplyMarkup(inlineKeyboardMarkup);
         return sendMessage;

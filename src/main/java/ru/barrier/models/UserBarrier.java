@@ -21,6 +21,9 @@ public class UserBarrier {
     @Column(name = "chat_id", nullable = false)
     private long chatId;
 
+    @Column(name="name")
+    private String name;
+
     @Column(name = "stopped_by")
     private int stoppedBy;
 

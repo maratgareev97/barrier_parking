@@ -2,6 +2,7 @@ package ru.barrier.services;
 
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Component;
+import ru.barrier.models.AdminUsers;
 import ru.barrier.models.User;
 import ru.barrier.models.UserBarrier;
 
@@ -21,5 +22,12 @@ public interface DataBaseService {
     List<User> getAllUsers();
 
     List<UserBarrier> getAllUsersBarrier();
+
+    Long getAdminUsersByChatId(Long chatId);
+
+    Long getCashPayment(Integer chatId);
+
+    void truncateTableAdminUsers();
+
 
 }

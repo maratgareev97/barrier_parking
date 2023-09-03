@@ -30,7 +30,7 @@ public class Payment implements Runnable {
     private String newOrAdd;
     private String idempotenceKey = "Bill_" + RandomStringUtils.randomNumeric(20);
 
-    private int finishTimeWorkPayment = 300;
+    private int finishTimeWorkPayment = 30;
 
     public Payment() {
     }
@@ -107,7 +107,7 @@ public class Payment implements Runnable {
             sendMessage(chatId, "Оплачено");
             log.debug(chatId + " Оплачено");
         }
-        if (flag == 0) {
+        if (flag == 0 && newOrAdd.equals("new") && getDataTimeNextPayment() == null) {
             String attention = EmojiParser.parseToUnicode("⚠");
             String noUrl = EmojiParser.parseToUnicode("📵");
             sendMessage(chatId, String.valueOf(attention) + " Счет на оплату отменен! " + String.valueOf(attention));
@@ -115,6 +115,26 @@ public class Payment implements Runnable {
             deleteUserForNotPayment();
             log.debug(chatId + "   " + String.valueOf(attention) + " Счет на оплату отменен! " + String.valueOf(attention));
         }
+    }
+
+    public String getDataTimeNextPayment() {
+        try {
+            Connection connection = DriverManager.getConnection(url, user, password);
+
+            String query = "SELECT * FROM user_barrier WHERE chat_id=?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setLong(1, chatId);
+            ResultSet result1 = preparedStatement.executeQuery();
+            String result = null;
+            while (result1.next()) {
+                result = result1.getString("data_time_next_payment");
+            }
+            return result;
+
+        } catch (Exception e) {
+            log.error("Не удален");
+        }
+        return null;
     }
 
     public void deleteUserForNotPayment() {
