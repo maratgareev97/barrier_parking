@@ -10701,3 +10701,58 @@
 2023-09-03 10:28:31 DEBUG TelegramBotImpl:566 - collOnBarrier {"balance": "36.280000", "call_id": 230903768921203, "created": "2023-09-03T07:28:31.669Z", "phone": "+79153700127"}
 2023-09-03 10:28:31 DEBUG TelegramBotImpl:184 - 1292677678    ЗАЕЗЖАЙТЕ!
 через несколько секунд откроется шлагбаум
+2023-09-03 13:36:34 DEBUG TelegramBotImpl:170 - 1292677678   Вас нет в базе
+2023-09-03 13:36:37 DEBUG TelegramBotImpl:228 - 1292677678  Оплатите парковку
+2023-09-03 13:36:54 DEBUG TelegramBotImpl:292 - 1292677678  Теперь Вы можете оплатить услугу
+2023-09-03 13:36:58 DEBUG TelegramBotImpl:451 - 1292677678  Вы выбрали место - 🚘    18
+2023-09-03 13:36:58 DEBUG TelegramBotImpl:453 - 1292677678  Оплатите счет в размере 300 руб.
+2023-09-03 13:36:59 DEBUG TelegramBotImpl:635 - SendMessage(chatId=1292677678, messageThreadId=null, text=Теперь вы можете оплатить счёт:, parseMode=HTML, disableWebPagePreview=null, disableNotification=null, replyToMessageId=null, replyMarkup=InlineKeyboardMarkup(keyboard=[[InlineKeyboardButton(text=💳Оплатить онлайн, url=http://62.109.17.109:8084/2c86758a-000f-5000-a000-1b1a0aee3861/1292677678, callbackData=О, callbackGame=null, switchInlineQuery=null, switchInlineQueryCurrentChat=null, pay=null, loginUrl=null, webApp=null)], [InlineKeyboardButton(text=💴Оплатить наличными, url=null, callbackData=cashPayment, callbackGame=null, switchInlineQuery=null, switchInlineQueryCurrentChat=null, pay=null, loginUrl=null, webApp=null)]]), entities=null, allowSendingWithoutReply=null, protectContent=null)
+2023-09-03 13:37:44 DEBUG TelegramBotImpl:130 - 1292677678 Можно оплатить
+2023-09-03 13:37:47 DEBUG TelegramBotImpl:381 - 1292677678 Оплачено наличными
+2023-09-03 13:37:54 DEBUG TelegramBotImpl:122 - 1292677678  У Вас имеется действующая аренда. Вы можете продлить аренду.
+2023-09-03 13:38:03 DEBUG TelegramBotImpl:122 - 1292677678  У Вас имеется действующая аренда. Вы можете продлить аренду.
+2023-09-03 13:38:10 DEBUG TelegramBotImpl:122 - 1292677678  У Вас имеется действующая аренда. Вы можете продлить аренду.
+2023-09-03 13:38:14 DEBUG TelegramBotImpl:220 - 1292677678 Ваше парковочное место №18
+Дата окончания аренды через: 0дн, 23 час, 59мин.
+2023-09-03 13:38:18 DEBUG TelegramBotImpl:574 - collOnBarrier {"balance": "36.250000", "call_id": 230903590542295, "created": "2023-09-03T10:38:17.967Z", "phone": "+79153700127"}
+2023-09-03 13:38:18 DEBUG TelegramBotImpl:192 - 1292677678    ЗАЕЗЖАЙТЕ!
+через несколько секунд откроется шлагбаум
+2023-09-03 13:45:50 DEBUG TelegramBotImpl:581 - collOnBarrier {"balance": "36.220000", "call_id": 2309031220854831, "created": "2023-09-03T10:45:50.510Z", "phone": "+79153700127"}
+2023-09-03 13:45:50 DEBUG TelegramBotImpl:203 - 1292677678    ЗАЕЗЖАЙТЕ!
+через несколько секунд откроется шлагбаум
+2023-09-03 13:48:10 DEBUG TelegramBotImpl:175 - 1292677678  Оплатите парковку
+2023-09-03 13:49:26 DEBUG TelegramBotImpl:175 - 1292677678  Оплатите парковку
+2023-09-03 13:49:27 DEBUG TelegramBotImpl:175 - 1292677678  Оплатите парковку
+2023-09-03 13:49:29 DEBUG TelegramBotImpl:175 - 1292677678  Оплатите парковку
+2023-09-03 13:49:30 DEBUG TelegramBotImpl:175 - 1292677678  Оплатите парковку
+2023-09-03 13:49:34 DEBUG TelegramBotImpl:170 - 1292677678   Вас нет в базе
+2023-09-03 13:49:40 DEBUG TelegramBotImpl:297 - 1292677678  Теперь Вы можете оплатить услугу
+2023-09-03 13:49:43 DEBUG TelegramBotImpl:456 - 1292677678  Вы выбрали место - 🚘    19
+2023-09-03 13:49:43 DEBUG TelegramBotImpl:458 - 1292677678  Оплатите счет в размере 300 руб.
+2023-09-03 13:49:44 DEBUG TelegramBotImpl:640 - SendMessage(chatId=1292677678, messageThreadId=null, text=Теперь вы можете оплатить счёт:, parseMode=HTML, disableWebPagePreview=null, disableNotification=null, replyToMessageId=null, replyMarkup=InlineKeyboardMarkup(keyboard=[[InlineKeyboardButton(text=💳Оплатить онлайн, url=http://62.109.17.109:8084/2c867887-000f-5000-9000-19259c66719c/1292677678, callbackData=О, callbackGame=null, switchInlineQuery=null, switchInlineQueryCurrentChat=null, pay=null, loginUrl=null, webApp=null)], [InlineKeyboardButton(text=💴Оплатить наличными, url=null, callbackData=cashPayment, callbackGame=null, switchInlineQuery=null, switchInlineQueryCurrentChat=null, pay=null, loginUrl=null, webApp=null)]]), entities=null, allowSendingWithoutReply=null, protectContent=null)
+2023-09-03 13:49:47 DEBUG TelegramBotImpl:130 - 1292677678 Можно оплатить
+2023-09-03 13:50:01 DEBUG TelegramBotImpl:386 - 1292677678 Оплачено наличными
+2023-09-03 13:50:08 DEBUG TelegramBotImpl:579 - collOnBarrier {"balance": "36.190000", "call_id": 2309031081468889, "created": "2023-09-03T10:50:08.194Z", "phone": "+79153700127"}
+2023-09-03 13:50:08 DEBUG TelegramBotImpl:196 - 1292677678    ЗАЕЗЖАЙТЕ!
+через несколько секунд откроется шлагбаум
+2023-09-03 13:50:22 DEBUG TelegramBotImpl:579 - collOnBarrier {"balance": "36.190000", "call_id": 230903199746856, "created": "2023-09-03T10:50:22.468Z", "phone": "+79153700127"}
+2023-09-03 13:50:22 DEBUG TelegramBotImpl:200 - 1292677678    ЗАЕЗЖАЙТЕ!
+через несколько секунд откроется шлагбаум
+2023-09-03 13:50:35 DEBUG TelegramBotImpl:122 - 1292677678  У Вас имеется действующая аренда. Вы можете продлить аренду.
+2023-09-03 18:13:44 DEBUG TelegramBotImpl:640 - SendMessage(chatId=1292677678, messageThreadId=null, text=Теперь вы можете оплатить счёт:, parseMode=HTML, disableWebPagePreview=null, disableNotification=null, replyToMessageId=null, replyMarkup=InlineKeyboardMarkup(keyboard=[[InlineKeyboardButton(text=💳Оплатить онлайн, url=http://62.109.17.109:8084/2c86b669-000f-5000-8000-1f78a9affced/1292677678, callbackData=О, callbackGame=null, switchInlineQuery=null, switchInlineQueryCurrentChat=null, pay=null, loginUrl=null, webApp=null)], [InlineKeyboardButton(text=💴Оплатить наличными, url=null, callbackData=cashPayment, callbackGame=null, switchInlineQuery=null, switchInlineQueryCurrentChat=null, pay=null, loginUrl=null, webApp=null)]]), entities=null, allowSendingWithoutReply=null, protectContent=null)
+2023-09-04 19:50:37 DEBUG TelegramBotImpl:297 - 5602250252  Теперь Вы можете оплатить услугу
+2023-09-04 19:50:41 DEBUG TelegramBotImpl:456 - 5602250252  Вы выбрали место - 🚘    3
+2023-09-04 19:50:42 DEBUG TelegramBotImpl:458 - 5602250252  Оплатите счет в размере 300 руб.
+2023-09-04 19:50:43 DEBUG TelegramBotImpl:640 - SendMessage(chatId=5602250252, messageThreadId=null, text=Теперь вы можете оплатить счёт:, parseMode=HTML, disableWebPagePreview=null, disableNotification=null, replyToMessageId=null, replyMarkup=InlineKeyboardMarkup(keyboard=[[InlineKeyboardButton(text=💳Оплатить онлайн, url=http://127.0.0.1:8084/2c881ea2-000f-5000-8000-1f1202105127/5602250252, callbackData=О, callbackGame=null, switchInlineQuery=null, switchInlineQueryCurrentChat=null, pay=null, loginUrl=null, webApp=null)], [InlineKeyboardButton(text=💴Оплатить наличными, url=null, callbackData=cashPayment, callbackGame=null, switchInlineQuery=null, switchInlineQueryCurrentChat=null, pay=null, loginUrl=null, webApp=null)]]), entities=null, allowSendingWithoutReply=null, protectContent=null)
+2023-09-04 19:51:06 DEBUG TelegramBotImpl:130 - 1292677678 Можно оплатить
+2023-09-04 19:51:11 DEBUG TelegramBotImpl:386 - 5602250252 Оплачено наличными
+2023-09-04 19:51:16 DEBUG TelegramBotImpl:225 - 5602250252 Ваше парковочное место №3
+Дата окончания аренды через: 0дн, 23 час, 59мин.
+2023-09-06 11:01:17 DEBUG TelegramBotImpl:233 - 1292677678  Оплатите парковку
+2023-09-06 11:01:18 DEBUG TelegramBotImpl:170 - 1292677678   Вас нет в базе
+2023-09-06 11:01:21 DEBUG TelegramBotImpl:297 - 1292677678  Теперь Вы можете оплатить услугу
+2023-09-06 11:01:26 DEBUG TelegramBotImpl:456 - 1292677678  Вы выбрали место - 🚘    1
+2023-09-06 11:01:26 DEBUG TelegramBotImpl:458 - 1292677678  Оплатите счет в размере 300 руб.
+2023-09-06 11:01:26 DEBUG TelegramBotImpl:640 - SendMessage(chatId=1292677678, messageThreadId=null, text=Теперь вы можете оплатить счёт:, parseMode=HTML, disableWebPagePreview=null, disableNotification=null, replyToMessageId=null, replyMarkup=InlineKeyboardMarkup(keyboard=[[InlineKeyboardButton(text=💳Оплатить онлайн, url=http://127.0.0.1:8084/2c8a4596-000f-5000-9000-1680a6092218/1292677678, callbackData=О, callbackGame=null, switchInlineQuery=null, switchInlineQueryCurrentChat=null, pay=null, loginUrl=null, webApp=null)], [InlineKeyboardButton(text=💴Оплатить наличными, url=null, callbackData=cashPayment, callbackGame=null, switchInlineQuery=null, switchInlineQueryCurrentChat=null, pay=null, loginUrl=null, webApp=null)]]), entities=null, allowSendingWithoutReply=null, protectContent=null)
+2023-09-06 11:02:27 DEBUG TelegramBotImpl:130 - 1292677678 Можно оплатить
+2023-09-06 11:02:30 DEBUG TelegramBotImpl:386 - 1292677678 Оплачено наличными

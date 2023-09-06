@@ -112,9 +112,17 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
             String extendRentEmoji = EmojiParser.parseToUnicode("🕑");
 
             long chatID = update.getMessage().getChatId();
+            User user = dataBaseService.getUserById(chatID);
             switch (messageTest) {
                 case "/start":
-                    startMessage(chatID, update.getMessage().getChat().getFirstName());
+//                    User user = dataBaseService.getUserById(chatID);
+                    if (user != null) {
+                        if (user.getUserBarrier() != null && user.getUserBarrier().getDateTimeNextPayment() != null) {
+                            sendMessage(chatID, "У Вас имеется действующая аренда. Вы можете продлить аренду.");
+                            log.debug(chatID + "  У Вас имеется действующая аренда. Вы можете продлить аренду.");
+                        }
+                    } else
+                        startMessage(chatID, update.getMessage().getChat().getFirstName());
                     break;
                 case "1":
                     if (dataBaseService.getAdminUsersByChatId(chatID) != null) {
@@ -135,7 +143,7 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
                     List<UserBarrier> userBarrierList = dataBaseService.getAllUsersBarrier().stream().toList();
                     for (UserBarrier i : userBarrierList) {
                         sendMessage(chatID, "ID: " + i.getChatId() + "\n" +
-                                            "Имя: " + update.getMessage().getChat().getFirstName() + "\n" +
+                                            "Имя: " + i.getName() + "\n" +
                                             "дни: " + i.getAmountOfDays() + "\n" +
                                             "от: " + i.getDateTimeLastPayment() + "\n" +
                                             "до: " + i.getDateTimeNextPayment() + "\n" +
@@ -150,7 +158,7 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
                     break;
                 default:
                     if (messageTest.equals(rentEmoji + " Арендовать место")) {
-                        User user = dataBaseService.getUserById(chatID);
+//                        User user = dataBaseService.getUserById(chatID);
                         if (user != null) {
                             if (user.getUserBarrier() != null && user.getUserBarrier().getDateTimeNextPayment() != null) {
                                 sendMessage(chatID, "У Вас имеется действующая аренда. Вы можете продлить аренду.");
@@ -162,44 +170,49 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
                             log.debug(chatID + "   Вас нет в базе");
                         }
                     } else if (messageTest.equals(openBarrierEmoji + " ОТКРЫТЬ ШЛАГБАУМ")) {
-                        LocalDateTime localDateTime = dataBaseService.getDateNextPayment(chatID);
-                        Integer stoppedBy = dataBaseService.getUserById(chatID).getUserBarrier().getStoppedBy();
-                        if (localDateTime != null) {
-                            Duration duration = compareTime(LocalDateTime.now(), localDateTime);
-                            if (duration.toDays() >= 0 && duration.toHours() % 24 >= 0 && duration.toMinutes() >= 0) {
-                                String numberPhoneBarrier = "";
-                                try {
-                                    numberPhoneBarrier = getWorkProperties().getProperty("numberPhoneBarrier");
-                                } catch (IOException e) {
-                                    throw new RuntimeException(e);
-                                }
-                                collOnBarrier("https://zvonok.com/manager/cabapi_external/api/v1/phones/call/?",
-                                        "1598159358",
-                                        numberPhoneBarrier,
-                                        "bbc1cbcde48564215c0b78b649081cac");
+                        if (user == null) {
+                            sendMessage(chatID, "Оплатите парковку");
+                            log.debug(chatID + "  Оплатите парковку");
+                        } else {
+                            LocalDateTime localDateTime = dataBaseService.getDateNextPayment(chatID);
+                            Integer stoppedBy = dataBaseService.getUserById(chatID).getUserBarrier().getStoppedBy();
+                            if (localDateTime != null) {
+                                Duration duration = compareTime(LocalDateTime.now(), localDateTime);
+                                if (duration.toDays() >= 0 && duration.toHours() % 24 >= 0 && duration.toMinutes() >= 0) {
+                                    String numberPhoneBarrier = "";
+                                    try {
+                                        numberPhoneBarrier = getWorkProperties().getProperty("numberPhoneBarrier");
+                                    } catch (IOException e) {
+                                        throw new RuntimeException(e);
+                                    }
+                                    collOnBarrier("https://zvonok.com/manager/cabapi_external/api/v1/phones/call/?",
+                                            "1598159358",
+                                            numberPhoneBarrier,
+                                            "bbc1cbcde48564215c0b78b649081cac");
 
-                                if (dataBaseService.getUserById(chatID).getUserBarrier().getStoppedBy() == 0) {
-                                    addData.stoppedByT(dataBaseService.getUserById(chatID), 1);
-                                    sendMessage(chatID, "ЗАЕЗЖАЙТЕ!\nчерез несколько секунд откроется шлагбаум");
-                                    log.debug(chatID + "    ЗАЕЗЖАЙТЕ!\nчерез несколько секунд откроется шлагбаум");
+                                    if (dataBaseService.getUserById(chatID).getUserBarrier().getStoppedBy() == 0) {
+                                        addData.stoppedByT(dataBaseService.getUserById(chatID), 1);
+                                        sendMessage(chatID, "ЗАЕЗЖАЙТЕ!\nчерез несколько секунд откроется шлагбаум");
+                                        log.debug(chatID + "    ЗАЕЗЖАЙТЕ!\nчерез несколько секунд откроется шлагбаум");
+                                    } else {
+                                        addData.stoppedByT(dataBaseService.getUserById(chatID), 0);
+                                        sendMessage(chatID, "ВЫЕЗЖАЙТЕ!\nчерез несколько секунд откроется шлагбаум");
+                                        log.debug(chatID + "    ЗАЕЗЖАЙТЕ!\nчерез несколько секунд откроется шлагбаум");
+                                    }
+
                                 } else {
-                                    addData.stoppedByT(dataBaseService.getUserById(chatID), 0);
-                                    sendMessage(chatID, "ВЫЕЗЖАЙТЕ!\nчерез несколько секунд откроется шлагбаум");
-                                    log.debug(chatID + "    ЗАЕЗЖАЙТЕ!\nчерез несколько секунд откроется шлагбаум");
+                                    sendMessage(chatID, "Оплатите парковку");
+                                    log.debug(chatID + "  Оплатите парковку");
                                 }
-
                             } else {
                                 sendMessage(chatID, "Оплатите парковку");
                                 log.debug(chatID + "  Оплатите парковку");
                             }
-                        } else {
-                            sendMessage(chatID, "Оплатите парковку");
-                            log.debug(chatID + "  Оплатите парковку");
                         }
                     } else if (messageTest.equals(myRentsEmoji + " Мои аренды")) {
 
 //                        User user = dataBaseService.getUserBarrierById(chatID).getUserBarrier().getUser();
-                        User user = dataBaseService.getUserById(chatID);
+//                        User user = dataBaseService.getUserById(chatID);
                         if (user != null && user.getUserBarrier() != null && user.getUserBarrier().getDateTimeNextPayment() != null) {
                             LocalDateTime localDateTime = user.getUserBarrier().getDateTimeNextPayment();
                             Duration duration = compareTime(LocalDateTime.now(), localDateTime);
@@ -228,7 +241,7 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
 
 //----------------------------------------
 
-                        User user = dataBaseService.getUserById(chatID);
+//                        User user = dataBaseService.getUserById(chatID);
                         if (user != null && user.getUserBarrier() != null && user.getUserBarrier().getDateTimeNextPayment() != null) {
                             sendMessageTimingForRenting(chatID);
                         } else {
@@ -379,7 +392,7 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
             if (countTimingRenting != 0 && user != null && user.getUserBarrier() != null && user.getUserBarrier().getDateTimeNextPayment() != null) {
 
                 LocalDateTime localDateTimeNew = user.getUserBarrier().getDateTimeNextPayment().plusDays(countTimingRenting);
-                baseMethodPayment(chatId, null, countTimingRenting, 1, localDateTimeNew, "add");
+                baseMethodPayment(chatId, null, countTimingRenting, money, localDateTimeNew, "add");
             }
 
 
@@ -445,7 +458,7 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
                     log.debug(chatId + "  Оплатите счет в размере " + money + " руб.");
 
 //-----------------------get ------------------------------------------------------------------------------------------
-                    baseMethodPayment(chatId, place, countTimingArrayList.get(countTimingArrayList.size() - 1), 1, null, "new");
+                    baseMethodPayment(chatId, place, countTimingArrayList.get(countTimingArrayList.size() - 1), money, null, "new");
 
                 } else {
                     sendMessage(chatId, "Скорее всего вы не подписали соглашение. Нажмите /start");
