@@ -3,6 +3,7 @@ package ru.barrier.services;
 import com.vdurmont.emoji.EmojiParser;
 import lombok.extern.log4j.Log4j;
 import okhttp3.*;
+import org.hibernate.exception.DataException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -185,10 +186,15 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
                                     } catch (IOException e) {
                                         throw new RuntimeException(e);
                                     }
-                                    collOnBarrier("https://zvonok.com/manager/cabapi_external/api/v1/phones/call/?",
-                                            "1598159358",
-                                            numberPhoneBarrier,
-                                            "bbc1cbcde48564215c0b78b649081cac");
+                                    try {
+                                        collOnBarrier("https://zvonok.com/manager/cabapi_external/api/v1/phones/call/?",
+                                                "215654108",
+                                                numberPhoneBarrier,
+                                                "bbc1cbcde48564215c0b78b649081cac");
+                                    } catch (Exception e) {
+                                        log.error("Звонок не прошел");
+                                    }
+                                    ;
 
                                     if (dataBaseService.getUserById(chatID).getUserBarrier().getStoppedBy() == 0) {
                                         addData.stoppedByT(dataBaseService.getUserById(chatID), 1);
@@ -255,6 +261,13 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
                     } else if (messageTest.equals("delete all admin users")) {
                         dataBaseService.truncateTableAdminUsers();
                         sendMessage(chatID, "Все админы удалены");
+                    } else if (messageTest.startsWith("delete id:") && dataBaseService.getAdminUsersByChatId(chatID) != null) {
+                        try {
+                            dataBaseService.deleteUserBarrierById(Long.valueOf(messageTest.substring(11)));
+                            sendMessage(chatID, "Арендартор c ID: " + messageTest.substring(11) + " удален");
+                        } catch (Exception e) {
+                            sendMessage(chatID, "Нет такого ID");
+                        }
                     } else {
                         sendMessage(chatID, "Оплатите парковку");
                         log.debug(chatID + "  Оплатите парковку");
@@ -328,7 +341,7 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
                 sendMessage(chatId, "1 месяц");
                 countTiming = 30;
                 countTimingArrayList.add(countTiming);
-                money = 6000;
+                money = 5000;
             }
 
 
@@ -361,7 +374,7 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
                 sendMessage(chatId, "1 месяц");
                 countTimingRenting = 30;
                 countTimingArrayList.add(countTimingRenting);
-                money = 6000;
+                money = 5000;
             }
 
             if (update.getCallbackQuery().getData().toString().equals("cashPayment")) {
@@ -415,7 +428,7 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
                 ArrayList<Integer> arrayListFreePlace = new ArrayList<>();
 
                 if (arrayListBusyPlace.size() == 0) {
-                    for (int i = 0; i < 27; i++) {
+                    for (int i = 0; i < 80; i++) {
                         arrayListFreePlace.add(i + 1);
                     }
                 }
@@ -439,8 +452,8 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
                 }
                 // заполнение после последнего
                 if (arrayListBusyPlace.size() != 0)
-                    if (arrayListBusyPlace.get(arrayListBusyPlace.size() - 1) != 27) {
-                        for (int i = arrayListBusyPlace.get(arrayListBusyPlace.size() - 1); i < 27; i++) {
+                    if (arrayListBusyPlace.get(arrayListBusyPlace.size() - 1) != 80) {
+                        for (int i = arrayListBusyPlace.get(arrayListBusyPlace.size() - 1); i < 80; i++) {
                             arrayListFreePlace.add(i + 1);
                         }
                     }
@@ -503,7 +516,7 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
                       "7 дней - 2000\n" +
                       "10 дней -2500\n" +
                       "15 дней - 3500\n" +
-                      "1 месяц- 6000";
+                      "1 месяц- 5000";
         MenuBot menuBot = new MenuBot();
         SendMessage sendMessage = new SendMessage();
         sendMessage.setChatId(chatId);
@@ -518,7 +531,7 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
                       "7 дней - 2000\n" +
                       "10 дней -2500\n" +
                       "15 дней - 3500\n" +
-                      "1 месяц- 6000";
+                      "1 месяц- 5000";
         MenuBot menuBot = new MenuBot();
         SendMessage sendMessage = new SendMessage();
         sendMessage.setChatId(chatId);
@@ -532,7 +545,7 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
     public void sendLocalPhoto(String chatId) {
         SendPhoto sendPhoto = new SendPhoto();
         sendPhoto.setChatId(chatId);
-        sendPhoto.setPhoto(new InputFile("http://test.school89.net/wp-content/uploads/2023/08/scheme_one_foras.jpg"));
+        sendPhoto.setPhoto(new InputFile("http://test.school89.net/wp-content/uploads/2023/09/public_contract_foras.jpg"));
 
         executePhoto(sendPhoto);
     }

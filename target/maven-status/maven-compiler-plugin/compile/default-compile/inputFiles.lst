@@ -1,13 +1,16 @@
-/home/marat/IdeaProjects/idea/idea_project/barrier_parking/src/main/java/ru/barrier/configs/SpringConfig.java
 /home/marat/IdeaProjects/idea/idea_project/barrier_parking/src/main/java/ru/barrier/services/TelegramBotImpl.java
+/home/marat/IdeaProjects/idea/idea_project/barrier_parking/src/main/java/ru/barrier/repository/AdminUsersRepository.java
+/home/marat/IdeaProjects/idea/idea_project/barrier_parking/src/main/java/ru/barrier/models/AllPayments.java
+/home/marat/IdeaProjects/idea/idea_project/barrier_parking/src/main/java/ru/barrier/repository/AllPaymentsRepository.java
+/home/marat/IdeaProjects/idea/idea_project/barrier_parking/src/main/java/ru/barrier/controllers/RedirectUrlPayment.java
+/home/marat/IdeaProjects/idea/idea_project/barrier_parking/src/main/java/ru/barrier/repository/CashPaymentRepository.java
+/home/marat/IdeaProjects/idea/idea_project/barrier_parking/src/main/java/ru/barrier/models/CashPayment.java
+/home/marat/IdeaProjects/idea/idea_project/barrier_parking/src/main/java/ru/barrier/configs/SpringConfig.java
 /home/marat/IdeaProjects/idea/idea_project/barrier_parking/src/main/java/ru/barrier/repository/UserBarrierRepository.java
 /home/marat/IdeaProjects/idea/idea_project/barrier_parking/src/main/java/ru/barrier/services/AddData.java
 /home/marat/IdeaProjects/idea/idea_project/barrier_parking/src/main/java/ru/barrier/configs/BotConfig.java
-/home/marat/IdeaProjects/idea/idea_project/barrier_parking/src/main/java/ru/barrier/models/AllPayments.java
 /home/marat/IdeaProjects/idea/idea_project/barrier_parking/src/main/java/ru/barrier/services/DataBaseService.java
-/home/marat/IdeaProjects/idea/idea_project/barrier_parking/src/main/java/ru/barrier/repository/AllPaymentsRepository.java
 /home/marat/IdeaProjects/idea/idea_project/barrier_parking/src/main/java/ru/barrier/services/sheduled/ClientAlertScheduled.java
-/home/marat/IdeaProjects/idea/idea_project/barrier_parking/src/main/java/ru/barrier/controllers/RedirectUrlPayment.java
 /home/marat/IdeaProjects/idea/idea_project/barrier_parking/src/main/java/ru/barrier/models/Payment.java
 /home/marat/IdeaProjects/idea/idea_project/barrier_parking/src/main/java/ru/barrier/services/TelegramBot.java
 /home/marat/IdeaProjects/idea/idea_project/barrier_parking/src/main/java/ru/barrier/services/Payment.java
@@ -18,4 +21,5 @@
 /home/marat/IdeaProjects/idea/idea_project/barrier_parking/src/main/java/ru/barrier/BarrierSystemApplication.java
 /home/marat/IdeaProjects/idea/idea_project/barrier_parking/src/main/java/ru/barrier/models/UserBarrier.java
 /home/marat/IdeaProjects/idea/idea_project/barrier_parking/src/main/java/ru/barrier/services/MenuBot.java
+/home/marat/IdeaProjects/idea/idea_project/barrier_parking/src/main/java/ru/barrier/models/AdminUsers.java
 /home/marat/IdeaProjects/idea/idea_project/barrier_parking/src/main/java/ru/barrier/repository/PaymentRepository.java

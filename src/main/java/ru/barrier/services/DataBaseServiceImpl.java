@@ -74,5 +74,10 @@ public class DataBaseServiceImpl implements DataBaseService {
         adminUsersRepository.truncateTableAdminUsers();
     }
 
+    @Override
+    public void deleteUserBarrierById(Long chatId) {
+        userBarrierRepository.deleteById(chatId);
+    }
+
 
 }

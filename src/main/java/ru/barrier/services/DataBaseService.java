@@ -29,5 +29,7 @@ public interface DataBaseService {
 
     void truncateTableAdminUsers();
 
+    void deleteUserBarrierById(Long chatId);
+
 
 }

@@ -17,7 +17,7 @@ import java.util.Iterator;
 @Log4j
 public class Payment implements Runnable {
 
-    private final String url = "jdbc:postgresql://localhost:5432/barrier_db";
+    private final String url = "jdbc:postgresql://localhost:5432/barrier_db_two";
     private final String user = "postgres";
     private final String password = "GOGUDAserver123!";
     private Integer i = 0;
@@ -226,7 +226,7 @@ public class Payment implements Runnable {
                 "{\n        \"amount\": " +
                 "{\n          \"value\": \"" + money + "\",\n          \"currency\": \"RUB\"\n        }," +
                 "\n      \n        \"confirmation\": {\n          \"type\": \"redirect\"," +
-                "\n          \"return_url\": \"https://t.me/open_barrier_bot\"\n        }," +
+                "\n          \"return_url\": \"https://t.me/BlackBotSevenV_bot\"\n        }," +
                 "\n        \"description\": \"Заказ №" + idempotenceKey + "\"\n      }");
         Request request = new Request.Builder()
                 .url("https://api.yookassa.ru/v3/payments")
@@ -292,7 +292,7 @@ public class Payment implements Runnable {
         RequestBody body = RequestBody.create(mediaType,
                 "{\"chat_id\": \"" + chatId + "\", \"text\": \"" + testMessage + "\", \"disable_notification\": true}");
         Request request = new Request.Builder()
-                .url("https://api.telegram.org/bot6500675392:AAF7zPbeR49zw_1a2vLBFaRTPhqaHTU0bfM/sendMessage")
+                .url("https://api.telegram.org/bot6268519128:AAEElauji3zNkJvaRU7LzdKweyYU-4eWQYg/sendMessage")
                 .method("POST", body)
                 .addHeader("Content-Type", "application/json")
                 .build();

@@ -40,14 +40,14 @@ public class AddData {
         paymentRepository.save(payment);
     }
 
-    public void cashPayment(Integer cP){
+    public void cashPayment(Integer cP) {
         CashPayment cashPayment = new CashPayment();
         cashPayment.setId(1);
         cashPayment.setCashAllowed(cP);
         cashPaymentRepository.save(cashPayment);
     }
 
-    public void addAdminUsers(Long chatId){
+    public void addAdminUsers(Long chatId) {
         AdminUsers adminUsers = new AdminUsers();
         adminUsers.setChatId(chatId);
         adminUsersRepository.save(adminUsers);
@@ -96,7 +96,9 @@ public class AddData {
         boolean setParkingPlaceLocal = false;
         int placeRandom = 0;
 
-        for (int i = 0; i < 27; i++) {
+        int numberOfPlaces = Integer.parseInt("numberOfPlaces");
+
+        for (int i = 0; i < numberOfPlaces; i++) {
             User user = new User();
             UserBarrier userBarrier = new UserBarrier();
 
@@ -106,7 +108,7 @@ public class AddData {
 
             setParkingPlaceLocal = true;
             while (setParkingPlaceLocal != false) {
-                placeRandom = (int) ((Math.random() * (28 - 1)) + 1);
+                placeRandom = (int) ((Math.random() * (numberOfPlaces)) + 1);
                 setParkingPlaceLocal = states.contains(placeRandom);
             }
             states.add(placeRandom);
