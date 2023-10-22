@@ -176,7 +176,7 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
                             log.debug(chatID + "  Оплатите парковку");
                         } else {
                             LocalDateTime localDateTime = dataBaseService.getDateNextPayment(chatID);
-                            Integer stoppedBy = dataBaseService.getUserById(chatID).getUserBarrier().getStoppedBy();
+//                            Integer stoppedBy = dataBaseService.getUserById(chatID).getUserBarrier().getStoppedBy();
                             if (localDateTime != null) {
                                 Duration duration = compareTime(LocalDateTime.now(), localDateTime);
                                 if (duration.toDays() >= 0 && duration.toHours() % 24 >= 0 && duration.toMinutes() >= 0) {
