@@ -33,15 +33,6 @@ public class ClientAlertScheduled {
 
     @Scheduled(fixedRate = 900000)
     public void alertClientInOneHour() {
-        ArrayList<Long> arrayList = (ArrayList<Long>) userBarrierRepository.getUserBarrierDataTime(LocalDateTime.now().plusHours(1));
-        for (Long chatId : arrayList) {
-            try {
-                telegramBot.sendMessage(chatId, "Время стоянки заканчивается.");
-            } catch (Exception e) {
-                log.debug("Scheduled. Нет такого контакта");
-            }
-        }
-
         try {
             ArrayList<Long> arrayList1 = (ArrayList<Long>) userBarrierRepository.getUserByEndTime(LocalDateTime.now());
             for (Long chatId : arrayList1) {
@@ -50,6 +41,19 @@ public class ClientAlertScheduled {
             }
         } catch (Exception e) {
             log.debug("Scheduled. При удалении пользователя из базы что-то пошло не так");
+        }
+    }
+
+    @Scheduled(fixedRate = 3200000)
+    public void alertClientInFifteenMinutes() {
+        System.out.println("15");
+        ArrayList<Long> arrayList = (ArrayList<Long>) userBarrierRepository.getUserBarrierDataTime(LocalDateTime.now().plusHours(1));
+        for (Long chatId : arrayList) {
+            try {
+                telegramBot.sendMessage(chatId, "Время стоянки заканчивается.");
+            } catch (Exception e) {
+                log.debug("Scheduled. Нет такого контакта");
+            }
         }
     }
 
