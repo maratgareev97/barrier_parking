@@ -463,7 +463,7 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
 
             if (getData.substring(0, 5).equals("place")) {
                 Integer place = Integer.parseInt(getData.substring(5));
-                if (dataBaseService.getChatIdUserById(chatId) != null) {
+                if (dataBaseService.getChatIdUserById(chatId) != null && localDateTime == null) {
                     addData.newUserBarrier(chatId, String.valueOf(update.getCallbackQuery().getFrom().getFirstName()), place, 0, null, null);
                     sendMessage(chatId, "Вы выбрали место - " + EmojiParser.parseToUnicode("🚘") + "    " + getData.substring(5));
                     log.debug(chatId + "  Вы выбрали место - " + EmojiParser.parseToUnicode("🚘") + "    " + getData.substring(5));
@@ -474,11 +474,10 @@ public class TelegramBotImpl extends TelegramLongPollingBot implements TelegramB
                     baseMethodPayment(chatId, place, countTimingArrayList.get(countTimingArrayList.size() - 1), money, null, "new");
 
                 } else {
-                    sendMessage(chatId, "Скорее всего вы не подписали соглашение. Нажмите /start");
+                    sendMessage(chatId, "Скорее всего вы не подписали соглашение или у Вас уже имеется парковочное место. Нажмите /start");
                 }
 
             }
-
 
         }
     }
